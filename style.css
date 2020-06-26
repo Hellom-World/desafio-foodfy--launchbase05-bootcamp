@@ -1,0 +1,153 @@
+@import "https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap";
+*{
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+body{
+    background-color: snow;
+    font-family: Roboto;
+    font-weight: 400;
+}
+p{
+    font-size: 18px;
+    color: #777777;
+}
+h4{
+    font-size: 24px;
+    color: #111111;
+}
+header div{
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    align-items: center;
+}
+header div img{
+    margin-right: 100px;
+}
+header div a{
+    
+    line-height: 19px;
+    font-size: 16px;
+    color: #111111;
+    margin-left: 30px;
+    text-decoration: none;
+}
+header div .sobre:hover, .receitas:hover{
+    font-family: Roboto;
+    font-weight: 700;
+}
+
+main{
+    background-color:#FBDFDB;
+
+    max-width: 940px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    border-radius: 30px;
+    height: 366px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+main div{
+    max-width: 305px;
+    margin: 30% auto;
+
+}
+main img{
+    margin-left: 130px;
+    margin-top: 60px;
+}
+section{
+    max-width: 940px;
+    margin: 0 auto;
+}
+section div p{
+    margin-bottom: 30px;
+}
+.cards-all{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+.card{
+    cursor: pointer;
+}
+.card img{
+    margin: 20px 0;
+    border-radius: 15px;
+    height: 140px;
+}
+.card img:hover{
+    border: 2px solid black ;
+    height: 136px;
+}
+.card h4{
+    font-size: 18px;
+}
+.card p{
+    font-size: 14px;
+    color: #777777;
+}
+
+footer{
+    font-size: 14px;
+    color: #999999;
+    background-color: #EEEEEE;
+    margin-top: 20px;
+    padding: 23px;
+    text-align: center;
+}
+
+/* MODAL */
+.modal-overlay{
+    top: 0;
+    position: fixed;
+
+    height: 100%;
+    width: 100%;
+
+    visibility: hidden;
+    background-color: rgba(0, 0,0, 0.8);
+} /* MODAL active */
+.modal-overlay.active{
+    visibility: visible;
+}
+.modal{
+    background-color: white;
+
+    width: 33%;
+    height: 40%;
+    margin: 30vh auto;
+    padding: 1.2%;
+
+    border-radius: 16px;
+
+    text-align: center;
+    
+}
+.modal img{
+    
+    height: 20vh;
+    width: 100%;
+
+    border-radius: 15px;
+}
+
+/* Modal Close */
+
+.modal-close{
+    cursor: pointer;
+    margin-top: 10%;
+}
+.modal-close:hover{
+    font-weight: 700;
+    color: red;
+}
+
+
+
