@@ -62,7 +62,7 @@ main img{
     margin-left: 130px;
     margin-top: 60px;
 }
-section{
+section, article{
     max-width: 940px;
     margin: 0 auto;
 }
@@ -124,6 +124,7 @@ footer{
     height: 40%;
     margin: 30vh auto;
     padding: 1.2%;
+    border: 1px solid #000;
 
     border-radius: 16px;
 
@@ -149,5 +150,21 @@ footer{
     color: red;
 }
 
+/* page-Sobre */
 
+article p{
+    text-align: justify;
+    font-size: 18px;
+    color: #444444;
+    line-height: 28px;
 
+    padding: 10px 0;
+}
+article h4{
+    padding-top: 5px;
+    font-size: 24px;
+}
+article h2{
+    padding-top: 5px;
+    font-size: 20px;
+}
