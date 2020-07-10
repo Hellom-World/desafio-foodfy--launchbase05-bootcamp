@@ -98,7 +98,7 @@ footer{
     font-size: 14px;
     color: #999999;
     background-color: #EEEEEE;
-    margin-top: 20px;
+    margin-top: auto;
     padding: 23px;
     text-align: center;
 }
@@ -167,4 +167,74 @@ article h4{
 article h2{
     padding-top: 5px;
     font-size: 20px;
+}
+
+/* --- Página da receita clicada --- */
+
+.foto-rec{
+    margin: 20px 0px;   
+}
+.foto-rec img{
+    border-radius: 15px;
+}
+.title-rec{
+    font-size: 36px;
+    margin: 30px 0px;
+    text-align: center;
+}
+.subtitle-rec{
+    font-size: 24px;
+    margin: 20px 0px;
+}
+.lista-rec{
+
+    font-size: 18px;
+    color: #444444;
+    line-height: 28px;
+
+}
+.title-esconde{
+    display: flex;
+    align-items: center;
+}
+.title-esconde p{
+    font-size: 12px;
+    margin: 0;
+    padding-left: 8px;
+    padding-top: 8px;
+    cursor: pointer;
+}
+.title-esconde p:hover {
+    color: seagreen;
+    
+}
+
+/* mostranto e escondendo divs da pagina receita.njk */
+
+.lista-ingredientes{
+    visibility: hidden;
+    display: none;
+}
+.lista-ingredientes.mostrar{
+    visibility: visible;
+    display: block;
+}
+/* modo de preparo */
+.lista-preparation{
+    visibility: hidden;
+    display: none;
+}
+.lista-preparation.mostrar{
+    visibility: visible;
+    display: block;
+}
+
+/* informação adicional */
+.text-info{
+    visibility: hidden;
+    display: none;
+}
+.text-info.mostrar{
+    visibility: visible;
+    display: block;
 }
