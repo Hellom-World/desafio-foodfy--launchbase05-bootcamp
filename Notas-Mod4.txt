@@ -1,0 +1,1397 @@
+
+1. Arquivos fundamentais, Views, public, server.js, package.json
+	.de o comando "npm install"
+
+2. Criar arquivo rotas.js para redefinir rotas
+	.criar --> const express = require('express')
+	.criar --> const routes = express.Router()
+	.criar --> "module.exports = routes" neste arquivo
+
+3. Fazer o chamado do rotas.js no serve.js
+	.const routes = require('./rotas')
+	.server.use(routes)
+
+4. No diretorio Views deixar apenas o layout.njk
+	.Reestrutura o html do layout
+	.redefina as rotas em rotas.js
+
+	         	
+	Comando de rota-> 	  routes.get('/', function(req, res){
+		  		  return res.redirect('/instructors')
+				})
+
+5. crie animação com ::after
+
+____________________________________________________________________________________________________________________________
+
+	------------------------- Desafio 4.2 --------------------- 
+
+				*-*-*-*-Recaregando pagina automaticamente com browsersync-*-*-*-*
+1. Instalar dependencias para reload automatico da pagina enquanto estamos desenvolvendo os arquivos dinamicos
+	.npm install browser-sync npm-run-all -D
+	. Mudar no package.json em scripts:				
+		."start": "npm-run-all -p nodemon browsersync"
+		."nodemon": "nodemon server.js"
+		."browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public,views'"
+
+				*-*-*-*-Criando container de conteudo-*-*-*-*
+2. Criar uma div com duas sessões, uma para imagem e outra apara detalhes dos instrutores
+	.Na pagina index dos instrutores crie uma div.card (bg-white, wd-800px, hg-400px, M-45px-Auto)
+	.dentro da div.card crie uma section.avatar e um section.details
+
+				*-*-*-*-Trabalhando com background-image no CSS-*-*-*-*
+3. Na tag sectin.avatar adicione:
+	style:"background: url(https://source.unsplash.com/collection/3465564/500x500) no-repeat center center / cover; 
+	.No css.card faz um diplay:grid , grid-tamplate-colims: 1fr 1fr;
+
+				*-*-*-*-Conhecendo o CSS box Shadow-*-*-*-*
+4. Adicione o atributo box-Shadow no css.card
+	. (box-shadow: eixo-x eixo-y borrar espalhar color) valores em px
+
+				*-*-*-*-Animando com CSS-*-*-*-*
+5. 	Acrescente no css.card o atributo animation: up 200ms ease-out
+		. Para a animação funcionar é preciso utilizar após o css.card
+			@keyframes up {
+				from{
+					opacity: 0
+					transform: translateY(15px)
+				}
+				to{
+					opacity:1
+				}
+			}
+
+				*-*-*-*-Estruturando e estilizando dados do instrutor-*-*-*-*
+6. Utilizaremos funcões de CSS ineditas até aqui, para isso:
+	.Dentro da section details crie uma tag <h3> de conteudo >Detalhes<
+	.Crie uma div.item e dentro dela coloca mais duas div's de conteudo:
+		>Instrutor<
+		>Guilherme Saraiva<
+	.Copie a div.item e crie mais div's seguintes com o conteudo:
+		>idade<	|   >sexo<	   | >acompanhamento< | >Cadastrado<
+		>29<	| >Masculino<  | span>Musculação< | >01.01.2019<
+							   | span>Crossfit<	  |
+	.Crie o CSS.details com {padding: 32px}
+	.Crie o CSS details .item {boder-bottom 1px solid rgba(0,0,0,0.1); padding: 16px 0;  }
+		.Adicione o min-heigth no CSS.card para a pagina não quebrar
+	.Tirar a linha do ultima elemento 
+		.Crie um CSS.details .item:last-child { boder: none}
+	.Estilizando a primeira div dentro da class item
+		.Crie um CSS. details .item div:nth-child(1){font-size 14px; line-heigth: 24px; 
+													color: #777; letter-spacing: 0.7px; font-weight: normal}
+			.Crie o CSS.details h3, (para pegar as funcionalidades da primeira div)
+	.Estilizando a segunda div dentro da class item
+		.Crie um CSS. details .item div:nth-child(2){color: #555; font-weight: bold; font-size: 18px}
+	.Crie o CSS.details h3{ text-transform: uppercase; font-weight: bold; color: primary-color}
+
+					*-*-*-*-Estilizando labels-*-*-*-*
+	.Crie um CSS.details .item span {padding: 8px 16px; background-color: F7DF1E(crie um secundary-color);
+									border-radius: 16px; color: #777; margin-right: 4px; margin-top: 8px;
+									display: inline-block; font-weight: bold; text-transform: uppercase;
+									font-size: 12px}
+
+____________________________________________________________________________________________________________________________-____________-
+									DESAFIO 4.3
+				
+				
+				
+					*-*-*-*-Trabalhando com formularios HTML-*-*-*-*
+	
+	.Crie uma pagina de nome create.njk na pasta instructors
+		.copie o conteudo do index.njk
+	.No rotas.js crie uma rota:
+		routes.get('/instructors/create', function(req, res){ return res.render('instructors/create')})
+	.Em create.njk subistitua a nome 'div' da div principal por 'form'
+		.Coloque nesse form,mantendo a class="card", os atributos:
+			method="POST"  				//enviar dados
+			action="/instructors"		//Para onde vai ser enviado os dados
+			.Na rotas.js crie a linha:
+				routes.post("/instructors" function(req, res){ return res.send('recebido')})
+	.Nas div.item mudar o conteudo da segunda div por Inputs
+		.(type="txt" name="name") ([criar nova sessão Avatar URL]type="url" name="avatar_url") (type="date" name="birth")];
+		.([Conteudo de uma tag <span> dento de input]type="radio" name="gender" value="M" checked >Masculino<)
+			.Faz a copia e coloca em baixo mudando o value="F" e o conteudo para >Feminino< 
+		.[Trocar o >Acompanhamento< por >area de atuação<](type="txt" name="services")
+		.Tirar as div's do "Cadastrado desde:" 
+		.Criar um <button>Salvar< (type="submit")
+		.Adicionar placeholder="http://", "Nome do Instrutor", "Digite os serviços"
+
+				
+				
+				
+					*-*-*-*-Estilizando formularios-*-*-*-*
+
+	.Abrir style.css e crier uma parte para o /*FORM*/ 
+		.Crie Input.css{ width:100%; outline:none (acrescentar os estilos do .details .item div:nth-child(1) )}
+		.Crie input.css[type="radio"]{ width:initial; margin-right: 4px}
+		.Crie um input.css::placeholder{ font-size: 16px, font-weight: normal}
+		.Crie um button[type="submit"]{ padding: 8px 32px; background: var-secundary-color; color: white; border-radius: 4px; margin-top: 32px; width:100%; font-size: 16px}
+
+				
+				
+				
+					*-*-*-*-Recebendo dados do front-end com req.body-*-*-*-*
+	
+	.No arquivo rotas.js mude o return do routes.post para return res.send(req.body) //Comando para pegar informação quando for comando POST
+	.Crie no server.js o use que vai fazer o req.body funcionar:
+		server.use(express.urlencoded({extended: true}))
+
+					*-*-*-*-Validando dados no back-end -*-*-*-*
+
+	. Adicione um comando de validação no routes.post no return em rotas.js:
+		.Crie -> const keys = Object.keys(req.body) //transforma as chaves dos input em objeto
+		.Em baixo da linha const keys:
+			.for(key of keys) {
+				if (req.body[key] == ""){
+					return res.send('Please, fill all fields!')
+				}
+			}
+
+				
+				
+				
+					*-*-*-*- Separando as funções das rotas -*-*-*-*
+		
+		.Crie um arquivo chamado instructors.js //Vai servir para tirar function das rotas e exportar depois
+			.Dentro de instructors.js escreva //Creat //Update //Delete
+			.No //Create escreva exports.post = (Colocar function do routes.post)
+		.No arquivo routes.js chame o arquivo instructors:
+			.const instructors = require('./instructors')
+			.No routes.post coloque no lugar da function que saiu -> instructors.post 
+
+			
+			
+					*-*-*-*- Usando Node fs e entendendo callback function -*-*-*-*
+		
+		.No arquivo instructors.js fora das abas comentadas escreva:
+			.const fs = require('fs')
+			.Após o comando FOR no //creat escreva:
+				.fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err){
+					if (err) return res.send("Write file error!")
+
+					return res.redirect("instructors")
+				}
+
+				
+				
+				
+				*-*-*-*- Trabalhando com dados em JSON -*-*-*-*
+
+		.No arquivo instructors.js comente a linha 26 "return res.redirect"
+
+		.Neste momento arquivo data.json salva apenas uma informação de cada vez,
+		para resolver isso:
+
+			.No arquivo instructors.js fora das abas comentadas, escreva:
+
+				."const data = require("./data.json")
+				.abaixo do comando for escreva:
+					"data.instructors.push(req.body)
+				.Apague tudo que estiver dentro do arquivo data.json e escreva:
+					{
+						"instructors": []
+					}
+				
+				
+				
+					*-*-*-*- Criando datas no javascript -*-*-*-*
+
+		.Para inserir a informação da data de criação do perfil no arquivo data.json:
+					
+			.No arquivo instructors.js, na linha acima do "data.instructors.push", escreva:
+
+				.req.body.birth = Date.parse(req.body.birth) <- isso vai transformar o formato da data
+					para formato em milesegundos ->
+				."req.body.created_at = Date.now()" <-- isso vai fazer criar uma data atual no formato milesegundos -->
+
+				 
+				 
+				 
+				 				 
+				 *-*-*-*- Estruturando dados de instrutores -*-*-*-*
+
+		.Acrescentar a chave id (que será necessario para buscar os valores para edição.
+		Cada "id" tem um valor unico) nos arrays de instructors no arquivo instructors.js:
+
+			.Abaixo do "req.body.created_at", coloque:
+
+				."req.body.id = Number(data.instructors.length + 1)"
+
+		.Desestruturando o req.body (A ideia é tornar o conteudo do req.body mais visual
+		com a finalidade de controlar todos os dados que é recebido):
+
+			.Abaixo do "req.body.id = Number(data.instructors.length + 1)", coloque:
+
+				."const {avatar_url, birth, created_at, id, name, services, gender} = req.body"
+
+			.Agora que o "req.body foi Desestruturado, é preciso abrir o req.body de dentro do .push:
+
+				.No "data.instructors.push({req.body})", mude o conteudo para:
+
+					."data.instructors.push({
+						id,
+						avatar_url,
+						name,
+						birth,
+						gender,
+						services,
+						created_at
+					})
+			.Para melhorar, passe o "const {avatar_url, birth, created_at, id, name, services, gender} = req.body"
+			para baixo da validação "For key"
+			 	
+				 .Mude de CONST para LET.
+				 .Retire o created_at (pois ele nao vem no req.body)
+
+				.Dessa forma podemos modificar as linhas de data e de ID retirando o req.body
+					
+					exemplo:
+						req.body.birth = Date.parse(req.body.birth)
+						 to
+						birth = Date.parse(req.body.birth)
+
+					.Acrescentando CONST antes de "created_at = Date.now" e de "id = Number(data.instructors.length + 1)
+
+____________________________________________________________________________________________________________________________-____________-
+										DESAFIO 4.4
+
+
+
+		 
+		                       *-*-*-*- Buscando instructor com parametros da rota -*-*-*-*
+
+
+	.pegar os dados do backend para o front
+
+			.No artivo rotas.js debaixo da rota get.create crie a rota:
+				
+				."routes.get('instructors/:id)
+
+			.No arquivo instructors.js em baixo da data.require crie o exports, com o comentario "//show" em cima:
+
+				."exports.show = function(req, res){
+					const { id } = req.params         ------> requisitando o id e fazendo que ele seja uma variavel
+
+					const foundInstructor = data.instructors.find(function(instructor){
+						return id == instructor.id										--->Encontrar o instrutor dentro do Data.json
+					})																		e retornar quando o id for igual ao requisitado
+
+					if (!foundInstructor) return res.send("instructor not found!")     ---> msg caso não encontre nenhum instrutor com o
+																							id requisitado.
+
+					return res.send(foundInstructor)                                    ----> vai retornar isso caso encontre o id correspondente
+				
+				
+			}																			
+
+			.No artivo rotas.js em "routes.get('instructors/:id)" acrescente:
+				
+				routes.get('instructors/:id, instructors.show)
+			
+			
+				TESTAR 
+	
+
+
+
+									*-*-*-*- Estruturando a visualização de um instrutor -*-*-*-*
+
+
+			.No diretorio instructors criar um novo arquivo.njk de nome show.njk
+			.copie e cole o conteudo do index.njk
+			.No arquivo instructors.js mude:
+				 "return res.send(foundInstructor)" para "return res.render("instructors/show", {instructor: foundInstructor})
+
+			.No arquivo show.njk mude:
+
+				style= "background: url(https://source.unsplash.com/collection/3465564/500x500)
+				    Para
+				style= "background: url({{instructor.avatar_url}})
+
+				<div>Guilherme Saraiva</div>
+					para
+				<div>{{instructor.name}}</div>
+
+				<div>29</div>
+					para
+				<div>{{instructor.birth}}</div>
+
+				<div>Masculino</div>
+					para
+				<div>{{instructor.gender}}</div>
+
+				.Em acompanhamento fazer um comando for para listar os serviços por ordem, então Mude:
+
+					<div>
+						<span>Musculação</span>
+						<span>Crossfit</span>
+					</div>
+						
+						Para
+
+					<div>
+						{% for service in services %}
+						<span> {{service}} </span>
+						{% endfor %}
+					</div>
+				
+				
+				
+				
+				<div>01/01/2019</div>
+					Para
+				<div>{{instructor.created_at}}</div>
+
+				TESTAR (vai aparecer o nome, a idade e a data de cadastro em formato milisegundos e o acompanhamento não vai aparecer e está tudo bem)
+
+				
+
+
+
+
+						*-*-*-*- Conhecendo o Spread Operator do javascript -*-*-*-*
+
+
+		.No arquivo instructors.js em baixo do if (!foundInstructor) escreva:
+
+			." const instructor = {
+				...foundInstructor //funcionalidade para espalhar a conteudo que não será modificado
+				age:"",
+				gender:"",
+				services:"",
+				created_at:""
+			}"
+
+		.Mude a linha:
+			"return res.send(foundInstructor)" para "return res.render("instructors/show, {instructor: foundInstructor}")
+					Para
+			"return res.send(foundInstructor)" para "return res.render("instructors/show, {instructor}")
+					
+			//Isso vai fazer enviar o array reconfigurado
+
+		TESTAR (Perceba que os novos valores que estão vazio no array não aparecem no front, exceto aqueles que foram trazidos pelo
+						"...foundInstructor)
+				
+		.No html do show.njk mude a linha "{{instructor.birth}}" para {{instructor.age}}"
+
+
+		
+		
+					*-*-*-*- Ajustando sexo e serviços do instrutor -*-*-*-*
+
+		
+		.Para transformar o Serviços em array para ele poder chegar ao front, no arquivo instructors.js acrescente na variavel const instructor:
+
+			em services:
+				"services: foundInstructor.services.split(",")   //Isso indica que ele vai transformar a string em array quebrando sempre
+																   aonde é indicado entre parenteses, no caso, na virgula.
+
+		.No arquivo show.njk mude o {% for service in services %} para {% for service in instructor.services%}
+
+		TESTAR
+
+		.No arquivo show.njk, para mostrar o sexo correto mude:
+
+			<div>{{"Masculino" if instructor.gender == "M" else "Feminino"}}</div>
+
+
+				*-*-*-*- Criando Lógica para Calcular idade -*-*-*-*
+
+		function age(timestamp){
+			const today = new Date()
+			const birthDate = new Date(timestamp)
+	
+			//2019 - 1984 = 35
+			let age	= today.getFullYear() - birthDate.getFullYear()
+			const month = today.getMonth() - birthDate.getMonth()
+
+			if (month < 0 || month == 0 && today.getDate() < birthDate.getDate()){
+				age = age - 1
+			}
+			return age
+		}
+
+
+
+				*-*-*-*- utilizando Lógica de idade -*-*-*-*
+
+		.Crie um arquivo.js chamado utils.js e escreva dentro:
+
+			module.exports = {
+				age: "função da idade"
+			}		
+
+		.No Arquivo instructors.js dentro da "const instructor" escreva a linha age assim: "age: age(foundInstructor.birth),"
+		.Ainda no instructors.js abaixo do "const data" escreva: "const {age} = require('./utils.js')
+
+
+
+		
+					*-*-*-*- Formatando data com intl do javascript -*-*-*-*
+
+		.No arquivo instructors.js na variavel "const instructor" o created_at fica assim:
+
+			"created_at: new Intl.DateTimeFormat,("pt-BR").format(foundInstructor.created_at),"
+			
+			//Utilização do constructor Intl para formatação da Data
+
+
+
+					*-*-*-*- Finalizando pagina de apresendação do instrutor -*-*-*-*
+
+		.No arquivo Data.json, escolha qualquer um dos usuarios para colocar uma imagem no avatar_url
+
+		TESTAR com instrutores/id
+
+		.No arquivo show.njk, em cima do fechamento da tag </section>, escreva:
+
+			<a href="#" class="button">Editar</a>
+
+		.No arquivo style.css aproveita a estilização do button para estilizar o link editar para se tornar um botão:
+
+			button[type="submit"],
+			a.button{ 
+			padding: 8px 32px;
+			background: var(--rocketseat-color) ; 
+			color: white; 
+			border-radius: 4px; 
+			margin-top: 32px; 
+			width:100%; 
+			font-size: 16px
+			}
+
+			e tambem coloque uma estilização só pra ele em baixo:
+
+			a.button{
+				display:block;
+				box-sizing: border-box;
+				text-align: center;
+				text-decoration: none;
+			}
+
+
+
+				*-*-*-*- Reuso de código com include do nunjucks -*-*-*-*
+
+
+			.No diretorio instrutores crie outro aquivo chamado edit.njk
+				.copie todo o conteudo do create.njk e cole no edit.njk
+
+			.No arquivo routes, em baixo da linha ".get('/instructors/:id')", crie a linha:
+
+				routes.get("/instructors/:id/edit", function(req, res){
+					return res.render('instructors/edit')
+				})
+
+			.No arquivo edit.njk mude <h3>Novo Instrutor</h3> para <h3>Editar Instrutor</h3>
+	
+			.Abaixo da tag <h3>Editar Instrutor</h3>, crie a linha:
+
+					{% include 'instructors/fields.njk' %}
+
+			.Ainda no edit.njk recorte da primeira div classe="item" até o botão salvar
+			.No diretorio instrutores crie outro arquivo chamado fields.njk e dentro cole o codigo recortado
+
+			.No arquivo create.njk todas as divs class="item"(formularios) e o botão,
+				e no lugar escreva a linha: {% include 'instructors/fields.njk' %}
+
+
+
+				*-*-*-*- preenchendo campos do formulario com Nunjucks -*-*-*-*
+
+	.No arquivo rotas.js tire recorte a função do "get.instructors/:id/edit" e deixe assim:
+
+		"routes.get('instructors/:id/edit', instructors.edit)
+
+	.no arquivo instructors.js em baixo do exports //create escreva:
+
+		//edit
+		exports.edit = function(req, res) {
+			const { id } = req.params         ------> requisitando o id e fazendo que ele seja uma variavel
+
+			const foundInstructor = data.instructors.find(function(instructor) {
+				return id == instructor.id										--->Encontrar o instrutor dentro do Data.json
+			})																		e retornar quando o id for igual ao requisitado
+
+			if (!foundInstructor) return res.send("instructor not found!")     ---> msg caso não encontre nenhum instrutor com o
+																							id requisitado.
+			return res.render('instructors/edit', { instructor: foundInstructor })
+		}
+
+	.No arquivo fields.njk acrescente os valores dentro dos inputs, assim
+
+		value="{{instructor.avatar_url}}
+
+		value="{{instructor.name}}
+
+		value="{{instructor.birth}}
+
+		.Nos imputs de sexo coloque como tag a logica:
+
+			{% if instructor.gender == 'M' %}
+				checked
+			{% endif %}
+			
+			//para o feminino mude de 'M' para 'F'
+
+		value="{{instructor.services}}
+
+
+
+		
+				*-*-*-*- Fazendo ajustes de data -*-*-*-*
+	
+	.Dentro do arquivo utils.js dentro do module.exports e depois da função age escreva a função date, assim:
+
+		module.exports = {
+			age: function(timestamp){
+				//CODIGO DA FUNÇÂO AGE
+			},
+			date: function(timestamp){
+				const date = new Date(timestamp)
+
+				//yyyy
+				const year = date.getFullYear()
+
+				//mm 
+				const month = date.getMonth() + 1
+
+				//dd 
+				const day = date.getDate()
+
+				//return yyyy-mm-dd
+				console.log(`${year}-${month}-${day}`)
+			}
+		}
+
+	.No arquivo instructors.js no const age = require acrescente o date, assim fica a linha:
+
+		const { age, date } = require('./utils')
+	
+	.Ainda no instructors.js no exports.edit na linha depois da linha
+			"if (!foundInstructor) return res.send("instructor not found!")"
+		escreva:
+
+				date(foundInstructor.birth)
+
+		TESTAR
+
+		*-*-*-*- Configurando datas universais -*-*-*-*
+
+	.No arquivo utils.js mude: 
+	
+		(Isso serve para fazer o computar entender como tempo universal e nao local)
+
+		const year = date.getFullYear()
+		const month = date.getMonth() + 1
+		const day = date.getDate()
+
+					para
+		
+		const year = date.getUTCFullYear()
+		const month = date.getUTCMonth() + 1
+		const day = date.getUTCDate()
+		
+		.mude:
+
+			console.log(`${year}-${month}-${day}`)
+
+				para
+			
+			return `${year}-${month}-${day}`
+
+	.No arquivo instructors.js no module.exports date, 
+
+		.exclua a linha "date(foundInstructor.birth)"
+		
+		no lugar escreva:
+
+			const instructor = {
+				...foundInstructor,
+				birth: date(foundInstructor.birth)
+			}
+
+			return res.render('instructors/edit', { instructor})
+		
+		//Ainda não vai funcionar pois a data esta com formato 2000-2-1
+		e precisamos de um formato 2000-02-01 para funcionar
+
+
+		
+		
+				
+				*-*-*-*- Formatando datas para o formulario -*-*-*-*
+
+	.No arquivo utils.js mude: 
+	
+		//O `0${}` serve para acrescentar o digito "0" para podermos apresentar
+		caso o valor do mes e do dia seja de apenas um digito
+		
+		//O ".slice(-2)" serve para pegar apenas os ultimos dois valores da string 
+		pois, caso o mes e o dia seja de valores de dois digitos a string terá 3 digitos
+		e nesse caso nao funcionaria porque precisamos de apenas dois.
+
+		const year = date.getUTCFullYear()
+		const month = date.getUTCMonth() + 1
+		const day = date.getUTCDate()
+
+					para
+		
+		const year = date.getUTCFullYear()
+		const month = `0${date.getUTCMonth() + 1}`.slice(-2)
+		const day = `0${date.getUTCDate()}`.slice(-2)
+
+____________________________________________________________________________________________________________________________-____________-
+										DESAFIO 4.5
+
+
+					*-*-*-*- Entendendo verbos HTTP -*-*-*-*
+		
+		.No arquivo show.njk, no "href" do botão editar, troque o conteudo para
+
+			."/instrutores/ {{ instructor.id }} /edit
+
+		// HTTP VERBS
+		// GET : Receber RESOURCE
+		// POST : Criar ou Salvar um RESOURCE
+		// PUT : Atualizar
+		// DELETE : Deletar
+
+		.No arquivo rotas.js em baixo da linha routes.post, crie a linha:
+
+			."routes.put("/instrutores", instructors.put)
+
+		.No arquivo instrutores.js em baixo do "exports.edit" crie um exports.put:
+
+			--//put
+			exports.put = function(req, res) {
+				const { id } = req.body
+				let index = 0
+
+				const foundInstructor = data.instructors.find(function(instrutor, foundIndex){
+					if (id == instrutor.id) {
+						index = foundIndex
+						return true
+					}
+				})
+
+				if (!foundInstructor) return res.send("instructor Not Found")
+
+				const instructor = {
+					...foundInstructor,
+					...req.body
+					birth: Date.parse(req.body.birth)
+				}
+
+				data.instructors[index] = instructor
+
+				fs.writeFile("data.json", JSON.stringify(data, null, 2), function (err) {
+					if(err) return res.send("write error!")
+
+					return res.redirect(`/instrutores/${id}`)
+				})
+			}--
+
+				
+				
+				
+				*-*-*-*- Trabalhando com Method override -*-*-*-*
+
+					.instale o method override :
+
+					 	"npm install method-override"
+
+					.No arquivo server.js em baixo da linha "const rotas" escreva:
+
+						const MethodOverride = require('method-override')
+					
+					.Ainda no arquivo server.js entre a linha "server.use express.static" e a linha "server.use routes" escreva:
+
+						server.use(MethodOverride('_method')) 
+
+					.No arquivo edit.njk mude o Action do form para:
+
+						action="/instrutores?_method=PUT"
+
+					TESTAR (ao tentar mudar o nome de algum instrutor vai dar erro de instructor not found)
+
+					.Para corrigir, abra o aquivo edit.njk
+						.Na section.details em baixo do include, crie o input:
+
+							input type="hidden" name="id" value={{instructor.id}}
+
+					
+					
+				
+				*-*-*-*- Deletando um instrutor -*-*-*-*
+
+		.No arquivo edit.njk crie um novo formulario:
+
+			form action="/instructors?_method=DELETE" method="post"
+
+			.Dentro desse formulario crie o input:
+
+				input type="hidden" name="id" value={{instructor.id}}
+				
+			.Ainda dentro do fomulario DELETE crie o button:
+
+				button type="submit" >DELETAR<
+
+		.Ainda no aquivo edit.njk 
+
+			.crie uma div de class card para colocar os forms dentro
+
+			.reorganize para o botão deletar ficar no lugar
+
+			.No form deletar coleque o id="form-delete"
+
+		.No arquivo style.css escreva:
+
+			#form-delete button[type="submit"] {
+				margin-top: 8px;
+				background-color: lightcoral
+			}
+
+		.No arquivo rotas.js em baixo da routes.put escreva a rota:
+
+			routes.delete("/instructors", instructors.delete)
+
+		.No arquivo instrutores.js escreva em baixo do exports.put:
+
+			exports.delete = function(req, res{
+				const { id } = req.body
+
+				const filteredInstructors = data.instructors.filter(function(instructor){
+					return instrutor.id != id
+				})
+
+				data.instructors = filteredInstructors
+
+				fs.writeFile("data.json", JSON.stringfy(data, null, 2), function(err) {
+					if (err) return res.send("Write file error!")
+
+					return res.redirect("/instructores")
+				})
+			})
+
+		TESTAR (tente deletar o id 1 e observe o data.json)
+
+		____________________________________________________________________________________________________________________________-____________-
+										DESAFIO 4.6 LISTANDO instrutores
+
+
+					
+					
+							*-*-*-*- Listando professores com tabelas em HTML -*-*-*-*
+		
+
+
+		.No arquivo index.njk tire todo conteudo da div class="card"
+
+			.Dentro voce vai colocar a tabela da seguinte forma:
+
+				<table> //tabela
+					<thead> //cabeçalho
+						<tr> //linha
+							<th> Instrutor </th>  //Coluna
+ 							<th> Atendimento </th>	
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td> Mayk </td>  //Coluna
+ 							<td> Natação </td>	
+						</tr>
+					<tbody>
+				</table>
+		
+		.No Arquivo Rotas, pegue a função do route.get da index e leve
+		para o arquivo instructors.js. No rotas vai ficar assim:
+
+			routes.get('/instructors', instructors.index)
+
+		.No arquivo instructors.js vai ficar assim:
+
+			exports.index = function(req, res){
+				return res.render("instructors/index", {instructors: data.instructors})
+			}
+		
+		.No Arquivo index.njk coloque o comando for para listagem dos instrutores na tabela:
+
+			{% for instructor in instructors %}
+			<tr>
+				<td> {{instructor.name}} </td>  //Coluna
+				<td> {{instructor.services}} </td>	
+			</tr>
+			{% endblock content %}
+
+
+
+
+
+									*-*-*-*- Estilizando a tabela -*-*-*-*
+
+
+		
+		.No arqutivo styles.css na ultima linha escreva o comentario:
+
+			/* Index instructors */
+
+		.No arquivo index.njk  da div.card acrescente a class table-container
+		.Acrescente um width de 100% na tag table: <table width="100%">
+		   e
+		.No arquivo styles.css, no /*index instrutores*/, crie as linhas:
+			
+			.table-container {
+				display: block;
+				padding: 40px;
+				box-sizing; border-box;
+			}
+
+			.table-container table {
+				border-spacing: 0;
+			}
+
+			.table-container thead tr th {
+				text-align: left;
+			}
+
+			td, th {
+				padding: 16px
+				border-bottom: 1px solid #d9d9d9;
+			}
+
+			tbody tr:last-child td {
+				border-bottom: none;
+			}
+
+
+
+
+
+								*-*-*-*- Adicionando Botoes na tabela -*-*-*-*
+
+
+
+		
+		.No arquivo index.njk coloque mais uma tag th na thead:
+
+				<th> Instrutor </th>
+ 				<th> Atendimento </th>	
+   	 --ESSA->   <th> Ação </th>          <-ESSA--	
+		
+			.Acrescente mais uma tag td no tbody:
+
+				<td> {{instructor.name}} </td>
+				<td> {{instructor.services}} </td>	
+	 --ESSA->   <td><a href="/instructors/{{instructor.id}}">Ver</a></td>          <-ESSA--	
+
+	 
+
+
+	 						*-*-*-*- Adicionando Imagem de Avatar na Tabela -*-*-*-*
+
+
+		.Quando a gente edita, o aquivo data.json esta salvando o id como string e a gente quer como numero, entao:
+
+			.No arquivo instructor.js No exports do PUT, embaixo da linha "birth: Date.parse(req.body.birth)", Escreva:
+
+				id:Number.(req.body.id)
+
+		.Atualize as fotos dos Avatares
+
+		.No index.njk, vamos acrescentar um SPAN, para colocar uma imagem, dentro do <td> instructor.name </td>, assim:
+
+			<td><span style="background-image: url({{instructor.avatar_url}})"></span>{{instructor.name}}</td>
+
+		.No arquivo styles.css vamos estilizar a imagem do avatar que será apresentada do index.njk, será assim:
+
+			tbody tr td:first-child {
+				display: grid;
+				grid-tamplate-columns: 64px 1fr;
+				align-items: center;
+			}
+
+			tbody tr td:first-child span {
+				width: 48px;
+				heigth: 48px;
+				background-position: center;
+				background-size: cover;
+
+				
+				border-radius: 50%;
+				box-shadow: 3px 1px 6px -4px black;
+				border: 2px solid white
+			}	
+
+
+
+
+				 						*-*-*-*- Ajustes Finais No estilo da Tabela -*-*-*-*
+
+
+		
+		.Ainda no styles.css em baixo na cascata "td, th {}" vamos colocar:
+
+			th {
+				text-transform: uppercase;
+				color: #777;
+				font-size: 14px
+			}
+		.Na ultima linha do arquivo, vamos estilizar o button "ver":
+
+			tbody tr td:last-child a {
+				background-color: var(--primary-color);
+				padding: 8px 16px;
+				text-decoration: none;
+				text-transform: uppercase;
+				color: white;
+				font-size: 12px;
+				border-radius: 4px;
+			}
+		
+		.Colocando as palavras na coluna de "ação" alinhadas ao centro
+
+			.table-container thead tr th:last-child, td:last-child {
+				text-align: center;
+			}
+
+
+
+
+____________________________________________________________________________________________________________________________-____________-
+										DESAFIO 4.7 Membros
+
+
+										
+
+				 		*-*-*-*- Estruturando Página de Membros -*-*-*-*
+
+
+
+		.Copiar a pasta instructors e criar a pasta Membros
+			
+		.Abrir o arquivo Rota.js para criar a rota de Membros
+			.Copiar desde a linha "Routes.get('/instructors', instructors.index)
+
+			.Até a linha "Routes.delete()
+
+			.Tirar a linha de espaço entre as rotas de instrutores
+
+			.Use ctrl-D e selecione as palavrar instructors das linhas copiadas
+				.troque a palavra instructors pela palavra members
+				.tire as linhas entre as rotas members
+			
+			.Crie a pasta(diretorio) controllers
+				.Coloque o arquivo instructors.js dentro dessa pasta
+				.Copie o arquivo instructors.js e cole renomeando para: members.js
+
+			.Usando ctrl-F no arquivo Members.js, renomeie tudo que for:
+				. Marque a opção de maiusculo e minusculo
+					.Serve para ser sensivel ao caso.
+				. 'instructor' mudar para 'member'
+				. 'Instructors' mudar para 'Members'
+				 
+			.Ainda no aruivo members.js na variavel "const member"
+				.Delete a linha Services
+				.Delete a linha created_at
+				.Verique se os nomes estão corretos
+
+			.No aquivo data.JSON, crie uma array de members
+	
+			{
+				"members": [],
+				"instructors": [
+								{
+								"id": 7,
+								"avatar_url": "https://images.unsplash.com/photo-1550345332-09e3ac987658?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80",
+								"name": "Natalia Miranda",
+								"birth": 718329600000,
+								"gender": "F",
+								"services": "musculação, personal trainer, nutrição",
+								"created_at": 1601206140901
+								}
+			}
+
+			.No arquivo Rotas.js vamos passar a rota "routes.get members/create" para o arquivo members.js
+
+				.Reescreva a linha para:
+					routes.get('members/create', members.create)
+				
+				*FAZER TAMBÉM NA PARTE DE INSTRUCTORS*
+
+			.No arquivo members.js: 
+				.Renomeie o comentario //Create para //post
+				.Crie o comentario //Create
+				.Em baixo do exports.show crie a linha:
+
+					exports.create = function(req, res) {
+						return render('members/create')
+					}
+				
+				*FAZER TAMBÉM NA PARTE DE INSTRUCTORS*
+
+			.Tirar os comentarios no arquivo members.js e instructors.js
+
+			.No arquivo rotas.js mude a variavel "const instructors" para:
+
+				const instructors = require('./controllers/instructors')
+
+			.Ainda no arquivo rotas.js, embaixo do "const instructors", crie a linha:
+
+				const members = require('./controllers/members')
+
+			.No arquivo instructors.js e members.js mude a variavel "const data" e "const {age, date}" para:
+
+				const data = require('../data.json')
+				const { age, date } = require('../utils')
+
+			
+
+
+
+				 		
+						 *-*-*-*- Lógica do Menu Ativo -*-*-*-*
+
+					
+
+
+
+
+		.No arquivo scripts.js, delete todas as linhas e escreva:
+
+			const currentPage = location.pathname
+			const menuItems = document.querySelectorAll("header .links a")
+
+			for (item of menuItems) {
+				if (currentPage.includes(item.getAttribute("href"))) {			
+				item.classList.add("active")
+				}
+			}
+
+		.No arquivo layout.njk no fim da body, escreva:
+
+			<script src="/scripts.js"></script>
+
+			.Nas tag's "a" da div.links reescreva o conteudo do href, para:
+
+				href="/instructors"
+				href="/members"
+
+				.E tira a class active
+
+
+		
+		
+						 *-*-*-*- Criando botão para adicionar Membros -*-*-*-*
+
+		
+
+		.No diretorio instructors no arquivo index.njk
+
+			.Entre a div.card e a tag <table>, crie a linha:
+
+				<a href="/instructors/create">Novo</a>
+		
+		.No arquivo styles.css:
+
+			.Junto Na cascata "tbody tr td:first-child a", acrescente:
+
+				.table-container > a
+
+			.Em baixo crie a cascata:
+
+				.table-container > a {
+					margin-bottom: 16px;
+					display: inline-block;
+				}
+
+		*REPLICAR ESSAS CONFIGURAÇOES PARA A PARTE MEMBERS*
+
+
+
+
+		
+		
+						 *-*-*-*- Ajustando formulario para cadastro de membro -*-*-*-*
+
+
+
+
+		.No arquivo create.njk do diretorio members
+
+			.Mude o conteudo da tag h3 para: 
+				
+				<h3>Novo Membro</h3>
+
+			.Use ctrl-F para mudar:
+
+				instructor POR member
+			
+			.Salve
+
+		.No arquivo fields.njk do doretorio MEMBERS:
+
+			.Na primeira div.item mude o conteudo da primeira div:
+
+				.De >Instrutor< PARA >Nome<
+				.Tire o placeholder
+
+			.Crie uma div class item type=email:
+
+				.name="email"
+				.Sem placeholder
+			
+			.Tire a div.item da area de atuação
+
+			.Crie uma div.item de tipo sanguineo:
+
+				<div class="item">
+                <div>Tipo Sanguíneo</div>
+                <div>
+					<select name="blood">
+						<option value="A+"{% if member.blood == "A+"%}selected{%endif%}>
+							A+
+						</option>
+						<option value="A-"{% if member.blood == "A-"%}selected{%endif%}>
+							A-
+						</option>
+						<option value="B+"{% if member.blood == "B+"%}selected{%endif%}>
+							B+
+						</option>
+						<option value="B-"{% if member.blood == "B-"%}selected{%endif%}>
+							B-
+						</option>
+						<option value="AB+"{% if member.blood == "AB+"%}selected{%endif%}>
+							AB+
+						</option>
+						<option value="AB-"{% if member.blood == "AB-"%}selected{%endif%}>
+							AB-
+						</option>
+						<option value="O+"{% if member.blood == "O+"%}selected{%endif%}>
+							O+
+						</option>
+						<option value="O-"{% if member.blood == "O-"%}selected{%endif%}>
+							O-
+						</option>
+					</select>
+				</div>    
+            </div>
+
+			
+			.Crie uma div.item de Peso(kg):
+
+			<div class="item">
+                <div>Peso (kg)</div>	
+				<div>
+					<input
+						type="number"
+						name="weight"
+						value="{{ instructor.weight }}"
+					/>
+				</div>
+            </div>
+
+			.Crie uma div.item de Altura:
+
+			<div class="item">
+                <div>Altura (cm)</div>	
+				<div>
+					<input
+						type="number"
+						name="height"
+						value="{{ instructor.height }}"
+					/>
+				</div>
+            </div>
+
+			.Use ctrol-F para trocar:
+
+				instructor POR member
+
+		
+
+
+						 *-*-*-*- Ajustando dados de cadastro de novo membro -*-*-*-*
+
+
+
+		.No arquivo members.js em exports.post, deleta o let depois da validação KEY
+
+		.Mude o birth para:
+
+			birth = Date.parse(req.body.birth)
+
+		.Troque o const Id por:
+
+			let id = 1
+			const lastMember = data.members[data.members.length - 1]
+ 				
+			if(lastMember) {
+				id = lastMember.id + 1
+			}
+
+		.mude o data.members.push para:
+
+			data.members.push({
+				id,
+				...req.body,
+				birth
+			})
+
+		.Cadastre um membro
+
+	
+
+
+						 *-*-*-*- Apresentação de membros -*-*-*-*
+		
+
+
+		.No show.njk no diretorio Members
+
+			.Use ctrol-F para trocar 
+
+				instructor POR members
+
+			.Mude a primeria div.item para >Membro<
+
+			.Crie a segunda div.item para >E-mail<
+
+				e member.email
+
+			.Mude a div.item >idade< para >Aniversário<
+
+				e member.birth
+
+			.Delete a div.item >Acompanhamento<
+
+			.Crie a div.item >Tipo Sanguineo<
+
+				member.blood
+
+			.Crie a div.item >Peso (kg)<
+
+				member.weight
+
+			.Crie a div.item >Altura (cm)<
+
+				member.height
+
+
+
+
+
+						 *-*-*-*- Reestruturando dados para Datas Atualizadas -*-*-*-*
+
+
+		.No arquivo utils.js mude o return do data:function para:
+
+			return {
+				day,
+				month,
+				year,
+				iso: `${year}-${month}-${day}`,
+				birthDay:`${day}/${month}`
+			}	
+
+		.No arquivo instructors.js no exports.edit:
+
+			.mude o birth para:
+
+				birth: date(foundInstructor.birth).iso
+
+		.No arquivo members.js no exports.show:
+
+			.mude a linha da const "age" para:
+
+				birth: date(foundMembers.birth).birthDay
+
+
+
+
+
+						 *-*-*-*- Editanto Membros -*-*-*-*
+		
+
+		.No arquivo edit.njk do diretorio members:
+
+			.Mude o conteudo da Tag h3 para >Editar Membro<
+
+			.Use ctrl-F para trocar
+
+				instructor POR member
+
+		.No arquivo members.js no exports.edit:
+
+			.Mude o birth para:
+
+				birth: date(foundMember.birth).iso
+
+
+		
+
+
+					 *-*-*-*- Confirmação e exclusao de membros *-*-*-*
+
+
+
+
+		.No Arquivo edit.njk no diretorio members, antes do endblock crie o script
+
+			<script>
+
+				const formDelete = document.querySelector("#form-delete")
+				formDelete.addEventListener("submit", function(event){
+					const confirmation = confirm("Deseja Deletar?")
+					if(!confirmation){
+						event.preventDefault()
+					}
+				})
+				
+			</script>
+
+			*ACRESCENTAR TAMBEM NO edit.njk DO diretorio instructors*
+
+
+
+
+
+					 *-*-*-*- Listagem dos Membros *-*-*-*
+
+		
+
+		.No Arquivo index.njk do diretorio members:
+
+			.Mude as <th> das <thead> para as segguintes:
+
+				<th>Membro</th>
+				<th>Email</th>
+				<th>Peso</th>
+				<th>Altura</th>
+				<th>Ação</th>
+
+			.Use ctrl-F para mudar de instructor para member
+
+			.No lugar do <td>.services colocar:
+
+				<td>{{member.email}}</td>
+				<td>{{member.weight}} kg</td>
+				<td>{{member.height}} cm</td>
+
+				
+
+
+					 *-*-*-*- Ajustes Finais *-*-*-*
+
+		.No arquivo styles.css:
+
+			.Na cascata "input" acrescente o "select"
+
+		.No arquivo edit.njk do diretorio members:
+
+			.Mude o style da primeira <section> para:
+
+				style="background: url({{member.avatar_url}}) no-repeat center center / cover;"
+
+		 	*Mudar tambem no diretorio intructors*

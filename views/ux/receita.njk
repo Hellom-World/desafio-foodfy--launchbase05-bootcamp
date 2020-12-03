@@ -1,0 +1,57 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+
+    <section>
+        <div class="foto-rec">
+            <img src="{{item.image}}" alt="">
+        </div>
+
+        <div class="title-rec">
+            <h1 class="content">{{item.title}}</h1>
+            <p class="info">por {{item.author}}</p>    
+        </div>
+
+        <div class="ingredientes">
+            
+            <div class="title-esconde">
+                <h4 class="subtitle-rec">Ingredientes</h4>
+                <p class="esconde-ingredientes">MOSTRAR</p>
+            </div>
+
+            <div class="lista-ingredientes">
+                {% for linha in item.ingredients %}
+                    <li class="lista-rec">{{linha}}</li>
+                {% endfor %}
+            </div>
+
+        </div>
+        <div class="modoPreparo">
+
+            <div class="title-esconde">
+                <h4 class="subtitle-rec">Modo de Preparo</h4>
+                <p class="esconder-preparo">MOSTRAR</p>
+            </div>
+            <div class="lista-preparation">        
+                {% for linha in item.preparation %}
+                    <li class="lista-rec">{{linha}}</li>
+                {% endfor %}
+            </div>
+        
+        </div>
+        <div class="info">
+            
+            <div class="title-esconde">
+                <h4 class="subtitle-rec">Informações adicionais</h4>
+                <p class="esconder-info">MOSTRAR</p>
+            </div>
+            <div class="text-info">
+                <p class="lista-rec">{{item.information}}</p>
+            </div>
+            
+            
+            
+        </div>
+    </section>
+
+{% endblock %}
