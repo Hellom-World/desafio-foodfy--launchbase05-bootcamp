@@ -32,7 +32,7 @@ ________________________________________________________________________________
 	. Mudar no package.json em scripts:				
 		."start": "npm-run-all -p nodemon browsersync"
 		."nodemon": "nodemon server.js"
-		."browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public,views'"
+		."browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public, views'"
 
 				*-*-*-*-Criando container de conteudo-*-*-*-*
 2. Criar uma div com duas sessões, uma para imagem e outra apara detalhes dos instrutores

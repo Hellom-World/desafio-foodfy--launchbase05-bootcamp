@@ -7,9 +7,7 @@ const recData = require("./data")
 
 
 routes.get("/", uxs.index)
-
 routes.get("/receitas", uxs.receitas)
-
 routes.get("/sobre", function(req, res){
     return res.render("ux/sobre.njk")
 })
