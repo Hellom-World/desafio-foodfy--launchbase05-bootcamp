@@ -12,15 +12,18 @@
         <img src="/assets/chef.png" alt="">
     </main> #}
 
-    <section class="content">
+    <section class="content-adm">
         <h1>Gerenciar Receitas</h1>
-        <div class="cards-all">
+        <div class="cards-all-adm">
                 
             {% for item in itens %}
-                <div class="card" id='{{item.index}}'>
+                <div class="card-adm" id='{{item.index}}'>
                     <img src="{{item.image2}}" alt="{{item.title}}">
-                    <h4 class="content">{{item.title}}</h4>
-                    <p class="info">por {{item.author}}</p>               
+                    <div class="card-info">
+                        <h4 class="content">{{item.title}}</h4>
+                        <p class="info">por {{item.author}}</p>
+                        <a href="/admin/recipes/{{item.index}}">Visualizar</a>
+                    </div>
                 </div>
             {% endfor %}
 
