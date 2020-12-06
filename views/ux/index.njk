@@ -16,11 +16,11 @@
         <h1>Mais Acessadas</h1>
         <div class="cards-all">
                 
-            {% for item in itens %}
-                <div class="card" id='{{item.index}}'>
-                    <img src="{{item.image2}}" alt="{{item.title}}">
-                    <h4 class="content">{{item.title}}</h4>
-                    <p class="info">por {{item.author}}</p>               
+            {% for recipe in recipes %}
+                <div class="card" id='{{recipe.index}}'>
+                    <img src="{{recipe.image2}}" alt="{{recipe.title}}">
+                    <h4 class="content">{{recipe.title}}</h4>
+                    <p class="info">por {{recipe.author}}</p>               
                 </div>
             {% endfor %}
 

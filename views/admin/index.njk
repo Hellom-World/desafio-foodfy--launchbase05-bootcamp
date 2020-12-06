@@ -16,13 +16,13 @@
         <h1>Gerenciar Receitas</h1>
         <div class="cards-all-adm">
                 
-            {% for item in itens %}
-                <div class="card-adm" id='{{item.index}}'>
-                    <img src="{{item.image2}}" alt="{{item.title}}">
+            {% for recipe in recipes %}
+                <div class="card-adm" id='{{recipe.index}}'>
+                    <img src="{{recipe.image2}}" alt="{{recipe.title}}">
                     <div class="card-info">
-                        <h4 class="content">{{item.title}}</h4>
-                        <p class="info">por {{item.author}}</p>
-                        <a href="/admin/recipes/{{item.index}}">Visualizar</a>
+                        <h4 class="content">{{recipe.title}}</h4>
+                        <p class="info">por {{recipe.author}}</p>
+                        <a href="/admin/recipes/{{recipe.index}}">Visualizar</a>
                     </div>
                 </div>
             {% endfor %}
