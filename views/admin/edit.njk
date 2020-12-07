@@ -1,47 +1,14 @@
 {% extends "layoutAdm.njk" %}
 
 {% block content %}
+
     <section class="section-button-edit">
         <p>Editando receita</p>
         <div>
             <a class="button" href="{{recipe.index}}/edit.njk">Deletar</a>
-            <a class="button" href="{{recipe.index}}/edit.njk">Salvar receita</a>
+            <a class="button" type="submit" method="POST" action="admin/recipes?_method=PUT" href="/admin/recipes">Salvar receita</a>
         </div>
     </section>
-    <section>
-
-        <div class="foto-rec">
-            <h4>Imagem da Receita</h4>
-            <input name="img-rec" type="text" placeholder="https://">    
-        </div>
-
-        <div id="ingredients">
-            <h4 class="subtitle-rec">Ingredientes</h4>
-            <div class="ingredient">
-                <input type="text" name="ingredients[]" value="" placeholder="Ingredient" />                
-            </div>
-        </div>
-        <button type="button" class="add-ingredient">Adicionar novo ingrediente</button>    
-
-
-        <div id="modoPreparo">
-            <h4 class="subtitle-rec">Modo de Preparo</h4>
-            <div class="modPrep-content">
-                <input type="text" name="modPrep[]" value="" placeholder="Escreva um passo de cada vez" />                
-            </div>
-        </div>
-        <button type="button" class="add-modPrep">Adicionar novo passo</button>    
-
-
-        <div class="info">
-            
-            <div class="title-esconde">
-                <h4 class="subtitle-rec">Informações adicionais</h4>
-            </div>
-            <textarea id="info-textarea" name="info-testarea" rows="4" cols="50">
-                At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
-            </textarea>
-        </div>
-    </section>
+    {% include 'admin/fields.njk' %}
 
 {% endblock %}

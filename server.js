@@ -1,12 +1,12 @@
 const express = require('express')
 const nunjucks = require('nunjucks')
 const routes = require('./routes')
-
+const MethodOverride = require('method-override')
 const server = express()
-const recData = require("./data")
 
 server.use(express.static('public'))
 server.use(routes)
+server.use(MethodOverride('_method'))
 
 server.set("views engine, njk")
 
