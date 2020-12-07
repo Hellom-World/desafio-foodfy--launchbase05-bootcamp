@@ -1,7 +1,8 @@
-    <section>        
+    <section>
+        
             <div class="foto-rec">
                 <h3>Imagem da Receita</h3>
-                <input name="img-rec" type="text" value="{{recipe.image}}"placeholder="https://">    
+                <input name="image" type="text" value="{{recipe.image}}"placeholder="https://">    
             </div>
 
             <div id="ingredients">
@@ -18,11 +19,11 @@
 
             <div id="modoPreparo">
                 <h3>Modo de Preparo</h3>
-                <div class="modPrep-content">
                     {% for linha in recipe.preparation %}
-                        <input type="text" name="modPrep[]" value="{{linha}}" placeholder="Escreva o próximo passo" />                
+                        <input type="text" name="preparation[]" value="{{linha}}" placeholder="Escreva o próximo passo" />                
                     {% endfor %}
-                    <input type="text" name="modPrep[]" value="" placeholder="Escreva o próximo passo" />                
+                <div class="modPrep-content">
+                    <input type="text" name="preparation[]" value="" placeholder="Escreva o próximo passo" />                
                 </div>
             </div>
             <button type="button" class="add-modPrep">Adicionar novo passo</button>    
@@ -33,6 +34,6 @@
                 <div class="title-esconde">
                     <h3>Informações adicionais</h3>
                 </div>
-                <textarea id="info-textarea" name="info-testarea" rows="0" cols="0">    {{recipe.information}}</textarea>
+                <textarea id="info-textarea" name="information" rows="0" cols="0">    {{recipe.information}}</textarea>
             </div>
     </section>

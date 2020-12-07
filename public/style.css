@@ -175,6 +175,7 @@ article h2{
     margin: 20px 0px;   
 }
 .foto-rec img{
+    width: 100%;
     border-radius: 15px;
 }
 .title-rec{

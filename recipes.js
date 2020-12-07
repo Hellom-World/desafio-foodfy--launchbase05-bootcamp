@@ -1,4 +1,5 @@
 const recData = require("./data.json")
+const fs= require('fs')
 
 exports.index = function(req, res){
     return res.render('admin/index.njk', {recipes: recData.recipes})
@@ -6,36 +7,35 @@ exports.index = function(req, res){
 exports.create = function(req, res){
     return res.render('admin/create.njk')
 }
-exports.post = function(req, res){ 
-
+exports.post = function(req, res) { //ok
     const keys = Object.keys(req.body)
-    console.log(keys)
-    
-    for(key of keys) {
-        if (req.body[key] == ""){
-            return res.send('Please, fill all fields!')
+    for (key of keys) {
+        if (req.body[key] == "") {
+            return res.send(`Preencha todos os campos`)
         }
     }
-
+    let {title, image, ingredients, preparation, information, author} = req.body
+    
     let index = 1
 	const lastRecipe = recData.recipes[recData.recipes.length - 1]
  				
 		if(lastRecipe) {
 			index = lastRecipe.index + 1
-		}
-
-
-        recData.recipess.push({
-            index,
-            ...req.body
-        })
-
-    fs.writeFile("data.json", JSON.stringify(recData, null, 2), function(err){
-        if (err) return res.send("Write file error!")
+        }
+    
+    recData.recipes.push({
+        index,
+        image,
+        title,
+        author,
+        ingredients,
+        preparation,
+        information
     })
-    
-    
-    return res.redirect("./admin/recipes")
+    fs.writeFile("data.json", JSON.stringify(recData, null, 2), function(err) {
+        if (err) return res.send('Write file err')
+    })
+    return res.redirect("/admin/recipes")
 }
 exports.show = function(req, res){
     const { id } = req.params 

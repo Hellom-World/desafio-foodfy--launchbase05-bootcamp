@@ -4,6 +4,7 @@ const routes = require('./routes')
 const MethodOverride = require('method-override')
 const server = express()
 
+server.use(express.urlencoded({extended: true}))
 server.use(express.static('public'))
 server.use(routes)
 server.use(MethodOverride('_method'))
@@ -18,4 +19,5 @@ nunjucks.configure("views", {
 
 server.listen(4000, function(){
     console.log("server is running")
+    
 })

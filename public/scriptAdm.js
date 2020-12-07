@@ -37,3 +37,4 @@ function addPreparo() {
   
   document
     .querySelector(".add-modPrep")
+    .addEventListener("click", addPreparo);
