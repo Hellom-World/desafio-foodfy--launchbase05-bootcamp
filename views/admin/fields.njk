@@ -2,7 +2,7 @@
         
             <div class="foto-rec">
                 <h3>Imagem da Receita</h3>
-                <input name="image" type="text" value="{{recipe.image}}"placeholder="https://">    
+                <input name="image" type="url" value="{{recipe.image}}"placeholder="https://">    
             </div>
 
             <div id="ingredients">
@@ -29,6 +29,17 @@
             <button type="button" class="add-modPrep">Adicionar novo passo</button>    
 
 
+            <div class="grid-fields">
+                <div class="title">
+                    <h3>Título da Receita</h3>
+                    <input name="title" type="text" value="{{recipe.title}}">    
+                </div>
+
+                <div class="create-name">
+                    <h3>Autor da Receita</h3>
+                    <input name="author" type="text" value="{{recipe.author}}">    
+                </div>
+            </div>
             <div class="info">
                 
                 <div class="title-esconde">

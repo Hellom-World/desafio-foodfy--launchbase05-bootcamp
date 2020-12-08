@@ -245,6 +245,9 @@ article h2{
 .abas-adm{
     background-color: black;
 }
+.header-adm{
+    margin-bottom: 70px;
+}
 .header-adm div a{
     margin: 0;
 }
@@ -285,9 +288,28 @@ article h2{
     color: blue;
 }
 .section-button-edit{
-    margin-top: 50px;
+    margin-top: -37px;
     display: flex;
     justify-content: space-between;
+}
+.delete-button,
+.salve-button{
+    padding: 9px 20px; 
+    color: whitesmoke; 
+    border-radius: 4px; 
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+.delete-button{
+    margin-top: 50px;
+    margin-left: 879px;
+    width: 92px;
+    background: firebrick;
+}
+.salve-button{
+    background: forestgreen;
 }
 .section-button-edit p{
     font-weight: 700;
@@ -295,21 +317,15 @@ article h2{
     color: #111111;
 }
 a.button{ 
-    padding: 8px 32px;
-    background: firebrick ; 
+    padding: 9px 20px; 
     color: whitesmoke; 
     border-radius: 4px; 
-    width: 139px; 
     font-size: 16px;
     text-decoration: none;
     text-align: center;
-    }
-a.button:first-child{
-    background: firebrick;
-}
-a.button:last-child{
+    cursor: pointer;
     background: forestgreen;
-}
+    }
 /* Edit Adm */
 
 input{
@@ -354,4 +370,9 @@ textarea{
     font-family: 'roboto';
     font-size: 16px;
     box-sizing: border-box;
+}
+.grid-fields{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
 }

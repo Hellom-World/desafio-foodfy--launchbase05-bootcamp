@@ -2,13 +2,23 @@
 
 {% block content %}
 
-    <section class="section-button-edit">
-        <p>Editando receita</p>
-        <div>
-            <a class="button" href="{{recipe.index}}/edit.njk">Deletar</a>
-            <a class="button" type="submit" method="POST" action="admin/recipes?_method=PUT" href="/admin/recipes">Salvar receita</a>
-        </div>
-    </section>
-    {% include 'admin/fields.njk' %}
+        <form id="form-delete" action="/admin/?_method=DELETE" method="post">
+
+            <input type="hidden" name="id" value={{recipe.index}}>
+            <button class="delete-button" type="submit">Delete</button>
+
+        </form>
+    <form  action="/admin/recipes?_method=PUT"  method="POST">
+
+
+        <section class="section-button-edit">
+            <p>Editando receita</p>
+            <div>
+                <button class="salve-button" type="submit">Salvar receita</button>
+            </div>
+        </section>
+        {% include 'admin/fields.njk' %}
+        <input type="hidden" name="id" value="{{recipe.index}}">
+    </form>
 
 {% endblock %}

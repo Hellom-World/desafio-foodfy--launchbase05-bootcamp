@@ -7,7 +7,7 @@ exports.index = function(req, res){
 exports.create = function(req, res){
     return res.render('admin/create.njk')
 }
-exports.post = function(req, res) { //ok
+exports.post = function(req, res) {
     const keys = Object.keys(req.body)
     for (key of keys) {
         if (req.body[key] == "") {
@@ -16,11 +16,14 @@ exports.post = function(req, res) { //ok
     }
     let {title, image, ingredients, preparation, information, author} = req.body
     
-    let index = 1
+    let  index = 1
 	const lastRecipe = recData.recipes[recData.recipes.length - 1]
- 				
+    
 		if(lastRecipe) {
-			index = lastRecipe.index + 1
+			index = Number(lastRecipe.index) + 1
+        }
+        if(ingredients == [""]){
+            return false
         }
     
     recData.recipes.push({
@@ -90,29 +93,29 @@ exports.put = function(req, res) {
     if (!foundRecipe) return res.send("Recipe Not Found")
 
     const recipe = {
-        ...foundRecipes,
+        ...foundRecipe,
         ...req.body,
-        id: Number(req.body.id)
+        
     }
 
-    data.recipes[index] = recipe
+    recData.recipes[index] = recipe
 
     fs.writeFile("data.json", JSON.stringify(recData, null, 2), function (err) {
         if(err) return res.send("write error!")
 
-        return res.redirect(`admin/recipes/${id}`)
+        return res.redirect(`admin/recipes/${index}`)
     })
 }
 exports.delete = function(req, res){
-    const { id } = req.body
+    const { index } = req.body
 
-    const filteredEstudantees = data.estudantes.filter(function(estudante){
-        return estudante.id != id
+    const filteredRecipes = data.recipes.filter(function(recipe){
+        return recipe.index != index
     })
 
-    data.estudantes = filteredEstudantees
+    Recdata.recipes = filteredRecipes
 
-    fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err) {
+    fs.writeFile("data.json", JSON.stringify(recData, null, 2), function(err) {
         if (err) return res.send("Write file error!")
 
         return res.redirect("/")
