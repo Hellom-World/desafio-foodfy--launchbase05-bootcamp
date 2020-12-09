@@ -22,9 +22,6 @@ exports.post = function(req, res) {
 		if(lastRecipe) {
 			index = Number(lastRecipe.index) + 1
         }
-        if(ingredients == [""]){
-            return false
-        }
     
     recData.recipes.push({
         index,
@@ -81,11 +78,11 @@ exports.put = function(req, res) {
     
     
     const { id } = req.body
-    let index = 0
+    let idx = 0
 
     const foundRecipe = recData.recipes.find(function(recipe, foundIndex){
         if (id == recipe.index) {
-            index = foundIndex
+            idx = foundIndex
             return true
         }
     })
@@ -95,15 +92,15 @@ exports.put = function(req, res) {
     const recipe = {
         ...foundRecipe,
         ...req.body,
-        
+        index: Number(req.body.id)        
     }
 
-    recData.recipes[index] = recipe
+    recData.recipes[idx] = recipe
 
     fs.writeFile("data.json", JSON.stringify(recData, null, 2), function (err) {
         if(err) return res.send("write error!")
 
-        return res.redirect(`admin/recipes/${index}`)
+        return res.redirect(`recipes`)
     })
 }
 exports.delete = function(req, res){

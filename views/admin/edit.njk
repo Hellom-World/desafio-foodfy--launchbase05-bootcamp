@@ -2,14 +2,13 @@
 
 {% block content %}
 
-        <form id="form-delete" action="/admin/?_method=DELETE" method="post">
+        <form id="form-delete" action="/admin/recipes?_method=DELETE" method="post">
 
             <input type="hidden" name="id" value={{recipe.index}}>
             <button class="delete-button" type="submit">Delete</button>
 
         </form>
     <form  action="/admin/recipes?_method=PUT"  method="POST">
-
 
         <section class="section-button-edit">
             <p>Editando receita</p>
@@ -19,6 +18,7 @@
         </section>
         {% include 'admin/fields.njk' %}
         <input type="hidden" name="id" value="{{recipe.index}}">
+        
     </form>
 
 {% endblock %}
