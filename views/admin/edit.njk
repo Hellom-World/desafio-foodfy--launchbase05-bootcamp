@@ -2,12 +2,12 @@
 
 {% block content %}
 
-        <form id="form-delete" action="/admin/recipes?_method=DELETE" method="post">
+    <form id="form-delete" action="/admin/recipes?_method=DELETE" method="post">
 
-            <input type="hidden" name="id" value={{recipe.index}}>
-            <button class="delete-button" type="submit">Delete</button>
+        <input type="hidden" name="id" value={{recipe.index}}>
+        <button class="delete-button" type="submit">Delete</button>
 
-        </form>
+    </form>
     <form  action="/admin/recipes?_method=PUT"  method="POST">
 
         <section class="section-button-edit">
@@ -20,5 +20,5 @@
         <input type="hidden" name="id" value="{{recipe.index}}">
         
     </form>
-
+    {% include '../confirm.njk'%}
 {% endblock %}

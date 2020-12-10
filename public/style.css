@@ -292,6 +292,12 @@ article h2{
     display: flex;
     justify-content: space-between;
 }
+#form-delete{
+    max-width: 638px;
+    display: flex;
+    margin: auto;
+    justify-content: flex-end;
+}
 .delete-button,
 .salve-button{
     padding: 9px 20px; 
@@ -304,7 +310,6 @@ article h2{
 }
 .delete-button{
     margin-top: 50px;
-    margin-left: 879px;
     width: 92px;
     background: firebrick;
 }

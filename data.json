@@ -18,6 +18,7 @@
         "",
         "",
         "",
+        "",
         ""
       ],
       "preparation": [
@@ -33,9 +34,10 @@
         "",
         "",
         "",
+        "",
         ""
       ],
-      "information": "                        Preaqueça a chapa, frigideira ou grelha por 10 minutos antes de levar os hambúrgueres. Adicione um pouquinho de óleo ou manteiga e não amasse os hambúrgueres! </br> </br> Você sabia que a receita que precede o hambúrguer surgiu no século XIII, na Europa? A ideia de moer a carne chegou em Hamburgo no século XVII, onde um açogueiro resolveu também temperá-la. Assim, a receita foi disseminada nos Estados Unidos por alemães da região. Lá surgiu a ideia de colocar o hambúrguer no meio do pão e adicionar outros ingredientes, como queijom tomates e alface.",
+      "information": "                            Pré aqueça a chapa, frigideira ou grelha por 10 minutos antes de levar os hambúrgueres. Adicione um pouquinho de óleo ou manteiga e não amasse os hambúrgueres! \r\n\r\n Você sabia que a receita que precede o hambúrguer surgiu no século XIII, na Europa? A ideia de moer a carne chegou em Hamburgo no século XVII, onde um açogueiro resolveu também temperá-la. Assim, a receita foi disseminada nos Estados Unidos por alemães da região. Lá surgiu a ideia de colocar o hambúrguer no meio do pão e adicionar outros ingredientes, como queijo e tomates e alface.",
       "id": "0"
     },
     {
@@ -168,19 +170,6 @@
       "information": ""
     },
     {
-      "index": "6",
-      "image": "gvgvgvgvg",
-      "ingredients": [
-        "h gv ggyuhyubhu",
-        ""
-      ],
-      "preparation": [
-        "gbguvuvtvu",
-        ""
-      ],
-      "information": "hbuuybu    "
-    },
-    {
       "index": "7",
       "image": "https://images.unsplash.com/photo-1516992654410-9309d4587e94?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
       "title": "cabeça de alho homogenia",
@@ -195,34 +184,22 @@
       "information": "    Serve também para matar vampiro"
     },
     {
-      "index": "8",
-      "image": "https://img.freepik.com/fotos-gratis/gotas-de-oleo-na-imagem-abstrata-padrao-psicodelico-de-agua_23-2148290141.jpg?size=626&ext=jpg",
-      "title": "nem sei",
-      "author": "Hellom Oliveira",
-      "ingredients": [
-        "asdsa",
-        ""
-      ],
-      "preparation": [
-        "adsdas",
-        ""
-      ],
-      "information": "    "
-    },
-    {
       "index": 9,
       "image": "https://images.unsplash.com/photo-1516992654410-9309d4587e94?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
       "title": "asdsadsa",
       "author": "asdsada",
       "ingredients": [
         "asdsada",
+        "",
         ""
       ],
       "preparation": [
         "adsadsadas",
+        "",
         ""
       ],
-      "information": "    "
+      "information": "        ",
+      "id": "9"
     },
     {
       "index": 10,
@@ -690,7 +667,20 @@
       "information": "            "
     },
     {
-      "index": 33
+      "index": 33,
+      "image": "",
+      "ingredients": [
+        "",
+        ""
+      ],
+      "preparation": [
+        "",
+        ""
+      ],
+      "title": "",
+      "author": "",
+      "information": "        ",
+      "id": "33"
     },
     {
       "index": 34
@@ -708,16 +698,35 @@
       "index": 38
     },
     {
-      "index": 39
-    },
-    {
       "index": 40
     },
     {
-      "index": 41
+      "index": 41,
+      "image": "",
+      "ingredients": [
+        ""
+      ],
+      "preparation": [
+        ""
+      ],
+      "title": "",
+      "author": "",
+      "information": "    ",
+      "id": "41"
     },
     {
-      "index": 42
+      "index": 42,
+      "image": "",
+      "ingredients": [
+        ""
+      ],
+      "preparation": [
+        ""
+      ],
+      "title": "",
+      "author": "",
+      "information": "    ",
+      "id": "42"
     },
     {
       "index": 43
@@ -748,213 +757,141 @@
         "1kg de fuba",
         "",
         "",
+        "",
+        "",
         ""
       ],
       "preparation": [
         "adsdas",
         "",
         "",
+        "",
+        "",
         ""
       ],
-      "information": "            "
+      "information": "                    ",
+      "id": "45"
     },
     {
       "index": 46,
-      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExIVFhUXGRcaFxcYGBoXGBcXGhcYFxgYFxoYHSggGB8lHRcaITEiJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGi0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAKoBKQMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAADAgQFBgcBCAD/xAA+EAABAgQEAwUFBwMEAgMAAAABAhEAAyExBBJBUQVhcQYiMoGRBxOhsfAUI0JScsHRYrLhJDOCkqLxFWNz/8QAGgEAAwEBAQEAAAAAAAAAAAAAAQIDAAQFBv/EACkRAAICAgICAAYCAwEAAAAAAAABAhEDITFBBBIFIjJRYXETgZHB8EL/2gAMAwEAAhEDEQA/AM2CijukQhGHJLgUhziiDVvhDMrUbGg0iB2MUTlNYTPnhVhCFEE1MIUGsHEYAqQtVtIKvFrBYB+cBCiaEQ4SlozowuUQpLzLwn3YHeBjqg9o6mQRcQKCBXiW0iWwivfJG6fjDD7O+0IkTlS1d2A19jJ72Oyk+8Y1MNeLuC34dYImeQcxDmOcQklYcO50/aNwwvgiJaUv3TD+VKKheohlisEqXWF4FSlO5YhoeW1aEXNMLPxBAyi8JTMBAehgpnIA7yXPSI+ZOewpGRmyRYWvtAkpaihSESsVlDQuZNzCsajaBplkqCZaSomgSASSdgBUmJaR2M4isjLg5wzWzJKOdStsvm0aZ7IOFypeHGJygzJpWArVKEqKMo2cpJO9No0tU5MBSKLC6TfZiXDvZDilgGdOlSv6QDMPnVI9CYfzfY6sDu4tJ6yiPiFn5Rqi8VWkKE5y0I5fkt/DXRi+L9muPlvkRLmj+hYBPktvnFb4lwbEyCffYeagakoOX/sHT8Y9GqnCDlI6wtsVwR5kwWF9/",
-      "title": "pudim",
-      "author": "ele mesmp",
-      "ingredients": [
-        "1kg de fuba",
-        "",
-        "",
-        "",
-        ""
-      ],
+      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFhUXGRoaGBgYFx0dGBgYGhoaGB0ZFxgYHyggGBolHRgYITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0NFQ8PFS0ZFR0rKystKysrKy0tLS0tKy0rLSsrKy0tKy0tLS0tLS0rLS0tLS0rKy0tLS0rKzctNy0rK//AABEIALMBGQMBIgACEQEDEQH/xAAaAAADAQEBAQAAAAAAAAAAAAAAAQIDBAUH/8QAOBAAAQMCBAQEBgIBAgcBAAAAAQACESExAxJBUWFxgfAEkaGxEyLB0eHxBTJCUoIWI1NUYnKSFP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A+M5Ug2qUocY4oocozJhhIt3sdtVBVRbXn0joaFWQs2RIzTEiYvGscUB1aeqDUgnoPSdY4nVAH5jZKRApqZPCmnCvmplRVALs/jcHBc8fGxCzDAJdlq8gAmGSIzGIEwFwkJyiKLbxUSYm8KstNjSm9TalIEX/AAl4Vgc5oc/K0uAc6JytpLoFXQJMC8JsZJcGwQA6pIbIGtTUxXLdFQ4cVktcVsAHedQbUqBUdVmWbVRFAUM7U9PooVEk2FBw91p4HxD8PEbiYbsjmmQ7/SbTFZ6AqjEBUXbad9UYpk1vrevGqQIn6/hAwadykBJgaqsJ2VwJaHAEEg2IpQkGYNqbpPcCZAgHQWHAcFAsibV6Pj/E+HdgYDMPByYrQ74r85PxCXS0gEQ2BSi4sRmUNgtMtn5ZppldIFRE0pW6CwRkNi4kRIMgAGzpiDIpBsLLJxVsaIzFwvGWsxH9to6rMoKkiQDThMGLSNVLjJnvoBZEoQKFTgOvLSkGddfJTKpAQhAaT9eVB9QqzQaca78a9YQQG6DySdMxqqaO/SiTmQJmOGvdfRBAVB1a1UBNjoQaA",
+      "title": "asdsadsa",
+      "author": "Luninha",
+      "ingredients": "",
       "preparation": [
-        "adsdas",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "information": "                "
-    },
-    {
-      "index": 47,
-      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExIVFhUXGRcaFxcYGBoXGBcXGhcYFxgYFxoYHSggGB8lHRcaITEiJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGi0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAKoBKQMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAADAgQFBgcBCAD/xAA+EAABAgQEAwUFBwMEAgMAAAABAhEAAyExBBJBUQVhcQYiMoGRBxOhsfAUI0JScsHRYrLhJDOCkqLxFWNz/8QAGgEAAwEBAQEAAAAAAAAAAAAAAQIDAAQFBv/EACkRAAICAgICAAYCAwEAAAAAAAABAhEDITFBBBIFIjJRYXETgZHB8EL/2gAMAwEAAhEDEQA/AM2CijukQhGHJLgUhziiDVvhDMrUbGg0iB2MUTlNYTPnhVhCFEE1MIUGsHEYAqQtVtIKvFrBYB+cBCiaEQ4SlozowuUQpLzLwn3YHeBjqg9o6mQRcQKCBXiW0iWwivfJG6fjDD7O+0IkTlS1d2A19jJ72Oyk+8Y1MNeLuC34dYImeQcxDmOcQklYcO50/aNwwvgiJaUv3TD+VKKheohlisEqXWF4FSlO5YhoeW1aEXNMLPxBAyi8JTMBAehgpnIA7yXPSI+ZOewpGRmyRYWvtAkpaihSESsVlDQuZNzCsajaBplkqCZaSomgSASSdgBUmJaR2M4isjLg5wzWzJKOdStsvm0aZ7IOFypeHGJygzJpWArVKEqKMo2cpJO9No0tU5MBSKLC6TfZiXDvZDilgGdOlSv6QDMPnVI9CYfzfY6sDu4tJ6yiPiFn5Rqi8VWkKE5y0I5fkt/DXRi+L9muPlvkRLmj+hYBPktvnFb4lwbEyCffYeagakoOX/sHT8Y9GqnCDlI6wtsVwR5kwWF9/",
-      "title": "pudim",
-      "author": "ele mesmp",
-      "ingredients": [
-        "1kg de fuba",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "preparation": [
-        "adsdas",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "information": "                    "
-    },
-    {
-      "index": 48,
-      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExIVFhUXGRcaFxcYGBoXGBcXGhcYFxgYFxoYHSggGB8lHRcaITEiJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGi0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAKoBKQMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAADAgQFBgcBCAD/xAA+EAABAgQEAwUFBwMEAgMAAAABAhEAAyExBBJBUQVhcQYiMoGRBxOhsfAUI0JScsHRYrLhJDOCkqLxFWNz/8QAGgEAAwEBAQEAAAAAAAAAAAAAAQIDAAQFBv/EACkRAAICAgICAAYCAwEAAAAAAAABAhEDITFBBBIFIjJRYXETgZHB8EL/2gAMAwEAAhEDEQA/AM2CijukQhGHJLgUhziiDVvhDMrUbGg0iB2MUTlNYTPnhVhCFEE1MIUGsHEYAqQtVtIKvFrBYB+cBCiaEQ4SlozowuUQpLzLwn3YHeBjqg9o6mQRcQKCBXiW0iWwivfJG6fjDD7O+0IkTlS1d2A19jJ72Oyk+8Y1MNeLuC34dYImeQcxDmOcQklYcO50/aNwwvgiJaUv3TD+VKKheohlisEqXWF4FSlO5YhoeW1aEXNMLPxBAyi8JTMBAehgpnIA7yXPSI+ZOewpGRmyRYWvtAkpaihSESsVlDQuZNzCsajaBplkqCZaSomgSASSdgBUmJaR2M4isjLg5wzWzJKOdStsvm0aZ7IOFypeHGJygzJpWArVKEqKMo2cpJO9No0tU5MBSKLC6TfZiXDvZDilgGdOlSv6QDMPnVI9CYfzfY6sDu4tJ6yiPiFn5Rqi8VWkKE5y0I5fkt/DXRi+L9muPlvkRLmj+hYBPktvnFb4lwbEyCffYeagakoOX/sHT8Y9GqnCDlI6wtsVwR5kwWF9/",
-      "title": "pudim",
-      "author": "ele mesmp",
-      "ingredients": [
-        "1kg de fuba",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "preparation": [
-        "adsdas",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "information": "                        "
-    },
-    {
-      "index": 49,
-      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExIVFhUXGRcaFxcYGBoXGBcXGhcYFxgYFxoYHSggGB8lHRcaITEiJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGi0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAKoBKQMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAADAgQFBgcBCAD/xAA+EAABAgQEAwUFBwMEAgMAAAABAhEAAyExBBJBUQVhcQYiMoGRBxOhsfAUI0JScsHRYrLhJDOCkqLxFWNz/8QAGgEAAwEBAQEAAAAAAAAAAAAAAQIDAAQFBv/EACkRAAICAgICAAYCAwEAAAAAAAABAhEDITFBBBIFIjJRYXETgZHB8EL/2gAMAwEAAhEDEQA/AM2CijukQhGHJLgUhziiDVvhDMrUbGg0iB2MUTlNYTPnhVhCFEE1MIUGsHEYAqQtVtIKvFrBYB+cBCiaEQ4SlozowuUQpLzLwn3YHeBjqg9o6mQRcQKCBXiW0iWwivfJG6fjDD7O+0IkTlS1d2A19jJ72Oyk+8Y1MNeLuC34dYImeQcxDmOcQklYcO50/aNwwvgiJaUv3TD+VKKheohlisEqXWF4FSlO5YhoeW1aEXNMLPxBAyi8JTMBAehgpnIA7yXPSI+ZOewpGRmyRYWvtAkpaihSESsVlDQuZNzCsajaBplkqCZaSomgSASSdgBUmJaR2M4isjLg5wzWzJKOdStsvm0aZ7IOFypeHGJygzJpWArVKEqKMo2cpJO9No0tU5MBSKLC6TfZiXDvZDilgGdOlSv6QDMPnVI9CYfzfY6sDu4tJ6yiPiFn5Rqi8VWkKE5y0I5fkt/DXRi+L9muPlvkRLmj+hYBPktvnFb4lwbEyCffYeagakoOX/sHT8Y9GqnCDlI6wtsVwR5kwWF9/",
-      "title": "pudim",
-      "author": "ele mesmp",
-      "ingredients": [
-        "1kg de fuba",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "preparation": [
-        "adsdas",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-      ],
-      "information": "                            "
-    },
-    {
-      "index": 50,
-      "image": "https://img.freepik.com/fotos-gratis/gotas-de-oleo-na-imagem-abstrata-padrao-psicodelico-de-agua_23-2148290141.jpg?size=626&ext=jpg",
-      "title": "azaxaXA",
-      "author": "ASAs",
-      "ingredients": [
-        "1kg de fuba",
-        ""
-      ],
-      "preparation": [
-        "gbguvuvtvu",
+        "asdasdasda",
         ""
       ],
       "information": "    "
     },
     {
-      "index": 51,
-      "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/pizza.png",
-      "title": "Pizza 4 estações",
-      "author": "Fabiana Melo",
+      "index": 47,
+      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFhUXGRoaGBgYFx0dGBgYGhoaGB0ZFxgYHyggGBolHRgYITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0NFQ8PFS0ZFR0rKystKysrKy0tLS0tKy0rLSsrKy0tKy0tLS0tLS0rLS0tLS0rKy0tLS0rKzctNy0rK//AABEIALMBGQMBIgACEQEDEQH/xAAaAAADAQEBAQAAAAAAAAAAAAAAAQIDBAUH/8QAOBAAAQMCBAQEBgIBAgcBAAAAAQACESExAxJBUWFxgfAEkaGxEyLB0eHxBTJCUoIWI1NUYnKSFP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A+M5Ug2qUocY4oocozJhhIt3sdtVBVRbXn0joaFWQs2RIzTEiYvGscUB1aeqDUgnoPSdY4nVAH5jZKRApqZPCmnCvmplRVALs/jcHBc8fGxCzDAJdlq8gAmGSIzGIEwFwkJyiKLbxUSYm8KstNjSm9TalIEX/AAl4Vgc5oc/K0uAc6JytpLoFXQJMC8JsZJcGwQA6pIbIGtTUxXLdFQ4cVktcVsAHedQbUqBUdVmWbVRFAUM7U9PooVEk2FBw91p4HxD8PEbiYbsjmmQ7/SbTFZ6AqjEBUXbad9UYpk1vrevGqQIn6/hAwadykBJgaqsJ2VwJaHAEEg2IpQkGYNqbpPcCZAgHQWHAcFAsibV6Pj/E+HdgYDMPByYrQ74r85PxCXS0gEQ2BSi4sRmUNgtMtn5ZppldIFRE0pW6CwRkNi4kRIMgAGzpiDIpBsLLJxVsaIzFwvGWsxH9to6rMoKkiQDThMGLSNVLjJnvoBZEoQKFTgOvLSkGddfJTKpAQhAaT9eVB9QqzQaca78a9YQQG6DySdMxqqaO/SiTmQJmOGvdfRBAVB1a1UBNjoQaA",
+      "title": "asdsadsa",
+      "author": "Luninha",
       "ingredients": [
-        "1 xícara (chá) de leite",
-        "1 ovo",
-        "1 colher (chá) de sal",
-        "1 colher (chá) de açúcar",
-        "1 colher (sopa) de margarina",
-        "1 e 1/2 xícara (chá) de farinha de trigo",
-        "1 colher (sobremesa) de fermento em pó",
-        "1/2 lata de molho de tomate",
-        "250 g de mussarela ralada grossa",
-        "2 tomates fatiados",
-        "azeitona picada",
-        "orégano a gosto",
+        "1kg de fuba"
+      ],
+      "preparation": [
+        "asdasdasda"
+      ],
+      "information": "    "
+    },
+    {
+      "index": 48,
+      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFhUXGRoaGBgYFx0dGBgYGhoaGB0ZFxgYHyggGBolHRgYITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0NFQ8PFS0ZFR0rKystKysrKy0tLS0tKy0rLSsrKy0tKy0tLS0tLS0rLS0tLS0rKy0tLS0rKzctNy0rK//AABEIALMBGQMBIgACEQEDEQH/xAAaAAADAQEBAQAAAAAAAAAAAAAAAQIDBAUH/8QAOBAAAQMCBAQEBgIBAgcBAAAAAQACESExAxJBUWFxgfAEkaGxEyLB0eHxBTJCUoIWI1NUYnKSFP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A+M5Ug2qUocY4oocozJhhIt3sdtVBVRbXn0joaFWQs2RIzTEiYvGscUB1aeqDUgnoPSdY4nVAH5jZKRApqZPCmnCvmplRVALs/jcHBc8fGxCzDAJdlq8gAmGSIzGIEwFwkJyiKLbxUSYm8KstNjSm9TalIEX/AAl4Vgc5oc/K0uAc6JytpLoFXQJMC8JsZJcGwQA6pIbIGtTUxXLdFQ4cVktcVsAHedQbUqBUdVmWbVRFAUM7U9PooVEk2FBw91p4HxD8PEbiYbsjmmQ7/SbTFZ6AqjEBUXbad9UYpk1vrevGqQIn6/hAwadykBJgaqsJ2VwJaHAEEg2IpQkGYNqbpPcCZAgHQWHAcFAsibV6Pj/E+HdgYDMPByYrQ74r85PxCXS0gEQ2BSi4sRmUNgtMtn5ZppldIFRE0pW6CwRkNi4kRIMgAGzpiDIpBsLLJxVsaIzFwvGWsxH9to6rMoKkiQDThMGLSNVLjJnvoBZEoQKFTgOvLSkGddfJTKpAQhAaT9eVB9QqzQaca78a9YQQG6DySdMxqqaO/SiTmQJmOGvdfRBAVB1a1UBNjoQaA",
+      "title": "asdsadsa",
+      "author": "Luninha",
+      "ingredients": [
+        "1kg de fuba"
+      ],
+      "preparation": [
+        "asdasdasda"
+      ],
+      "information": "    "
+    },
+    {
+      "index": 49,
+      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFhUXGRoaGBgYFx0dGBgYGhoaGB0ZFxgYHyggGBolHRgYITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0NFQ8PFS0ZFR0rKystKysrKy0tLS0tKy0rLSsrKy0tKy0tLS0tLS0rLS0tLS0rKy0tLS0rKzctNy0rK//AABEIALMBGQMBIgACEQEDEQH/xAAaAAADAQEBAQAAAAAAAAAAAAAAAQIDBAUH/8QAOBAAAQMCBAQEBgIBAgcBAAAAAQACESExAxJBUWFxgfAEkaGxEyLB0eHxBTJCUoIWI1NUYnKSFP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A+M5Ug2qUocY4oocozJhhIt3sdtVBVRbXn0joaFWQs2RIzTEiYvGscUB1aeqDUgnoPSdY4nVAH5jZKRApqZPCmnCvmplRVALs/jcHBc8fGxCzDAJdlq8gAmGSIzGIEwFwkJyiKLbxUSYm8KstNjSm9TalIEX/AAl4Vgc5oc/K0uAc6JytpLoFXQJMC8JsZJcGwQA6pIbIGtTUxXLdFQ4cVktcVsAHedQbUqBUdVmWbVRFAUM7U9PooVEk2FBw91p4HxD8PEbiYbsjmmQ7/SbTFZ6AqjEBUXbad9UYpk1vrevGqQIn6/hAwadykBJgaqsJ2VwJaHAEEg2IpQkGYNqbpPcCZAgHQWHAcFAsibV6Pj/E+HdgYDMPByYrQ74r85PxCXS0gEQ2BSi4sRmUNgtMtn5ZppldIFRE0pW6CwRkNi4kRIMgAGzpiDIpBsLLJxVsaIzFwvGWsxH9to6rMoKkiQDThMGLSNVLjJnvoBZEoQKFTgOvLSkGddfJTKpAQhAaT9eVB9QqzQaca78a9YQQG6DySdMxqqaO/SiTmQJmOGvdfRBAVB1a1UBNjoQaA",
+      "title": "asdsadsa",
+      "author": "Luninha",
+      "ingredients": [
+        "1kg de fuba",
         ""
       ],
       "preparation": [
-        "No liquidificador bata o leite, o ovo, o sal, o açúcar, a margarina, a farinha de trigo e o fermento em pó até que tudo esteja encorporado.",
-        "Despeje a massa em uma assadeira para pizza untada com margarina e leve ao forno preaquecido por 20 minutos.",
-        "Retire do forno e despeje o molho de tomate.",
-        "Cubra a massa com mussarela ralada, tomate e orégano a gosto.",
-        "Leve novamente ao forno até derreter a mussarela.",
+        "asdasdasda"
+      ],
+      "information": "    "
+    },
+    {
+      "index": 50,
+      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFhUXGRoaGBgYFx0dGBgYGhoaGB0ZFxgYHyggGBolHRgYITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0NFQ8PFS0ZFR0rKystKysrKy0tLS0tKy0rLSsrKy0tKy0tLS0tLS0rLS0tLS0rKy0tLS0rKzctNy0rK//AABEIALMBGQMBIgACEQEDEQH/xAAaAAADAQEBAQAAAAAAAAAAAAAAAQIDBAUH/8QAOBAAAQMCBAQEBgIBAgcBAAAAAQACESExAxJBUWFxgfAEkaGxEyLB0eHxBTJCUoIWI1NUYnKSFP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A+M5Ug2qUocY4oocozJhhIt3sdtVBVRbXn0joaFWQs2RIzTEiYvGscUB1aeqDUgnoPSdY4nVAH5jZKRApqZPCmnCvmplRVALs/jcHBc8fGxCzDAJdlq8gAmGSIzGIEwFwkJyiKLbxUSYm8KstNjSm9TalIEX/AAl4Vgc5oc/K0uAc6JytpLoFXQJMC8JsZJcGwQA6pIbIGtTUxXLdFQ4cVktcVsAHedQbUqBUdVmWbVRFAUM7U9PooVEk2FBw91p4HxD8PEbiYbsjmmQ7/SbTFZ6AqjEBUXbad9UYpk1vrevGqQIn6/hAwadykBJgaqsJ2VwJaHAEEg2IpQkGYNqbpPcCZAgHQWHAcFAsibV6Pj/E+HdgYDMPByYrQ74r85PxCXS0gEQ2BSi4sRmUNgtMtn5ZppldIFRE0pW6CwRkNi4kRIMgAGzpiDIpBsLLJxVsaIzFwvGWsxH9to6rMoKkiQDThMGLSNVLjJnvoBZEoQKFTgOvLSkGddfJTKpAQhAaT9eVB9QqzQaca78a9YQQG6DySdMxqqaO/SiTmQJmOGvdfRBAVB1a1UBNjoQaA",
+      "title": "asdsadsa",
+      "author": "Luninha",
+      "ingredients": [
+        "1kg de fuba",
         ""
       ],
-      "information": "    Pizza de liquidificador é uma receita deliciosa e supersimples de preparar. Feita toda no liquidificador, ela é bem prática para o dia a dia. Aqui no TudoGostoso você também encontra diversas delícias práticas feitas no liquidificador: massa de panqueca, torta de frango de liquidificador, pão de queijo de liquidificador, bolo de banana, bolo de chocolate e muito mais!"
+      "preparation": [
+        "asdasdasda"
+      ],
+      "information": "    "
+    },
+    {
+      "index": 51,
+      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFhUXGRoaGBgYFx0dGBgYGhoaGB0ZFxgYHyggGBolHRgYITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0NFQ8PFS0ZFR0rKystKysrKy0tLS0tKy0rLSsrKy0tKy0tLS0tLS0rLS0tLS0rKy0tLS0rKzctNy0rK//AABEIALMBGQMBIgACEQEDEQH/xAAaAAADAQEBAQAAAAAAAAAAAAAAAQIDBAUH/8QAOBAAAQMCBAQEBgIBAgcBAAAAAQACESExAxJBUWFxgfAEkaGxEyLB0eHxBTJCUoIWI1NUYnKSFP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A+M5Ug2qUocY4oocozJhhIt3sdtVBVRbXn0joaFWQs2RIzTEiYvGscUB1aeqDUgnoPSdY4nVAH5jZKRApqZPCmnCvmplRVALs/jcHBc8fGxCzDAJdlq8gAmGSIzGIEwFwkJyiKLbxUSYm8KstNjSm9TalIEX/AAl4Vgc5oc/K0uAc6JytpLoFXQJMC8JsZJcGwQA6pIbIGtTUxXLdFQ4cVktcVsAHedQbUqBUdVmWbVRFAUM7U9PooVEk2FBw91p4HxD8PEbiYbsjmmQ7/SbTFZ6AqjEBUXbad9UYpk1vrevGqQIn6/hAwadykBJgaqsJ2VwJaHAEEg2IpQkGYNqbpPcCZAgHQWHAcFAsibV6Pj/E+HdgYDMPByYrQ74r85PxCXS0gEQ2BSi4sRmUNgtMtn5ZppldIFRE0pW6CwRkNi4kRIMgAGzpiDIpBsLLJxVsaIzFwvGWsxH9to6rMoKkiQDThMGLSNVLjJnvoBZEoQKFTgOvLSkGddfJTKpAQhAaT9eVB9QqzQaca78a9YQQG6DySdMxqqaO/SiTmQJmOGvdfRBAVB1a1UBNjoQaA",
+      "title": "asdsadsa",
+      "author": "Luninha",
+      "ingredients": [
+        "1kg de fuba",
+        ""
+      ],
+      "preparation": [
+        "asdasdasda"
+      ],
+      "information": "    "
     },
     {
       "index": 52,
-      "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/pizza.png",
-      "title": "Pizza 4 estações",
-      "author": "Fabiana Melo",
+      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFhUXGRoaGBgYFx0dGBgYGhoaGB0ZFxgYHyggGBolHRgYITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0NFQ8PFS0ZFR0rKystKysrKy0tLS0tKy0rLSsrKy0tKy0tLS0tLS0rLS0tLS0rKy0tLS0rKzctNy0rK//AABEIALMBGQMBIgACEQEDEQH/xAAaAAADAQEBAQAAAAAAAAAAAAAAAQIDBAUH/8QAOBAAAQMCBAQEBgIBAgcBAAAAAQACESExAxJBUWFxgfAEkaGxEyLB0eHxBTJCUoIWI1NUYnKSFP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A+M5Ug2qUocY4oocozJhhIt3sdtVBVRbXn0joaFWQs2RIzTEiYvGscUB1aeqDUgnoPSdY4nVAH5jZKRApqZPCmnCvmplRVALs/jcHBc8fGxCzDAJdlq8gAmGSIzGIEwFwkJyiKLbxUSYm8KstNjSm9TalIEX/AAl4Vgc5oc/K0uAc6JytpLoFXQJMC8JsZJcGwQA6pIbIGtTUxXLdFQ4cVktcVsAHedQbUqBUdVmWbVRFAUM7U9PooVEk2FBw91p4HxD8PEbiYbsjmmQ7/SbTFZ6AqjEBUXbad9UYpk1vrevGqQIn6/hAwadykBJgaqsJ2VwJaHAEEg2IpQkGYNqbpPcCZAgHQWHAcFAsibV6Pj/E+HdgYDMPByYrQ74r85PxCXS0gEQ2BSi4sRmUNgtMtn5ZppldIFRE0pW6CwRkNi4kRIMgAGzpiDIpBsLLJxVsaIzFwvGWsxH9to6rMoKkiQDThMGLSNVLjJnvoBZEoQKFTgOvLSkGddfJTKpAQhAaT9eVB9QqzQaca78a9YQQG6DySdMxqqaO/SiTmQJmOGvdfRBAVB1a1UBNjoQaA",
+      "title": "asdsadsa",
+      "author": "Luninha",
       "ingredients": [
-        "1 xícara (chá) de leite",
-        "1 ovo",
-        "1 colher (chá) de sal",
-        "1 colher (chá) de açúcar",
-        "1 colher (sopa) de margarina",
-        "1 e 1/2 xícara (chá) de farinha de trigo",
-        "1 colher (sobremesa) de fermento em pó",
-        "1/2 lata de molho de tomate",
-        "250 g de mussarela ralada grossa",
-        "2 tomates fatiados",
-        "azeitona picada",
-        "orégano a gosto",
-        ""
+        "1kg de fuba"
       ],
       "preparation": [
-        "No liquidificador bata o leite, o ovo, o sal, o açúcar, a margarina, a farinha de trigo e o fermento em pó até que tudo esteja encorporado.",
-        "Despeje a massa em uma assadeira para pizza untada com margarina e leve ao forno preaquecido por 20 minutos.",
-        "Retire do forno e despeje o molho de tomate.",
-        "Cubra a massa com mussarela ralada, tomate e orégano a gosto.",
-        "Leve novamente ao forno até derreter a mussarela.",
-        ""
+        "asdasdasda"
       ],
-      "information": "    Pizza de liquidificador é uma receita deliciosa e supersimples de preparar. Feita toda no liquidificador, ela é bem prática para o dia a dia. Aqui no TudoGostoso você também encontra diversas delícias práticas feitas no liquidificador: massa de panqueca, torta de frango de liquidificador, pão de queijo de liquidificador, bolo de banana, bolo de chocolate e muito mais!"
+      "information": "    "
     },
     {
       "index": 53,
-      "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/macarrao.png",
-      "title": "Espaguete ao alho",
-      "author": "Júlia Kinoto",
+      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFhUXGRoaGBgYFx0dGBgYGhoaGB0ZFxgYHyggGBolHRgYITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0NFQ8PFS0ZFR0rKystKysrKy0tLS0tKy0rLSsrKy0tKy0tLS0tLS0rLS0tLS0rKy0tLS0rKzctNy0rK//AABEIALMBGQMBIgACEQEDEQH/xAAaAAADAQEBAQAAAAAAAAAAAAAAAQIDBAUH/8QAOBAAAQMCBAQEBgIBAgcBAAAAAQACESExAxJBUWFxgfAEkaGxEyLB0eHxBTJCUoIWI1NUYnKSFP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A+M5Ug2qUocY4oocozJhhIt3sdtVBVRbXn0joaFWQs2RIzTEiYvGscUB1aeqDUgnoPSdY4nVAH5jZKRApqZPCmnCvmplRVALs/jcHBc8fGxCzDAJdlq8gAmGSIzGIEwFwkJyiKLbxUSYm8KstNjSm9TalIEX/AAl4Vgc5oc/K0uAc6JytpLoFXQJMC8JsZJcGwQA6pIbIGtTUxXLdFQ4cVktcVsAHedQbUqBUdVmWbVRFAUM7U9PooVEk2FBw91p4HxD8PEbiYbsjmmQ7/SbTFZ6AqjEBUXbad9UYpk1vrevGqQIn6/hAwadykBJgaqsJ2VwJaHAEEg2IpQkGYNqbpPcCZAgHQWHAcFAsibV6Pj/E+HdgYDMPByYrQ74r85PxCXS0gEQ2BSi4sRmUNgtMtn5ZppldIFRE0pW6CwRkNi4kRIMgAGzpiDIpBsLLJxVsaIzFwvGWsxH9to6rMoKkiQDThMGLSNVLjJnvoBZEoQKFTgOvLSkGddfJTKpAQhAaT9eVB9QqzQaca78a9YQQG6DySdMxqqaO/SiTmQJmOGvdfRBAVB1a1UBNjoQaA",
+      "title": "asdsadsa",
+      "author": "Luninha",
       "ingredients": [
-        "1 pacote de macarrão 500 g (tipo do macarrão a gosto)",
-        "1 saquinho de alho granulado",
-        "1/2 tablete de manteiga (não use margarina)",
-        "1 colher (sopa) de azeite extra virgem",
-        "ervas (manjericão, orégano, salsa, cebolinha, tomilho, a gosto)",
-        "sal",
-        "1 dente de alho",
-        "gengibre em pó a gosto",
-        "1 folha de louro",
+        "1kg de fuba",
         ""
       ],
       "preparation": [
-        "Quando faltar mais ou menos 5 minutos para ficar no ponto de escorrer o macarrão, comece o preparo da receita.",
-        "Na frigideira quente coloque a manteiga, o azeite, a folha de louro, e o alho granulado.",
-        "Nesta hora um pouco de agilidade, pois o macarrão escorrido vai para a frigideira, sendo mexido e dosado com sal a gosto, as ervas, o gengibre em pó a gosto também.",
-        "O dente de alho, serve para você untar os pratos onde serão servidos o macarrão.",
-        "Coloque as porções nos pratos já com o cheiro do alho, e enfeite com algumas ervas.",
+        "asdasdasda"
+      ],
+      "information": "    "
+    },
+    {
+      "index": 54,
+      "image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFhUXGRoaGBgYFx0dGBgYGhoaGB0ZFxgYHyggGBolHRgYITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0NFQ8PFS0ZFR0rKystKysrKy0tLS0tKy0rLSsrKy0tKy0tLS0tLS0rLS0tLS0rKy0tLS0rKzctNy0rK//AABEIALMBGQMBIgACEQEDEQH/xAAaAAADAQEBAQAAAAAAAAAAAAAAAQIDBAUH/8QAOBAAAQMCBAQEBgIBAgcBAAAAAQACESExAxJBUWFxgfAEkaGxEyLB0eHxBTJCUoIWI1NUYnKSFP/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/EABYRAQEBAAAAAAAAAAAAAAAAAAABEf/aAAwDAQACEQMRAD8A+M5Ug2qUocY4oocozJhhIt3sdtVBVRbXn0joaFWQs2RIzTEiYvGscUB1aeqDUgnoPSdY4nVAH5jZKRApqZPCmnCvmplRVALs/jcHBc8fGxCzDAJdlq8gAmGSIzGIEwFwkJyiKLbxUSYm8KstNjSm9TalIEX/AAl4Vgc5oc/K0uAc6JytpLoFXQJMC8JsZJcGwQA6pIbIGtTUxXLdFQ4cVktcVsAHedQbUqBUdVmWbVRFAUM7U9PooVEk2FBw91p4HxD8PEbiYbsjmmQ7/SbTFZ6AqjEBUXbad9UYpk1vrevGqQIn6/hAwadykBJgaqsJ2VwJaHAEEg2IpQkGYNqbpPcCZAgHQWHAcFAsibV6Pj/E+HdgYDMPByYrQ74r85PxCXS0gEQ2BSi4sRmUNgtMtn5ZppldIFRE0pW6CwRkNi4kRIMgAGzpiDIpBsLLJxVsaIzFwvGWsxH9to6rMoKkiQDThMGLSNVLjJnvoBZEoQKFTgOvLSkGddfJTKpAQhAaT9eVB9QqzQaca78a9YQQG6DySdMxqqaO/SiTmQJmOGvdfRBAVB1a1UBNjoQaA",
+      "title": "asdsadsa",
+      "author": "Luninha",
+      "ingredients": [
+        "1kg de fuba",
         ""
       ],
-      "information": "    Não lave o macarrão nem passe óleo ou gordura nele depois de escorrê-lo. Coloque direto na frigideira."
+      "preparation": [
+        "asdasdasda"
+      ],
+      "information": "    "
     }
   ]
 }
