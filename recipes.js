@@ -14,18 +14,23 @@ exports.post = function(req, res) {
             return res.send(`Preencha todos os campos`)
         }
     }
-    let {title, image, ingredients, preparation, information, author} = req.body
-    
+    let {title, image, preparation, ingredients, information, author} = req.body
     let  index = 1
 	const lastRecipe = recData.recipes[recData.recipes.length - 1]
     
-    if(ingredients[item].value == "" ){
-        return false
+    if(lastRecipe) {
+        index = Number(lastRecipe.index) + 1
     }
 
-	if(lastRecipe) {
-		index = Number(lastRecipe.index) + 1
-    }
+    
+    function noEmpty(value) {
+        return value != "";
+      }
+      
+    ingredients = ingredients.filter(noEmpty);
+      
+    
+
     
     recData.recipes.push({
         index,
@@ -40,6 +45,7 @@ exports.post = function(req, res) {
         if (err) return res.send('Write file err')
     })
     return res.redirect("/admin/recipes")
+    /* return res.send(ingredients) */
 }
 exports.show = function(req, res){
     const { id } = req.params 

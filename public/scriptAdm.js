@@ -24,7 +24,7 @@ function addIngredient() {
 function addPreparo() {
     const modoPreparo = document.querySelector("#modoPreparo");
     const fieldContainer = document.querySelectorAll(".modPrep-content");
-    // Realiza um clone do último ingrediente adicionado
+    // Realiza um clone do último modo de preparp adicionado
     const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true);
   
     // Não adiciona um novo input se o último tem um valor vazio
