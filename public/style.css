@@ -43,6 +43,7 @@ header div .sobre:hover, .receitas:hover{
 main{
     background-color:#FBDFDB;
 
+    box-shadow: 3px 0px 13px -6px;
     max-width: 940px;
     margin: 0 auto;
     margin-bottom: 50px;
@@ -371,7 +372,6 @@ textarea{
     padding: 20px 15px;
     margin-bottom: 10px;
     resize: none;
-    text-align-last: justify;
     font-family: 'roboto';
     font-size: 16px;
     box-sizing: border-box;

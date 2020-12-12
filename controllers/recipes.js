@@ -1,5 +1,7 @@
-const recData = require("./data.json")
+const recData = require("../data.json")
 const fs= require('fs')
+const {noEmpty} = require("../utils")
+
 
 exports.index = function(req, res){
     return res.render('admin/index.njk', {recipes: recData.recipes})
@@ -21,24 +23,14 @@ exports.post = function(req, res) {
     if(lastRecipe) {
         index = Number(lastRecipe.index) + 1
     }
-
-    
-    function noEmpty(value) {
-        return value != "";
-      }
-      
-    ingredients = ingredients.filter(noEmpty);
-      
-    
-
     
     recData.recipes.push({
         index,
         image,
         title,
         author,
-        ingredients,
-        preparation,
+        ingredients: ingredients.filter(noEmpty),
+        preparation: preparation.filter(noEmpty),
         information
     })
     fs.writeFile("data.json", JSON.stringify(recData, null, 2), function(err) {
@@ -93,6 +85,9 @@ exports.put = function(req, res) {
     const { id } = req.body
     let idx = 0
 
+    let {ingredients, preparation} = req.body
+
+
     const foundRecipe = recData.recipes.find(function(recipe, foundIndex){
         if (id == recipe.index) {
             idx = foundIndex
@@ -101,11 +96,12 @@ exports.put = function(req, res) {
     })
 
     if (!foundRecipe) return res.send("Recipe Not Found")
-    if(ingredients == "") return false 
 
     const recipe = {
         ...foundRecipe,
         ...req.body,
+        ingredients: ingredients.filter(noEmpty),
+        preparation: preparation.filter(noEmpty),
         index: Number(req.body.id)        
     }
 

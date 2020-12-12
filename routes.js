@@ -1,24 +1,15 @@
 const express = require ('express')
 const routes = express.Router()
-const recipes = require('./recipes')
-const uxs = require('./uxs')
+const recipes = require('./controllers/recipes')
+const public = require('./controllers/public')
 
 const recData = require("./data.json")
 
 
-routes.get("/", uxs.index)
-routes.get("/receitas", uxs.receitas)
-routes.get("/sobre", function(req, res){
-    return res.render("ux/sobre.njk")
-})
-
-routes.get("/recipes/:index", function (req, res) {
-    const recipes = recData.recipes  // Array de receitas carregadas do data.js
-    const recipeIndex = req.params.index;
-
-    return res.render("ux/receita.njk", {item: recipes[recipeIndex]}) 
-    
-  })
+routes.get("/", public.index)
+routes.get("/receitas", public.receitas)
+routes.get("/sobre", public.about)
+routes.get("/recipes/:index", public.show)
 
 
 routes.get("/admin/recipes", recipes.index); // Mostrar a lista de receitas
