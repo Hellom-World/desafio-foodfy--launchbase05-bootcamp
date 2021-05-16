@@ -25,7 +25,7 @@ header div{
     align-items: center;
 }
 header div img{
-    margin-right: 100px;
+    margin-right: 54.4px;
 }
 header div a{
     
@@ -332,6 +332,27 @@ a.button{
     cursor: pointer;
     background: forestgreen;
     }
+
+header div .receitasAdm {
+    font-family: Roboto-Bold;
+    font-size: 15px;
+    color: #999999;
+    text-align: left;
+    margin-right: 30px;
+}
+header div .chefsAdm{
+    font-family: Roboto-Bold;
+    font-size: 15px;
+    color: #999999;
+    text-align: left;
+}
+
+header div .receitasAdm:hover, .chefsAdm:hover{
+    font-family: Roboto-Bold;
+    font-size: 15px;
+    color: #FFFFFF;
+    text-align: left;
+}
 /* Edit Adm */
 
 input{

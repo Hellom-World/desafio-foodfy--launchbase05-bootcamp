@@ -1,0 +1,1764 @@
+__________________________Trabalhando com Bando de Dados___________________________________________________________
+                                    Desafio 5.1
+
+
+
+
+
+
+
+
+
+++++++++++++++++++++++++ Instalando Postgres e Postbird +++++++++++++++++++++++
+
+
+    .Vamos installar o banco de dados Postgres, Link para windows
+
+        https://github.com/rocketseat-education/bootcamp-launchbase-05/blob/master/docs/guia-instalacao-postgres.md
+    
+    .Vamos instalar o Postbird, programa de interface para o postgres, link:
+
+        https://electronjs.org/apps/postbird 
+
+
+
+
+
+
+
+
+
+
+
+++++++++++++++++++++++++ Criando banco e tabela de instrutores +++++++++++++++++++
+
+
+    .Abra o powershell e escreva a linha para chegar ao banco de dados instalado:
+
+        cd "C:\Program Files\PostgreSQL\12\bin\"
+
+    .E essa linha para iniciar o banco de dados:
+
+        .\pg_ctl.exe -D "C:\Program Files\PostgreSQL\12\data" start
+
+    .Agora abra o postbird e faz a conexão
+
+    .Na parte query, dentro do postbird, escreva a linha:
+
+        CREATE DATABASE gymmanager
+
+    .Clique em "Run Query"
+    .De um refresh na lista de DATABASEs
+
+    .Selecione a DATABASE e a parte Structure
+        .Crie uma nova tabala no botao "add table"
+
+    . Clique em add column
+        .Crie o avatar_URL de Type: "text" e marcar permitir vazio(allow null)
+        .Crie o name de Type: "text" e marcar permitir vazio(allow null)
+        .Crie o birth de Type: "timestamp without time zone" e marcar permitir vazia(allow null)
+        .Crie o gender de Type: "text" e marcar permitir vazia(allow null)
+        .Crie o services de Type: "text" e marcar permitir vazia(allow null)
+        .Crie o create_at de Type: "timestamp without time zone" e marcar permitir vazia(allow null)
+
+    
+
+
+
+
+
+
+
+
+
+
+
+  ++++++++++++++++++++++++ Refatorando estrutura de pastas +++++++++++++++++++  
+
+
+    .Na pasta bootcamp copie a pasta modulo04 e cole remoneando ela para modulo05
+            .Delete NODE_MODULES E package-lock.json
+
+    .Abra o modulo05 no VisualStudio
+
+    .Crie uma nova pasta chamada "src" dentro dela colque a pasta "controllers",
+    a pasta "views" e todos os arquivos ".js"
+
+    .Deleta o data.json
+
+    .Dentro da pasta "src" crie a pastas "app" e coloque a pasta "controllers",
+    e a pasta "views" dentro dela.
+
+    .No arquivo package.json mude a linha:
+
+        "nodemon": "nodemon --ignore server.js",
+                para
+        "nodemon": "nodemon --ignore src/server.js",
+
+            .E mude a linha:
+
+        "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public,views, !data.json'"
+                para
+        "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public,src/app/views'"
+
+    .Na pasta "src" em routes.js, reescreva aS linhaS:
+
+        const instructors = require('./app/controllers/instructors')
+        const members = require('./app/controllers/members')
+
+    .No arquivo server.js mude a linha:
+
+        nunjucks.configure("src/app/views", {
+
+    .Dentro da pasta "src" crie a pasta "lib"
+
+        .Coloque o arquivo utils.js dentro da pasta "lib"
+
+
+
+
+
+
+
+
+
+
+
+
+
+++++++++++++++++++++++++ Exportando com methof shorthand ES6 +++++++++++++++++++  
+
+
+    .No arquivo instructors.js
+
+        .Delete a linha "const fs" e "const data"
+
+        .Crie um module.exports de objeto para refazer as funçoes das rotas:
+
+            module.exports = {
+                index(req, res){
+
+                }   
+                create(req, res){
+                    
+                }   
+                post(req, res){
+                    
+                }   
+                show(req, res){
+                    
+                }                
+                edit(req, res){
+                    
+                }   
+                put(req, res){
+                    
+                }   
+                delete(req, res){
+                    
+                }   
+            }    
+
+        .Copie e cole o conteudo dos respectivos exports do arquivo
+
+        .No ES6 index tire o ,{ instructors: data.instructors }
+
+        .Na ES6 "post" deixe apenas o conteudo das KeysObject,
+         o let = req.body e add um return vazio
+
+        .No show, edit e delete o conteudo será só return
+
+        .No put pode colocar a validaçao keysObject
+
+        .Mude a Const, antes do exports, para:
+
+            const { age, date } = require('../../lib/utils')
+
+PAREI AQUI
+    .No arquivo members.js copie e cole o conteudo do instructors.js
+
+        .Troque tudo que for instructores por members
+        .No ES6 index tire o ,{ members: data.members }
+        .Delete a linha "let" no ES6 post
+
+    .No arquivo utils.js tire as linhas:
+
+        .exemplo: age: function() --para--> age()
+
+
+
+
+
+
+
+
+
+    
+    
++++++++++++++++++++++++ Configurando conexão do banco +++++++++++++++++++ 
+
+
+    .instale  a dependencia para conectar o projeto com o postgres:
+
+        npm install pg
+
+    .De também o comando npm install, para garantir o resto das configuraçoes:
+
+        npm install
+
+    .Dentro da pasta "src" crie uma pasta de nome "config"
+
+        .Dentro da pasta "config" crie um script de nome "db.js"
+
+            .Dentro do arquivo escreva esse codigo:
+
+                const { Pool } = require("pg")
+
+                module.exports = new Pool({
+                    user: 'hellom',
+                    password: "",
+                    host: "localhost",
+                    port: 5432,
+                    database: "gymmanager"  
+                })
+
+
+
+    
+
+
+
+
+
+
+
+
+_____________________________________________________________________________________
+                                    Desafio 5.2
+
+
+
+
++++++++++++++++++++++++ Inserindo dados no banco +++++++++++++++++++
+
+
+
+    .No arquivo instructors.js na função POST
+
+        .Delete a linha da variavel let
+
+        .Em cima to "return" escreva as linhas:
+            
+            const query = `
+                INSERT INTO instructors (
+                    name,
+                    avatar_URL,
+                    gender,
+                    services,
+                    birth,
+                    create_at
+                ) VALUES ($1, $2, $3, $4, $5, $6)
+                RETURNING id
+            `
+
+            const values = [
+                req.body.name,
+                req.body.avatar_URL,
+                req.body.gender,
+                req.body.services,
+                date(req.body.birth).iso,
+                date(Date.now()).iso
+            ]
+
+    .Coloque o POSTGRES para rodar e abra o POSTBIRD
+
+    .No POSTBIRD abra o database gymmanager e selecione a tabela instructors
+
+        .Na aba "Query" escreva essas linhas:
+
+            INSERT INTO instructors (
+                name,
+                avatar_URL,
+                gender,
+                services,
+                birth,
+                create_at
+            ) VALUES ('hellom', 'htt', 'm', 'se', '2000-01-02', '2000-02-01')
+            RETURNING id
+
+        .Clique no botão "Run Selection"
+
+    .No arquivo instructors.js na função POST
+
+        .tire o "return"
+
+        .Em baixo do "const {age,date}", escreva
+
+            const db = require('../../config/db')
+
+        .Escreva no fim da função POST:
+            
+            const { Pool } = require("pg")
+
+            db.query(query, values, function (err, results){
+                console.log(err)
+                console.log(results)
+                return
+            })
+    
+        .Rode o site com "npm start"
+
+            .crie um novo instrutor
+            .Abra o POSTBIRD para analisar os dados salvos na tabala instructors/content
+
+        .Estando tudo certo reescreva:
+
+            db.query(query, values, function (err, results){
+                if(err) return res.send("Database Error!")
+
+                return res.redirect(`/instructors/${results.rows[0].id}`)
+            })
+
+
+
+
+
+
+
+
++++++++++++++++++++++++ Buscando dados do banco +++++++++++++++++++
+
+
+
+    .No arquivo instructors.js na função INDEX, escreva em cima do return:
+
+        db.query(`SELECT * FROM instructors`, function(err, results){
+            if(err) return res.send("Database Error!")
+
+            return res.render("instructors/index", {instructors: results.rows})
+        })
+
+    .Apos salvar ve se vai aparecer os instrutores na pagina index
+
+
+
+
+
+
+
+
+
++++++++++++++++++++++++ Criando models e aprofundando em callback function +++++++++++++++++++
+
+
+    .Dentro da pasta "app" crie a pasta "models"
+
+        .Ela será responsavel pela parte de ligação com o banco de dados
+
+        .Dentro da pasta "models" crie o script "Instructor.js"
+
+        .Dentro do (PRIMEIRA LETRA MAIUSCULA)"Instructor.js", escreva:
+
+            module.exports = {
+                all(callback){
+
+                    db.query(`SELECT * FROM instructors`, function(err, results){
+                        if(err) return res.send("Database Error!")
+
+                        callback(results.rows)
+                    })
+
+                },
+
+                create(){
+
+                }
+            }
+    .No arquivo instructors.js, em baixo do "const db" escreva:
+
+        const Instructor = require ('../models/Instructor')
+
+    .Ainda no arquivo instructors.js, na função index, delete o conteudo e escreva:
+        Instructor.all(function(instructors) {
+            return res.render("instructors/index", {instructors})
+    
+        })
+
+    .No arquivo Instructor.js no objeto "create()", escreva:
+
+        create(data, callback){
+            const query = `
+                INSERT INTO instructors (
+                    name,
+                    avatar_URL,
+                    gender,
+                    services,
+                    birth,
+                    created_at
+                ) VALUES ($1, $2, $3, $4, $5, $6)
+                RETURNING id
+            `
+        const values = [
+            data.nome,
+            data.avatar_URL,
+            data.gender,
+            data.services,
+            date(data.birth).iso
+            date(Date.now()).iso
+        ]
+
+        db.query(query, values, function(err, results){
+            if(err) return res.send("Database Error!")
+
+            callback(results.rows[0])
+        })
+        }
+
+    .No arquivo instructors.js na função POST reescreva o conteudo para:
+
+        const keys = Object.keys(req.body)
+
+        for(key of keys) {
+            if (req.body[key] == "") {
+                return res.send('please, fill all fields')
+            }
+        }
+
+        Instructor.create(req.body, function(instructor) {
+            return res.redirect(`/instructors/${instructor.id}`)
+        })
+
+    .Ainda no arquivo instructors.js
+
+        .Passe o "const db" e o "const {age, data}" para o arquivo Instructor.js
+
+    TESTAR - TENTAR CRIAR NOVO INSTRUTOR (vai ser preciso voltar no index pra ver se salvou)
+
+
+
+
+
+
+
+
+
++++++++++++++++++++++++ Buscando Registro unico na banco de dados +++++++++++++++++++
+
+
+
+    .No arquivo Instructor.js crie o objeto:
+
+        find(id, callback) {
+            db.query(`SELECT *
+            FROM instructors
+            WHERE id = $1`, [id], function(err, results){
+                if(err) return res.send("Database Error!")
+                callback(results.rows[0])
+            })
+        }
+    
+    .No arquivo instructors.js na função SHOW, escreva:
+
+        Instructor.find(req.params.id, function (instructor){
+            if (!instructor) return res.send("Instructor no found!")
+
+            instructor.age = age(instrutor.birth)
+            instructor.services = instructor.services.split(",")
+
+            instructor.create_at = date(instructor.created_at).format
+
+            return res.render("instructors/show", { instrutor })
+        })
+
+        .Reescreva a const do age:
+
+        const { age } = require('../../lib/utils')
+
+    .No arquivo ultis.js, no return do "date(timestamp)",
+
+        .Em baixo de "birthDay: ${day}/${month}", escreva:
+
+            format: `${day}/${month}/${year}`
+
+    
+
+
+
+
+
+
+
+
+
++++++++++++++++++++++++ Editando Dados do bancos +++++++++++++++++++
+
+
+
+    .No arquivo instructors.js, na função edit escreva:
+
+        Instructor.find(req.params.id, function (instructor){
+            if (!instructor) return res.send("Instructor no found!")
+
+            instructor.birth = date(instrutor.birth).iso
+
+            return res.render("instructors/edit", { instrutor })
+        })
+
+    .No arquivo Instructor.js, crie um novo objeto em baixo do obj FIND:
+
+        update(data, callback) {
+            const query = `
+            UPDATE instructors SET
+                avatar_URL=($1),
+                name=($2),
+                birth=($3),
+                gender=($4),
+                services=($5)
+            WHERE id =($6)
+            `
+            const values = [
+                data.avatar_URL,
+                data.name,
+                date.(data.birth).iso,
+                data.gender,
+                data.services,
+                data.id
+            ]
+
+            db.query(query, values, function(err, results){
+                if(err) return res.send("Database Error!")
+
+                callback()
+            })
+        }
+
+    .No arquivo instructors.js, na função PUT escreva:
+
+        const keys = Object.keys(req.body)
+
+        for(key of keys) {
+            if (req.body[key] == "") {
+                return res.send("Please, fill all fields!")
+            }
+        }
+
+        Instructor.update(req.body, function() {
+            return res.redirect(`/instructors/${req.body.id}`)
+        })
+
+
+
+
+
+
+
+
+
++++++++++++++++++++++++ Capturando erros da aplicação +++++++++++++++++++
+
+
+    .No arquivo Instructor.js:
+
+        .Mude todas as linhas "
+            
+            return res.send("Database Error!")
+
+                Para
+            
+            throw `database Error! ${err}`
+
+    
+
+
+
+
+
++++++++++++++++++++++++ Deletando dados do banco +++++++++++++++++++
+
+
+.No arquivo Instructor.js, crie um novo objeto em baixo do obj UPDATE:
+
+    delete(id, callback) {
+        db.query(`DELETE FROM instructors WHERE id = $1`, [id], function(err, results){
+            if(err) throw `Database Error! ${err}`
+
+            return callback()
+        })
+    }
+
+.No arquivo instructors.js, na função DELETE, escreva:
+
+    Instructor.delete(req.body, function(){
+        return res.redirect(`/instructors`)
+    })
+
+
+
+
+
+
+
+
+
+__________________________ AJUSTES DE MEMBROS ___________________________________________________________
+                     ..continuação para o Desafio 5.2
+
+
+
+
+    
++++++++++++++++++++++++ Ajustando controllers de members +++++++++++++++++++
+
+
+    .No arquivo members.js:
+
+        .Em baixo do "const {age, date}", escreva a linha:
+
+            const Member = require('../models/Member')
+
+        .Copie e cole o module.exports do arquivo instructors.js para o members.js
+
+            .faça um (ctrl + f) para mudar instructor por member.
+                ->DIFERENCIE MAIUSCULO DE MINUSCULO PARA A PRIMEIRA LETRA
+            
+        .Na função SHOW, mude a linha "member.age" pela linha
+
+            member.birth = date(member.birth).birthDay
+
+            .Tire as linhas: "member.services e member.created_at
+
+
+
+
+
+
+
+
++++++++++++++++++++++++ Criando tabela de membros +++++++++++++++++++
+
+    .Abra o POSTBIRD e crie uma nova tabela com o NOME:
+
+        members
+    
+    .Adicione as seguintes colunas:
+
+        Name: name - type: text - allow null
+        Name: avatar_URL - type: text - allow null
+        Name: email - type: text - allow null
+        Name: gender - type: text - allow null
+        Name: birth - type: timestamp without time zone - allow null
+        Name: blood - type: text - allow null
+        Name: weight - type: integer - allow null
+        Name: height - type: integer - allow null
+
+
+
+
+
+
++++++++++++++++++++++++ Model de membros +++++++++++++++++++
+
+
+    .Na pasta "models" crie o arquivo "Member.js"
+
+        .Copie e cole o conteudo do arquivo "Instructor.js" para o "Member.js"
+
+        .No arquivo "Member.js" use (ctrl + f) para mudar:
+
+            intructor 
+
+                para
+            
+            member
+
+        .No objeto CREATE, reescreva essas partes:
+
+            const query = `
+                INSERT INTO members (
+                    name,
+                    avatar_URL,
+                    gender,
+                    email,
+                    birth,
+                    blood,
+                    weight,
+                    height
+                )   VALUES ($1, $2, $3, $4 ,$5 ,$6, $7, $8)
+            `
+
+            const values = [
+                data.name,
+                data.avatar_URL,
+                data.gender,
+                data.email,
+                date(data.birth).iso,
+                data.blood,
+                data.weight,
+                data.height
+            ]
+
+        .Na objeto UPDATE, reescreva essas partes:
+
+            const query = `
+            UPDATE members SET
+                avatar_URL=($1),
+                name=($2),
+                birth=($3),
+                gender=($4),
+                email=($5),
+                blood=($6),
+                weight=($7),
+                height=($8)
+            WHERE id = $9
+            `
+
+            const values = [
+                data.avatar_URL,
+                data.name,
+                date(data.birth).iso,
+                data.gender,
+                data.email,
+                data.blood,
+                data.weight,
+                data.height,
+                data.id
+            ]
+
+    .TESTAR - CADASTRAR NOVO MEMBRO
+        
+
+
+
+
+    
++++++++++++++++++++++++ Ordenando dados do banco +++++++++++++++++++
+
+
+    .No arquivo Instructor.js, no objeto ALL:
+
+        .Mude a parte do SELECT para:
+
+            SELECT *
+            FROM instructors
+            ORDER BY name ASC, function...(função matém igual)
+
+
+
+
+
+
+
+
+
+
+__________________________ Relacionando Tabelas ___________________________________________________________
+                     .. part 1/2 Desafio 5.3
+
+
+
+
+
++++++++++++++++++++++++ Entendendo os relacionamentos da aplicação +++++++++++++++++++            
+
+- A ideia é fazer o membro ter um instrutor.. para isso:
+
+    * Abra o postbird e crie uma nova coluna na tabela members:
+
+        Name: instructor_id
+        type: integer
+        Allow null
+
+    * crie novos membros
+
+        -Abra o postbird e vai até a tabela members
+        -acrescenta o id do instrutor na coluna intructor_id
+
+
+
+
+
+
+
+
++++++++++++++++++++++++ Unindo tabela com SQL join +++++++++++++++++++            
+
+- Crie mais um pouco de membros e instrutores para fazer o relacionamento
+
+- No postbird, na aba Query escreva:
+
+    SELECT *
+    FROM instructors
+
+- Selecione isso que foi escrito e de "run Query".
+    *Tem que aparecer os dados dos instrutores
+
+-Para ordenar as informações pelo id, escreva:
+
+    SELECT *
+    FROM instructors
+    ORDER BY id
+
+-ROda da Query o cod para unir as Tabelas:
+
+    SELECT *
+    FROM instructors
+    LEFT JOIN members ON (members.instructor_id = instructors.id)
+
+    - Repare ao rodar se aparece as duas tabelas relacionadas
+
+-Agora rode a Query:
+
+    SELECT *
+    FROM instructors
+    LEFT JOIN members ON (members.instructor_id = instructors.id)
+    ORDER BY id
+
+    -Note que dará erro
+    -Para corrigir isso deve-se dizer qual id se deseja, dessa forma:
+
+        SELECT *
+        FROM instructors
+        LEFT JOIN members ON (members.instructor_id = instructors.id)
+        ORDER BY instructors.id
+
+        * tambem pode ser ORDER BY members.id
+
+
+
+
+
+
+
+
+++++++++++++++++++++++ Agrupando e contando colunas no SQL +++++++++++++++++++
+
+
+
+-Para relacionar uma unica informação na tabela rode a Query:
+
+    SELECT instructors.*, members.name AS member_name
+    FROM instructors
+    LEFT JOIN members ON (members.instructor_id = instructors.id)
+    
+
+-Não queremos a tabela repetindo id... para isso:
+
+    SELECT instructors.*, count(members) AS total_students
+    FROM instructors
+    LEFT JOIN members ON (members.instructor_id = instructors.id)
+    GRUP BY instructors.id
+    
+
+
+
+
+
+
+++++++++++++++++++++++ Aplicando coluna total students +++++++++++++++++++
+
+
+-No arquivo "index.njk" na pasta "instructors", mude a parte:
+
+    <thead>
+        <tr>
+            <th>Instructor</th>
+            <th>Atendimento</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+
+Para:
+
+    <thead>
+        <tr>
+            <th>Instructor</th>
+            <th>Atendimento</th>
+            <th>Alunos</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
+
+
+-Ainda no arquivo "index.njk" mude a parte:
+
+    <tr>
+        <td>
+            <span da imagem>
+        </td>
+        <td>{{instructor.services}}</td>
+    </tr>
+
+Para:
+
+    <tr>
+        <td>
+            <span da imagem>
+        </td>
+        <td>{{instructor.services}}</td>
+        <td>{{instructor.total_students}}</td>
+    </tr>
+
+
+-No arquivo "instructors.js", Na parte all(callback):
+
+    -Mude a parte 
+
+        SELECT * 
+        FROM instructors 
+        ORDER BY name ASC`
+
+    PARA:
+
+        SELECT instructors.*, count(members) AS total_students
+        FROM instructors
+        LEFT JOIN members ON (members.instructor_id = instructors.id)
+        GROUP BY instructors.id
+        ORDER BY total_students DESC`
+
+
+
+
+
+
+
+
+
+++++++++++++++++++++++ Criando seleção de instrutores +++++++++++++++++++
+
+
+-No Arquivo "fields.njk" na pasta "members"
+
+    -Em cima da linha:
+
+        <button type="submit">Salvar</button>
+
+    escreva:
+
+    <div class="item">
+        <div>Instrutor</div>
+        <div>
+            <select name="instructor">
+                {% for instructor in instructorOptions%}
+                <option value="{{instructor.id}}" {% if member.instructor_id == instructor.id %}selected{% endif %}>
+                    {{instructor.name}}
+                </option>
+                {% endfor %}
+            </select>
+    </div>
+
+- No arquivo Member.js, dentro no "module.exports" e abaixo a linha "delete(){}", escreva:
+
+    instructorSelectOptions(callback) {
+        db.query(`SELECT name, id FROM instructors`, function(err, results) {
+            if (err) throw 'Database Error!'
+
+            callback (results.rows)
+        })
+    }
+
+- No arquivo member.js reescreva a linha "create" para:
+
+    create(req, res){
+        Member.instructorSelectOptions(function(options){
+            return res.render('members/create', {instructorOptions: options})
+        })
+    }
+
+
+
+
+
+
+++++++++++++++++++++++ Exibindo instrutor de um membro +++++++++++++++++++
+
+
+
+-No arquivo "show.njk" da pasta "members", abaixo da div.Altura, escreva:
+
+    <div class= "item">
+        <div>Aluno de</div>
+        <div>{{ member.instructor_name }}</div>
+    </div>
+
+-No arquivo Member.js, na linha "find()", reescreva:
+
+    SELECT *
+        FROM members
+        WHERE id = $1`
+
+para:
+
+    SELECT members.*, instructors.name AS instructor_name
+    FROM members
+    LEFT JOIN instructors ON (members.instructor_id = instructors.id)
+    WHERE members.id = $1`
+
+
+
+
+
+
+
+
+__________________________ Filtros da Tabela ___________________________________________________________
+                     .. part 2/2 Desafio 5.3
+
+
+
+
+++++++++++++++++++++++ Estrutura do Filtro +++++++++++++++++++
+
+
+- Vamos adicionar um campo de filtrar por nome ou atendimento
+
+    - Configurando layout:
+
+        -Na pasta instructors abra o arquivo index.js
+            - exclua a linha:
+
+            <a href="/instructors/create">Nome<a/>
+
+            E No lugar dela adicione a linha:
+
+            <div class="header">
+                <a class="button" href="/instructors/create">Nome</a>
+                <form action="/instructors" method="GET">
+                    <input
+                        type="text"
+                        name="filter"
+                        placeholder="filtrar por Nome"
+                    >
+                    <button type="submit">Filtrar</button>
+                </form>
+            </div>
+
+        -ATUALIZA A PAGINA PRA TESTAR
+
+    
+
+
+
+
+++++++++++++++++++++++ Estilizando a filtragem +++++++++++++++++++
+
+
+    -Aqui vamos configurar o CSS da filtragem
+
+        - Abra o arquivo styles.css
+            -No final dos conteudo escreva:
+
+
+/* FILTERS */
+.table-container .header {
+    display: grid;
+    grid-tamplete-columns: 1fr 1fr;
+    align-items: center;
+    margin-bottom: 32px;
+}        
+
+.table-container .header a {
+    margin:0;
+    width: 120px;
+}
+
+
+.table-container .header form {
+    display: grid;
+    grid-template-columns: 1fr 120px
+    align-items: center;
+    grid-gap: 8px;
+}
+
+.table-container .header form input {
+    border: 1px solid #eee;
+    padding: 4px 8px;
+    box-sizing: border-box;
+}
+
+.table-container .header form button {
+    margin:0;
+}
+
+
+
+
+
+
+
+++++++++++++++++++++++ Lógica da filtragem de dados +++++++++++++++++++
+
+
+ -No arquivo instructors.js
+
+    mude a função index() para: 
+
+    index(req, res) {
+        const { filter 
+        } = req.query
+
+        if ( filter ) {
+            Instructor.findBy(filter, function(instructors){
+                return res.render("instructors/index", { instructors })
+            })
+        } else {
+            Instructor.all(function(instructors){
+                return res.render("instructors/index", { instructors })
+            })
+        }
+
+    },
+
+-No arquivo Instructors.js, abaixo da função "find()"
+
+    *escreva:
+
+        findBy(filter, callback) {
+            db.query(`
+            SELECT instructors.*, count(members) AS total_students
+        
+        
+            FROM instructors
+            LEFT JOIN members ON (instructors.id = members.instructors_id)
+            WHERE instructors.name ILIKE '%${filter}%'
+            GROUP BY instructors.id
+            ORDER BY total_students DESC`, function(err, results){
+                if(err) throw `Dtabase Error! ${err}`
+
+                callback(results.rows)
+            })   
+        }
+
+
+
+
+
+++++++++++++++++++++++ Filtro Flexivel com extensão OR do SQL +++++++++++++++++++
+
+
+    -Isso vai servir para filtrar Por Nome ou Atendimentpo
+
+        - No arquivo index.njk da pasta instructors, mude placeholder para:
+
+            placeholder="Nome ou Atendimento"
+
+        - Na função findBY do arquyivo Instructors.js
+
+            *Abaixo a linha "WHERE" Escreva a linha:
+
+                OR instructors.services ILIKE '%${filter}%' 
+
+    -Para manter o filter no value:
+
+        -No if do filter, no aquivo instructors.js:
+
+            -mude o return para:
+
+                return res.render("instructors/index", { instructors, filter })
+
+        -No arquivo index.njk da pasta instructors,
+
+            *acrescente no input:
+
+                value={{filter}}
+
+
+    
+
+
+
+
+
+
+_____________________________________PAGINAÇÃO________________________________________________
+                                Desafio 5.4
+
+
+
+
+++++++++++++++++++++++ Entendendo a Lógica da paginação +++++++++++++++++++
+
+-Ele explicou, tinha logica.. mas não tinha codigo (assistir video)
+
+
+
+
+
+
+++++++++++++++++++++++ Estruturando os parametros para paginação +++++++++++++++++++
+
+
+-No arquivo instructors.js, na função index:
+
+    -Comente o conteudo todo da função
+    -Agora escreva isso por cima do cod. comentado:
+
+        let {filter, page, limit } = req.query
+
+        page = page || 1
+        limit = limit || 2
+        let offset = limit * (page - 1)
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(instructors){
+                return res.render("instructors/index", { instructors, filter })
+            }
+        }
+
+        Instructor.paginate(params)
+
+-No arquivo Instructor.js, em baixo da função delete(), escreva:
+
+    paginate(params) {}
+
+
+
+
+
+
+
+
+
+++++++++++++++++++++++ Queries dinâmicas +++++++++++++++++++
+
+
+
+
+-No arquivo Instructor.js, mude a função paginate() para:
+
+    paginate(params) {
+        const {filter, limit, offset, callback } = params
+
+        let query = `
+        SELECT instructors.*, count(members) as total_students
+        FROM instructors
+        LEFT JOIN members ON (instructors.id = members.instructor_id)`
+
+        if ( filter ) {
+            query = `${query}
+            WHERE instructors.name ILIKE '%${filter}%'
+            OR instructors.services ILIKE '%${filter}%'
+            `
+        }
+
+        query = `${query}
+        GROUP BY instructors.id limit $1 OFFSET $2
+        `
+
+        db.query(query, [limit, offset], function(err, results){
+            if (err) throw `Database Error! ${err}`
+
+            callback(results.rows)
+        })
+    }
+
+
+
+
+
+
+++++++++++++++++++++++ Algoritmo de paginação no front I +++++++++++++++++++
+
+
+
+-No fim do conteudo do arquivo "script.js" escreva:
+
+    // paginação
+    // totalPages = 20
+    // SelectedPage = 15
+    // [1, ..., 13, 14, 15, 16, 17, ..., 20]
+
+    let totalPages = 20,
+        SelectedPage = 15,
+        pages = []
+
+    for(let currentPage = 1; currentPage <= totalPages; currentPage++){
+
+        if(currentPage == 1 || currentPage == totalPages) {
+            pages.push(currentPage)
+        }
+    }
+
+    console.log(params)
+
+
+
+
+++++++++++++++++++++++ Algoritmo de paginação no front II +++++++++++++++++++
+
+
+
+-No fim do conteudo do arquivo "script.js" Atualize:
+
+    // paginação
+    // totalPages = 20
+    // SelectedPage = 15
+    // [1, ..., 13, 14, 15, 16, 17, ..., 20]
+
+    let totalPages = 20,
+        SelectedPage = 15,
+        pages = []
+
+    for(let currentPage = 1; currentPage <= totalPages; currentPage++){
+
+        const firstAndLastPage = currentPage == 1 || currentPage == total
+        const pagesAfterSelectedPage = currentPage <= selectedPage + 2
+        const pagesBeforeSelectedPage = currentPage >= selecetdPage - 2
+
+
+        if(firstAndLastPage == 1 || pagesBeforeSelectedPage && pagesAfterSelectedPage) {
+            pages.push(currentPage)
+        }
+    }
+
+    console.log(params)
+
+
+
+
+
+++++++++++++++++++++++ Algoritmo de paginação no front III +++++++++++++++++++
+
+
+
+-No fim do conteudo do arquivo "script.js" Atualize:
+
+    // paginação
+    // totalPages = 20
+    // SelectedPage = 15
+    // [1, ..., 13, 14, 15, 16, 17, ..., 20]
+
+    let totalPages = 20,
+        SelectedPage = 15,
+        pages = [],
+        oldPage
+
+    for(let currentPage = 1; currentPage <= totalPages; currentPage++){
+
+        const firstAndLastPage = currentPage == 1 || currentPage == totalPages
+        const pagesAfterSelectedPage = currentPage <= selectedPage + 2
+        const pagesBeforeSelectedPage = currentPage >= selecetdPage - 2
+
+
+        if(firstAndLastPage == 1 || pagesBeforeSelectedPage && pagesAfterSelectedPage) {
+            if (oldPage && currentPage - oldPage > 2){
+                pages.push("...")
+            }
+
+            if (oldPage && currentPage - oldPage == 2) {
+                pages.push(oldPage + 1)
+            }
+
+            pages.push(currentPage)
+            
+            oldPage = currentPage
+        }
+    }
+
+    console.log(params)
+
+
+
+
+
+++++++++++++++++++++++ Estruturando dados para paginação no front +++++++++++++++++++
+
+
+- No arquivo "scripts.js" vamos colocar as ultimas linhas em um função:
+
+
+
+    function paginate (selectedPage, totalPages) {
+        let pages = [],
+        oldPage
+
+        for(let currentPage = 1; currentPage <= totalPages; currentPage++){
+
+            const firstAndLastPage = currentPage == 1 || currentPage == total
+            const pagesAfterSelectedPage = currentPage <= selectedPage + 2
+            const pagesBeforeSelectedPage = currentPage >= selectedPage - 2
+
+
+            if(firstAndLastPage == 1 || pagesBeforeSelectedPage && pagesAfterSelectedPage) {
+                if (oldPage && currentPage - oldPage > 2){
+                    pages.push("...")
+                }
+
+                if (oldPage && currentPage - oldPage == 2) {
+                    pages.push(oldPage + 1)
+                }
+
+                pages.push(currentPage)
+                
+                oldPage = currentPage
+            }
+        }
+        return pages    
+    }
+
+
+
+
+-No arquivo "instructor.js" delete a parte comentada e troque esse conteudo:
+
+
+    let {filter, page, limit } = req.query
+
+        page = page || 1
+        limit = limit || 2
+        let offset = limit * (page - 1)
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(instructors){
+
+                const pagination = {
+                    filter,
+                    total,
+                    page
+                }
+                return res.render("instructors/index", { instructors })
+            }
+        }
+
+        Instructor.paginate(params)
+
+
+
+
+
+
+
+
+
+++++++++++++++++++++++ pegando o total de registros com subqueries +++++++++++++++++++
+
+
+
+
+
+
+
+-No Arquivo Instructors.js Modifique o código da função "paginate(params){}" PARA:
+
+
+paginate(params) {
+        const {filter, limit, offset, callback } = params
+
+        let query = "",
+            filterQuery = "",
+            totalQuery = `(
+                SELECT count(*) FROM instructors
+            ) AS total`
+
+
+        
+
+        if ( filter ) {
+            filterQuery = `
+            WHERE instructors.name ILIKE '%${filter}%'
+            OR instructors.services ILIKE '%${filter}%'
+            `
+
+            totalQuery = `(
+                SELECT count(*) FROM instructors
+                ${filterQuery}
+            ) AS total`
+        }
+        
+        query = `
+        SELECT instructors.*, ${totalQuery}, count(members) AS total_students
+        FROM instructors
+        LEFT JOIN members ON (instructors.id = members.instructor_id)
+        ${filterQuery}
+        GROUP BY instructors.id limit $1 OFFSET $2
+        `
+
+        db.query(query, [limit, offset], function(err, results){
+            if (err) throw `Database Error! ${err}`
+
+            callback(results.rows)
+        })
+}
+
+
+
+
+
+++++++++++++++++++++++ Finanlizando estrutura de dados da Paginação +++++++++++++++++++
+
+
+
+-Na pagina instructors.js na Função paginate()
+
+    - Tire o filter do conteudo.
+    - Mude a variavel "total" em "const pagination" PARA:
+
+        total: Math.ceil(instructors[0].total / limit),
+
+    -Mude o return PARA:
+
+        return res.render("instructors/index", { instructors, pagination, filter})
+
+
+
+
+
+
+++++++++++++++++++++++ Pegando dados do HTML com dataset +++++++++++++++++++
+
+
+
+-Na pasta instructors, no arquivo index.js
+
+    -Abaixo do tag </table> crie a seguinte div
+
+    <div class="pagination"
+        data-page={{pagination.page}}
+        data-total={{pagination.total}} 
+    ></div>
+
+
+-No arquivo "scripts.js"  em baixo da funtion paginate(), escreva:
+
+    const pagination = document.querySelector(".paginate")
+    const page = +pagination.dataset.page;
+    const total = +pagination.dataset.total;
+
+
+
+
+
+++++++++++++++++++++++ Montando paginação no front +++++++++++++++++++
+
+
+-No arquivo script.js abaixo da variavel "const total = +pagination", escreva
+
+    const pages = paginate(page, total)
+
+    let elements = ""
+
+    for (let page of pages) {
+        if (String(page).includes("...")) {
+            elements += `<span>${page}</span>`
+        } else {
+            elements += `<a href= "?page=${page}">${page}</a>`
+        }    
+    }
+
+    paginate.innerHTML = elements
+
+
+
+
+
+
+++++++++++++++++++++++ Estilizando a paginação +++++++++++++++++++
+
+
+
+-Abra o arquivo "styles.css"
+
+-No fim do conteudo, escreva:
+
+    //Paginação
+
+    .table-container {
+        display: grid;
+        grid-template: 64px 1vr 16px / 1fr;
+    }
+
+    .table-container .header {
+        margin: 0;
+        align-self: start;
+    }
+
+    .table-container .pagination {
+        margin: 0;
+        align-self: end;
+        justfy-self: center;
+    }
+
+    .pagination a,
+    .pagination span {
+        color: var(--primary-color);
+        text-decoration: none;
+        margin-right: 16px;
+    }
+
+    .pagination a:houver {
+        filter: brightness(0.3);
+        border-bottom: 1px solid var(--primary-color)
+    }
+
+
+
+
+
+
+++++++++++++++++++++++ Mantendo estado do filtro +++++++++++++++++++
+
+
+
+-No arquivo "scripts.js" no "for" no fim dos conteudos, Mude para:
+
+
+    for (let page of pages) {
+        if (string(page).includes("...")) {
+            elements += `<span>${page}</span>`
+        } else {
+            if( filter ) {
+                elements += `<a href= "?page=${page}&filter=${filter}">${page}</a>`
+            } else {
+                elements += `<a href= "?page=${page}">${page}</a>`
+            }
+        }    
+    }
+
+
+-Na pasta instructors, no arquivo index.js
+
+    -Abaixo do tag </table> modifique a seguinte div, PARA:
+
+    <div class="pagination"
+        data-page={{pagination.page}}
+        data-total={{pagination.total}} 
+        data-filter={{filter}}
+    ></div>
+
+
+-No arquivo "scripts.js" acrescente a seguinte linha
+
+    -entre o "const pagination" e "const page":
+
+    const filter = pagination.dataset.filter
+
+
+PAREI ESTOU AQUI
+++++++++++++++++++++++ Aplicando paginação para membros +++++++++++++++++++
+
+
+-Copie a div pagination do index.js da pasta instructors
+    -Cole no index.js da pasta members
+
+
+-Copie a div header do index.js da pasta instructors
+    -E coloque no lugar da header no index.js da pasta members
+
+    -Troque instructors por members
+    -mude o placeholder para: Nome ou email
+
+-CRIE a função paginate no fim do arquivo Member.js
+
+    paginate(params) {
+        const {filter, limit, offset, callback } = params
+
+        let query = "",
+            filterQuery = "",
+            totalQuery = `(
+                SELECT count(*) FROM members
+            ) AS total`
+
+
+        
+
+        if ( filter ) {
+            filterQuery = `
+            WHERE members.name ILIKE '%${filter}%'
+            OR members.email ILIKE '%${filter}%'
+            `
+
+            totalQuery = `(
+                SELECT count(*) FROM members
+                ${filterQuery}
+            ) AS total`
+        }
+        
+        query = `
+        SELECT members.*, ${totalQuery}
+        FROM members
+        ${filterQuery}
+        LIMIT $1 OFFSET $2
+        `
+
+        db.query(query, [limit, offset], function(err, results){
+            if (err) throw `Database Error! ${err}`
+
+            callback(results.rows)
+        })
+}
+
+
+
+
+-No arquivo members.js mude o conteudo da função index, PARA:
+
+
+        let {filter, page, limit } = req.query
+
+        page = page || 1
+        limit = limit || 2
+        let offset = limit * (page - 1)
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(members){
+
+                const pagination = {
+                    total: Math.ceil(members[0].total / limit),
+                    page
+                }
+                return res.render("members/index", { members, paginate, filter })
+            }
+        }
+
+        Member.paginate(params)
+
+
+
+
+
+
+++++++++++++++++++++++ Ajustes finais +++++++++++++++++++
+
+
+-No arquivo scritps.js reescreva o codigo depois da função paginate, PARA:
+
+function createPagination(pagination) {
+    
+    const filter = pagination.dataset.filter
+    const page = +pagination.dataset.page
+    const total = +pagination.dataset.total
+    const pages = paginate(page, total)
+
+    let elements = ""
+
+    for (let page of pages) {
+        if (String(page).includes("...")) {
+            elements += `<span>${page}</span>`
+        } else {
+            if( filter ) {
+                elements += `<a href= "?page=${page}&filter">${page}</a>`
+            } else {
+                elements += `<a href= "?page=${page}">${page}</a>`
+            }
+        }    
+    }
+
+    pagination.innerHTML = elements
+}
+
+const pagination = document.querySelector(".pagination")
+
+if (pagination) {
+    createPagination(pagination)
+}
