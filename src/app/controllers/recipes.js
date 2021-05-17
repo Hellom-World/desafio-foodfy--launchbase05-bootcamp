@@ -1,5 +1,6 @@
 
 const { age, date } = require('../../lib/utils')
+const db = require('../../config/db')
 
 module.exports = {
     index(req, res){
@@ -15,9 +16,35 @@ module.exports = {
                 return res.send(`Preencha todos os campos`)
             }
         }
-        let {title, image, preparation, ingredients, information, author} = req.body
-        return 
-        
+        const query = `
+        INSERT INTO recipes (
+            chef_id,
+            image,
+            title,
+            ingredients,
+            preparation,
+            information,
+            created_at
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7)
+        RETURNING id
+    `
+
+        const values = [
+            req.body.chef_id,
+            req.body.image,
+            req.body.title,
+            req.body.ingredients,
+            req.body.preparation,
+            req.body.information,
+            date(Date.now()).iso
+        ]
+        const { Pool } = require("pg")
+
+        db.query(query, values, function (err, results){
+            if(err) return res.send("Database Error!")
+
+            return res.redirect(`/admin/recipes/${results.rows[0].id}`)
+        })
     },   
     show(req, res){
         

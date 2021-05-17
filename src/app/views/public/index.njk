@@ -17,10 +17,10 @@
         <div class="cards-all">
                 
             {% for recipe in recipes %}
-                <div class="card" id='{{recipe.index}}'>
-                    <img src="{{recipe.image2}}" alt="{{recipe.title}}">
+                <div class="card" id='{{recipe.id}}'>
+                    <img src="{{recipe.image}}" alt="{{recipe.title}}">
                     <h4 class="content">{{recipe.title}}</h4>
-                    <p class="info">por {{recipe.author}}</p>               
+                    <p class="info">por {{recipe.chef_id}}</p>               
                 </div>
             {% endfor %}
 

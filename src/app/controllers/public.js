@@ -14,7 +14,7 @@ module.exports = {
                 return res.send(`Preencha todos os campos`)
             }
         }
-        let {title, image, preparation, ingredients, information, author} = req.body
+        
         return 
         
     },   

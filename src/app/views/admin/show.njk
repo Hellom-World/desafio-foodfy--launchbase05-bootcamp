@@ -3,7 +3,7 @@
 {% block content %}
     <section class="section-button-edit">
         <p>Receita: {{recipe.title}}</p>
-        <a class="button" href="{{recipe.index}}/edit.njk">Editar receita</a>
+        <a class="button" href="{{recipe.id}}/edit.njk">Editar receita</a>
     </section>
     <section>
         <div class="foto-rec">
@@ -12,7 +12,7 @@
 
         <div class="title-rec">
             <h1 class="content">{{recipe.title}}</h1>
-            <p class="info">por {{recipe.author}}</p>    
+            <p class="info">por {{recipe.chef_id}}</p>    
         </div>
 
         <div class="ingredientes">

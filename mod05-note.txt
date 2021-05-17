@@ -174,7 +174,7 @@ __________________________Trabalhando com Bando de Dados________________________
 
             const { age, date } = require('../../lib/utils')
 
-PAREI AQUI
+
     .No arquivo members.js copie e cole o conteudo do instructors.js
 
         .Troque tudo que for instructores por members
@@ -215,8 +215,8 @@ PAREI AQUI
                 const { Pool } = require("pg")
 
                 module.exports = new Pool({
-                    user: 'hellom',
-                    password: "",
+                    user: 'postgres',
+                    password: "shanti0408",
                     host: "localhost",
                     port: 5432,
                     database: "gymmanager"  
@@ -325,7 +325,7 @@ ________________________________________________________________________________
 
 
 
-
+PAREI AQUI
 +++++++++++++++++++++++ Buscando dados do banco +++++++++++++++++++
 
 

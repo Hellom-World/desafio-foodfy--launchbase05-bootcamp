@@ -17,12 +17,12 @@
         <div class="cards-all-adm">
                 
             {% for recipe in recipes %}
-                <div class="card-adm" id='{{recipe.index}}'>
+                <div class="card-adm" id='{{recipe.id}}'>
                     <img src="{{recipe.image}}" alt="{{recipe.title}}">
                     <div class="card-info">
                         <h4 class="content">{{recipe.title}}</h4>
-                        <p class="info">por {{recipe.author}}</p>
-                        <a href="/admin/recipes/{{recipe.index}}">Visualizar</a>
+                        <p class="info">por {{recipe.chef_id}}</p>
+                        <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
                     </div>
                 </div>
             {% endfor %}
