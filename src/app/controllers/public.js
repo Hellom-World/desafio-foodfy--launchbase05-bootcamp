@@ -1,8 +1,13 @@
 const { age, date } = require('../../lib/utils')
+const db = require('../../config/db')
+const Public = require ('../models/Public')
 
 module.exports = {
     index(req, res){
-        return res.render('admin/index.njk')
+        Public.all(function(recipes) {
+            return res.render("public/index", {recipes})
+    
+        })
     },   
     create(req, res){
         return res.render('admin/create.njk')        

@@ -383,7 +383,7 @@ PAREI AQUI
             return res.render("instructors/index", {instructors})
     
         })
-
+    PAREI AQUI
     .No arquivo Instructor.js no objeto "create()", escreva:
 
         create(data, callback){
