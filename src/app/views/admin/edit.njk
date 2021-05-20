@@ -4,7 +4,7 @@
 
     <form id="form-delete" action="/admin/recipes?_method=DELETE" method="post">
 
-        <input type="hidden" name="id" value={{recipe.index}}>
+        <input type="hidden" name="id" value={{recipe.id}}>
         <button class="delete-button" type="submit">Delete</button>
 
     </form>
@@ -17,7 +17,7 @@
             </div>
         </section>
         {% include 'admin/fields.njk' %}
-        <input type="hidden" name="id" value="{{recipe.index}}">
+        <input type="hidden" name="id" value="{{recipe.id}}">
         
     </form>
     {% include '../confirm.njk'%}

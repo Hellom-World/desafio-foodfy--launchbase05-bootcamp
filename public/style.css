@@ -317,7 +317,8 @@ article h2{
 .salve-button{
     background: forestgreen;
 }
-.section-button-edit p{
+.section-button-edit p,
+.section-button p{
     font-weight: 700;
     font-size: 24px;
     color: #111111;

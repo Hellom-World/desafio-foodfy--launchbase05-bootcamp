@@ -44,7 +44,7 @@ module.exports = {
     find(id, callback) {
         db.query(`SELECT *
         FROM recipes
-        WHERE id = $1`, [id], function(err, results){
+        WHERE id = $1`, [id], function(err, results){  
             if(err) throw `database Error! ${err}`
             callback(results.rows[0])
         })
@@ -79,4 +79,5 @@ module.exports = {
             callback()
         })
     }
+
 }
