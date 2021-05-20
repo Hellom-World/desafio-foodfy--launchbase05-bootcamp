@@ -5,7 +5,8 @@ const Public = require ('../models/Public')
 module.exports = {
     index(req, res){
         Public.all(function(recipes) {
-            return res.render("public/index", {recipes})
+            
+            return res.render("public/index.njk", {recipes})
     
         })
     },   

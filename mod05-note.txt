@@ -324,8 +324,6 @@ ________________________________________________________________________________
 
 
 
-
-PAREI AQUI
 +++++++++++++++++++++++ Buscando dados do banco +++++++++++++++++++
 
 
@@ -383,7 +381,6 @@ PAREI AQUI
             return res.render("instructors/index", {instructors})
     
         })
-    PAREI AQUI
     .No arquivo Instructor.js no objeto "create()", escreva:
 
         create(data, callback){
@@ -399,7 +396,7 @@ PAREI AQUI
                 RETURNING id
             `
         const values = [
-            data.nome,
+            data.nome,]
             data.avatar_URL,
             data.gender,
             data.services,

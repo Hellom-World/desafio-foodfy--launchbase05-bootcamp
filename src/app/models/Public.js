@@ -1,3 +1,6 @@
+const { age, date } = require('../../lib/utils')
+const db = require('../../config/db')
+
 module.exports = {
     all(callback){
 
@@ -6,10 +9,6 @@ module.exports = {
 
             callback(results.rows)
         })
-
-    },
-
-    create(){
 
     }
 }
