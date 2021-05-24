@@ -69,10 +69,4 @@ module.exports = {
         return res.render('recipes/recipes.njk', {recipes})        
         })
     },
-    chefs(req, res){
-        Recipes.all(function(recipes) {
-        
-        return res.render('recipes/chefs.njk', {recipes})        
-        })
-    },
 }  

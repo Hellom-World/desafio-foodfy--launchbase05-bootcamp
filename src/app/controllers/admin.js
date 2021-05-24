@@ -5,9 +5,9 @@ const Admin = require('../models/Admin')
 
 module.exports = {
     index(req, res){
-        Admin.all(function(recipes) {
+        Admin.all(function(chefs) {
             
-            return res.render("admin/index.njk", {recipes})
+            return res.render("admin/index.njk", {chefs})
     
         })
         
@@ -35,13 +35,15 @@ module.exports = {
             recipe.created_at = date(recipe.created_at).format
 
             return res.render("admin/show.njk", { recipe })
-            
-    
+        
         })
-
-
-    
-    },                
+    },  
+    chefs(req, res){
+        Admin.all(function(chefs) {
+        
+        return res.render('recipes/chefs.njk', {chefs}), console.log(chefs)       
+        })
+    },              
     edit(req, res){
         Admin.find(req.params.id, function (recipe){
             if (!recipe) return res.send("recipe no found!")

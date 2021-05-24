@@ -4,16 +4,16 @@
 {% block content%}
 
     <section class="content">
-        <div class="cards-all">
+        <div class="cards-chefs">
             
-            {% for recipe in recipes %}
-                <div class="card" id="{{recipe.id}}" >
+            {% for chef in chefs %}
+                <div class="card" id="{{chef.id}}" >
+                    
+                    <img src="{{chef.avatar_url}}" alt="{{chef.name}}">
+                    
                     <div>
-                        <img src="{{recipe.image}}" alt="{{recipe.title}}">
-                    </div>
-                    <div>
-                        <h4 class="content">{{recipe.title}}</h4>
-                        <p class="info">por {{recipe.author}}</p>               
+                        <h4 class="content">{{chef.name}}</h4>
+                        <p class="info">por {{chef.name}}</p>               
                     </div>
                 </div>
             {% endfor %}
