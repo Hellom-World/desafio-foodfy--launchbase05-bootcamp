@@ -9,7 +9,7 @@
             {% for chef in chefs %}
                 <div class="card-chef" id="{{chef.id}}" >
                     <div class="circle">
-                    <img src="{{chef.avatar_url}}" alt="{{chef.name}}">
+                    <span style="background-image: url({{chef.avatar_url}})"></span>
                     </div>
                     <div>
                         <h4 class="content">{{chef.name}}</h4>
