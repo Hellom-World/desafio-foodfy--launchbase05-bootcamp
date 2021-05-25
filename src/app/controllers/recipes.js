@@ -63,6 +63,12 @@ module.exports = {
     about(req, res){
         return res.render('recipes/sobre.njk')        
     },
+    chefs(req, res){
+        Recipes.allChefs(function(chefs) {
+        
+        return res.render('recipes/chefs.njk', {chefs})
+        })
+    },              
     recipes(req, res){
         Recipes.all(function(recipes) {
         

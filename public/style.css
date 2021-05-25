@@ -254,7 +254,7 @@ article h2{
     background-color: black;
 }
 .header-adm{
-    margin-bottom: 70px;
+    margin-bottom: 50px;
 }
 .header-adm div a{
     margin: 0;
@@ -437,8 +437,8 @@ textarea{
         background-position: center;
         background-size: cover;
         border-radius: 50%;
-        box-shadow: 3px 1px 6px -4px black;
-        border: 2px solid white;
+        /* box-shadow: 3px 1px 6px -4px black;
+        border: 2px solid white; */
     
   }
   

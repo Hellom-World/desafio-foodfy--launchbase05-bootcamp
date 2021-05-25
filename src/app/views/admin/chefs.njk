@@ -1,0 +1,23 @@
+{% extends "layoutAdm.njk" %}
+
+
+{% block content%}
+
+    <section class="content">
+        <div class="cards-chefs">
+            
+            {% for chef in chefs %}
+                <div class="card-chef" id="{{chef.id}}" >
+                    <div class="circle">
+                    <span style="background-image: url({{chef.avatar_url}})"></span>
+                    </div>
+                    <div>
+                        <h4 class="content">{{chef.name}}</h4>
+                        <p class="info">por {{chef.name}}</p>               
+                    </div>
+                </div>
+            {% endfor %}
+            
+        </div>
+    </section>
+{% endblock %}

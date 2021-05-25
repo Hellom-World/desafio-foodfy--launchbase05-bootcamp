@@ -11,6 +11,15 @@ module.exports = {
         })
 
     },
+    allRecipes(callback){
+
+        db.query(`SELECT * FROM recipes`, function(err, results){
+            if(err) return res.send("Database Error!")
+
+            callback(results.rows)
+        })
+
+    },
     create(data, callback){
         const query = `
         INSERT INTO recipes (

@@ -5,9 +5,9 @@ const Admin = require('../models/Admin')
 
 module.exports = {
     index(req, res){
-        Admin.all(function(chefs) {
+        Admin.allRecipes(function(recipes) {
             
-            return res.render("admin/index.njk", {chefs})
+            return res.render("admin/index.njk", {recipes})
     
         })
         
@@ -41,7 +41,7 @@ module.exports = {
     chefs(req, res){
         Admin.all(function(chefs) {
         
-        return res.render('recipes/chefs.njk', {chefs}), console.log(chefs)       
+        return res.render('admin/chefs.njk', {chefs})
         })
     },              
     edit(req, res){

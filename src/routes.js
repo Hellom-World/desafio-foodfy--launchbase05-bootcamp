@@ -7,11 +7,12 @@ const admin = require('./app/controllers/admin')
 routes.get("/", recipes.index)
 routes.get("/receitas", recipes.recipes)
 routes.get("/sobre", recipes.about) 
-routes.get("/chefs", admin.chefs) 
+routes.get("/chefs", recipes.chefs) 
 routes.get("/recipes/:index", recipes.show)
 
 
 routes.get("/admin", admin.index); // Mostrar a lista de receitas
+routes.get("/admin/chefs", admin.chefs) 
 routes.get("/admin/recipes", admin.index); // Mostrar a lista de receitas
 routes.get("/admin/recipes/create", admin.create); // Mostrar formulário de nova receita
 routes.get("/admin/recipes/:id", admin.show); // Exibir detalhes de uma receita
