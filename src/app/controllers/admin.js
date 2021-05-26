@@ -14,6 +14,9 @@ module.exports = {
     },   
     create(req, res){
         return res.render('admin/create.njk')        
+    },
+    createchef(req, res){
+        return res.render('admin/createchef.njk')        
     },   
     post(req, res){
         const keys = Object.keys(req.body)
@@ -48,7 +51,15 @@ module.exports = {
         Admin.find(req.params.id, function (recipe){
             if (!recipe) return res.send("recipe no found!")
 
-            return res.render(`admin/recipes/${recipe.id}/edit.njk`, { recipe })
+            return res.render(`admin/edit.njk`, { recipe })
+        })
+       
+    },
+    editchef(req, res){
+        Admin.findchef(req.params.id, function (chef){
+            if (!chef) return res.send("Chef no found!")
+
+            return res.render(`admin/editchef.njk`, { chef })
         })
        
     },   
