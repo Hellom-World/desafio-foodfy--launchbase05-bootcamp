@@ -26,9 +26,22 @@ module.exports = {
                 return res.send('please, fill all fields')
             }
         }
+        
+            Admin.create(req.body, function(recipes) {
+                return res.redirect(`/admin/recipes/${recipes.id}`)
+            })
+    },
+    postchef(req, res){
+        const keys = Object.keys(req.body)
 
-        Admin.create(req.body, function(recipes) {
-            return res.redirect(`/admin/recipes/${recipes.id}`)
+        for(key of keys) {
+            if (req.body[key] == "") {
+                return res.send('please, fill all fields')
+            }
+        }
+
+        Admin.createchef(req.body, function(chefs) {
+            return res.redirect(`/admin/chefs/${chefs.id}`)
         })
     },   
     show(req, res){
@@ -38,6 +51,16 @@ module.exports = {
             recipe.created_at = date(recipe.created_at).format
 
             return res.render("admin/show.njk", { recipe })
+        
+        })
+    },
+    showchef(req, res){
+        Admin.findchef(req.params.id, function (chef){
+            if (!chef) return res.send("Chef no found!")
+
+            chef.created_at = date(chef.created_at).format
+
+            return res.render("admin/showchef.njk", { chef })
         
         })
     },  
@@ -65,12 +88,29 @@ module.exports = {
     },   
     put(req, res){
         const keys = Object.keys(req.body)
-        for (key of keys) {
+
+        for(key of keys) {
             if (req.body[key] == "") {
-                return res.send(`Preencha todos os campos`)
+                return res.send("Please, fill all fields!")
             }
         }
-            return 
+        
+            Admin.update(req.body, function() {
+                return res.redirect(`/admin/recipes/${req.body.id}`)
+            })
+        
+    },
+    putchef(req, res){
+        const keys = Object.keys(req.body)
+
+        for(key of keys) {
+            if (req.body[key] == "") {
+                return res.send("Please, fill all fields!")
+            }
+        }
+        Admin.updatechef(req.body, function() {
+            return res.redirect(`/admin/chefs/${req.body.id}`)
+        })
     },   
     delete(req, res){
         

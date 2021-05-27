@@ -1,0 +1,33 @@
+{% extends "layoutAdm.njk" %}
+
+{% block content %}
+    <section class="section-button-editchef">
+        <p>Chef: {{chef.name}}</p>
+        <a class="button" href="{{chef.id}}/edit">Editar chef</a>
+    </section>
+    <section>
+        <div class="bigcircle">
+            <span style="background-image: url({{chef.avatar_url}})"></span>
+        </div>
+
+        <div class="title-rec">
+            <h1 class="content">{{chef.name}}</h1>
+            <p class="info">por {{recipe.chef_id}}</p>    
+        </div>        
+    </section>
+    <section class="content">
+        <h1>Receitas</h1>
+        <div class="cards-all">
+                
+            {% for recipe in recipes %}
+                <div class="card" id='{{recipe.id}}'>
+                    <img src="{{recipe.image}}" alt="{{recipe.title}}">
+                    <h4 class="content">{{recipe.title}}</h4>
+                    <p class="info">por {{recipe.chef_id}}</p>               
+                </div>
+            {% endfor %}
+
+        </div>
+    </section>
+
+{% endblock %}

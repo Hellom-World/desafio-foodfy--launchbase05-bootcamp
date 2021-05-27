@@ -50,6 +50,28 @@ module.exports = {
             callback(results.rows[0])
         })
     },
+    createchef(data, callback){
+        const query = `
+        INSERT INTO chefs (
+            name,
+            avatar_url,
+            created_at
+        ) VALUES ($1, $2, $3)
+        RETURNING id
+    `
+
+        const values = [
+            data.name,
+            data.avatar_url,
+            date(Date.now()).iso
+        ]
+
+        db.query(query, values, function(err, results){
+            if(err) return res.send("Database Error!")
+
+            callback(results.rows[0])
+        })
+    },
     find(id, callback) {
         db.query(`SELECT *
         FROM recipes
@@ -68,18 +90,16 @@ module.exports = {
     },
     update(data, callback) {
         const query = `
-        UPDATE recipes SET(
-            chef_id,
-            image,
-            title,
-            ingredients,
-            preparation,
-            information,
-            created_at
-        ) VALUES ($1, $2, $3, $4, $5, $6, $7)
-        RETURNING id
-    `
-
+        UPDATE recipes SET
+            chef_id=($1),
+            image=($2),
+            title=($3),
+            ingredients=($4),
+            preparation=($5),
+            information=($6),
+            created_at=($7)
+        WHERE id =($8)
+        `
         const values = [
             data.chef_id,
             data.image,
@@ -87,13 +107,36 @@ module.exports = {
             data.ingredients,
             data.preparation,
             data.information,
-            date(Date.now()).iso
+            date(Date.now()).iso,
+            data.id
         ]
 
         db.query(query, values, function(err, results){
-            if(err) return res.send("Database Error!")
+            if(err) throw `database Error! ${err}`
+
+            callback()
+        })
+    },
+    updatechef(data, callback) {
+        const query = `
+        UPDATE chefs SET
+            name=($1),
+            avatar_url=($2),
+            created_at=($3)
+        WHERE id =($4)
+        `
+        const values = [
+            data.name,
+            data.avatar_url,
+            date(Date.now()).iso,
+            data.id
+        ]
+
+        db.query(query, values, function(err, results){
+            if(err) throw `database Error! ${err}`
 
             callback()
         })
     }
+    
 }

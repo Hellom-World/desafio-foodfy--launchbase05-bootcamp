@@ -1,3 +1,16 @@
+
+const cardChefs = document.querySelectorAll(".card-chef") 
+console.log(cardChefs)
+for(let cardChef of cardChefs){
+    
+    cardChef.addEventListener('click', function() {
+        const index = cardChef.getAttribute('id')
+
+       window.location.href= `/admin/chefs/${index}`
+    }) 
+
+}
+
 /* Logica de adicionar ingredientes */
 
 function addIngredient() {

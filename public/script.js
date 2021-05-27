@@ -11,8 +11,6 @@ for(let card of cards){
     }) 
 
 }
-
-/* Mostrar e esconder itens das receitas */
             
 /* Mostra - Esconde -> ingredientes */
 const escondeingre = document.querySelector('.esconde-ingredientes')
