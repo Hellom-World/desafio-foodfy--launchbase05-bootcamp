@@ -843,7 +843,7 @@ __________________________ Relacionando Tabelas ________________________________
     SELECT instructors.*, count(members) AS total_students
     FROM instructors
     LEFT JOIN members ON (members.instructor_id = instructors.id)
-    GRUP BY instructors.id
+    GROUP BY instructors.id
     
 
 
@@ -918,7 +918,7 @@ Para:
 
 
 
-
+PAREI AQUI
 
 ++++++++++++++++++++++ Criando seleção de instrutores +++++++++++++++++++
 

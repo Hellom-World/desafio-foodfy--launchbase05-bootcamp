@@ -11,9 +11,16 @@
                     <div class="circle">
                     <span style="background-image: url({{chef.avatar_url}})"></span>
                     </div>
-                    <div>
+                    <div class="content-info">
                         <h4 class="content">{{chef.name}}</h4>
-                        <p class="info">por {{chef.name}}</p>               
+                        
+                        <p class="info">
+                            {% if chef.total_recipes > 1 %}
+                                {{chef.total_recipes}} receitas
+                            {% else %}
+                                {{chef.total_recipes}} receita
+                            {% endif %}
+                        </p>               
                     </div>
                 </div>
             {% endfor %}

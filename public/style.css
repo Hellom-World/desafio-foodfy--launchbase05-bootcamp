@@ -427,7 +427,7 @@ textarea{
     margin-bottom: 285px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    column-gap: 30px;
+    gap: 30px;
 }
 .card-chef{
     gap: 20px;
@@ -437,6 +437,7 @@ textarea{
     cursor: pointer;
 }
 .card-chef div .info{
+    font-size: 14px;
     margin-bottom: 0;
 }
 
@@ -477,4 +478,7 @@ textarea{
 }
 .title-rec h1 {
  font-size: 36px;   
+}
+.content-info{
+    margin: auto 0;
 }

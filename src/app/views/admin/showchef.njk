@@ -12,7 +12,13 @@
 
         <div class="title-rec">
             <h1 class="content">{{chef.name}}</h1>
-            <p class="info">por {{recipe.chef_id}}</p>    
+            <p class="info">
+                {% if chef.total_recipes > 1 %}
+                {{chef.total_recipes}} receitas
+                {% else %}
+                {{chef.total_recipes}} receita
+                {% endif %}
+            </p>
         </div>        
     </section>
     <section class="content">
