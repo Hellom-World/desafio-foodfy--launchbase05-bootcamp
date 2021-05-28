@@ -43,6 +43,10 @@ header div .sobre:hover, .receitas:hover{
     font-family: Roboto;
     font-weight: 700;
 }
+header div .active-site{
+    font-family: Roboto;
+    font-weight: 700;
+}
 
 main{
     background-color:#FBDFDB;

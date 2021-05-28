@@ -9,6 +9,7 @@ routes.get("/receitas", recipes.recipes)
 routes.get("/sobre", recipes.about) 
 routes.get("/chefs", recipes.chefs) 
 routes.get("/recipes/:index", recipes.show)
+routes.get("/recipes/chefs/:index", recipes.showchef)
 
 
 routes.get("/admin", admin.index); // Mostrar a lista de receitas

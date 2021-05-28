@@ -4,8 +4,10 @@ const db = require('../../config/db')
 module.exports = {
     all(callback){
 
-        db.query(`SELECT * FROM recipes`, function(err, results){
-            if(err) return res.send("Database Error!")
+        db.query(`SELECT *
+        FROM recipes
+        ORDER BY title ASC`, function(err, results){
+            if(err) throw `database Error! ${err}`  
 
             callback(results.rows)
         })
@@ -13,8 +15,10 @@ module.exports = {
     },
     allChefs(callback){
 
-        db.query(`SELECT * FROM chefs`, function(err, results){
-            if(err) return res.send("Database Error!")
+        db.query(`SELECT *
+        FROM chefs
+        ORDER BY name ASC`, function(err, results){
+            if(err) throw `database Error! ${err}`
 
             callback(results.rows)
         })
@@ -45,7 +49,7 @@ module.exports = {
         ]
 
         db.query(query, values, function(err, results){
-            if(err) return res.send("Database Error!")
+            if(err) throw `database Error! ${err}`
 
             callback(results.rows[0])
         })
@@ -54,6 +58,14 @@ module.exports = {
         db.query(`SELECT *
         FROM recipes
         WHERE id = $1`, [id], function(err, results){  
+            if(err) throw `database Error! ${err}`
+            callback(results.rows[0])
+        })
+    },
+    findchef(id, callback) {
+        db.query(`SELECT *
+        FROM chefs
+        WHERE id = $1`, [id], function(err, results){
             if(err) throw `database Error! ${err}`
             callback(results.rows[0])
         })
@@ -83,7 +95,7 @@ module.exports = {
         ]
 
         db.query(query, values, function(err, results){
-            if(err) return res.send("Database Error!")
+            if(err) throw `database Error! ${err}`
 
             callback()
         })

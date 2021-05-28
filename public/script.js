@@ -1,3 +1,25 @@
+const currentPage = location.pathname
+const menuItems = document.querySelectorAll("header .abas a")
+
+for (item of menuItems) {
+	if (currentPage.includes(item.getAttribute("href"))) {			
+		item.classList.add("active-site")
+	}
+}
+
+/* Logica para selecionar o respectivo chef ao clicar nele */
+const cardChefs = document.querySelectorAll(".card-chef") 
+console.log(cardChefs)
+for(let cardChef of cardChefs){
+    
+    cardChef.addEventListener('click', function() {
+        const index = cardChef.getAttribute('id')
+
+       window.location.href= `/recipes/chefs/${index}`
+    }) 
+
+}
+
 
 /* Redirecionamento de página ao clicar em alguma receta */
 

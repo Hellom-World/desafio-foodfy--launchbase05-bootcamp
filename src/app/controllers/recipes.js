@@ -32,6 +32,16 @@ module.exports = {
         
         return res.render('recipes/show.njk', {recipe}), console.log(recipe)      
         })
+    },
+    showchef(req, res){
+        Recipes.findchef(req.params.index, function (chef){
+            if (!chef) return res.send("Chef no found!")
+
+            chef.created_at = date(chef.created_at).format
+
+            return res.render("recipes/showchef.njk", { chef })
+        
+        })
     },                
     edit(req, res){
         
