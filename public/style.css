@@ -362,6 +362,11 @@ header div .receitasAdm:hover, .chefsAdm:hover{
     color: #FFFFFF;
     text-align: left;
 }
+header div .active{
+    font-family: Roboto-Bold;
+    color: #FFFFFF;
+    text-align: left;
+}
 /* Edit Adm */
 
 input{

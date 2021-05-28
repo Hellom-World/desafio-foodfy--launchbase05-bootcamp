@@ -1,3 +1,4 @@
+
 /* Redirecionamento de página ao clicar em alguma receta */
 
 const cards = document.querySelectorAll(".card") 

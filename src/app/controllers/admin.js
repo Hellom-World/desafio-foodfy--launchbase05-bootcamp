@@ -114,7 +114,14 @@ module.exports = {
     },   
     delete(req, res){
         
-        return 
-            
+        Admin.delete(req.body.id, function(){
+            return res.redirect(`/admin/recipes`)
+        })    
+    },
+    deletechef(req, res){
+        
+        Admin.deletechef(req.body.id, function(){
+            return res.redirect(`/admin/chefs`)
+        })    
     }   
 }  

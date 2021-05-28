@@ -1,4 +1,16 @@
+const currentPage = location.pathname
+const menuItems = document.querySelectorAll("header .abas-adm a")
 
+for (item of menuItems) {
+	if (currentPage.includes(item.getAttribute("href"))) {			
+		item.classList.add("active")
+	}
+}
+
+
+
+
+/* Logica para selecionar o respectivo chef ao clicar nele */
 const cardChefs = document.querySelectorAll(".card-chef") 
 console.log(cardChefs)
 for(let cardChef of cardChefs){
