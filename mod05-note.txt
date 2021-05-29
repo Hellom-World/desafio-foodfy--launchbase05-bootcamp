@@ -918,7 +918,7 @@ Para:
 
 
 
-PAREI AQUI
+
 
 ++++++++++++++++++++++ Criando seleção de instrutores +++++++++++++++++++
 
@@ -1637,7 +1637,7 @@ paginate(params) {
     const filter = pagination.dataset.filter
 
 
-PAREI ESTOU AQUI
+
 ++++++++++++++++++++++ Aplicando paginação para membros +++++++++++++++++++
 
 
