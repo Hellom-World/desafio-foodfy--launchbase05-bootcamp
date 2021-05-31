@@ -17,9 +17,10 @@ module.exports = {
     },
     allRecipes(callback){
 
-        db.query(`SELECT *
-         FROM recipes
-         ORDER BY title ASC`, function(err, results){
+        db.query(`SELECT recipes.*, chefs.name AS chef_name
+        FROM recipes
+        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+        ORDER BY title ASC`, function(err, results){
             if(err) throw `database Error! ${err}`
 
             callback(results.rows)
