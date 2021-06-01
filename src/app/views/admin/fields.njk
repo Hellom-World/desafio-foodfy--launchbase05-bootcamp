@@ -37,7 +37,16 @@
 
                 <div class="create-name">
                     <h3>Autor da Receita</h3>
-                    <input name="chef_id" type="text" value="{{recipe.chef_id}}">    
+                    <select name="chef_id">
+                        {% for chef in chefOptions%}
+                        <option value="{{chef.id}}" {% if recipe.chef_id == chef.id %}selected{% endif %}>
+                            {{chef.name}}
+                            
+                        </option>   
+                        
+                        {% endfor %}
+                    </select>
+                     
                 </div>
             </div>
             <div class="info">

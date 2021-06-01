@@ -2,10 +2,10 @@
 
 {% block content%}
     <section class="content">
-        <div class="cards-all">
+        <div class="cards-index">
             
             {% for recipe in recipes %}
-                <div class="card" id="{{recipe.id}}" >
+                <div class="card" id='{{recipe.id}}'>
                     <img src="{{recipe.image}}" alt="{{recipe.title}}">
                     <h4 class="content">{{recipe.title}}</h4>
                     <p class="info">por {{recipe.chef_name}}</p>               

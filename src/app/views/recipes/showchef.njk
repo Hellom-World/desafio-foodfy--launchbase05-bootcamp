@@ -25,10 +25,13 @@
         <div class="cards-all">
                 
             {% for recipe in recipes %}
-                <div class="card" id='{{recipe.id}}'>
+                <div class="card-adm" id='{{recipe.id}}'>
                     <img src="{{recipe.image}}" alt="{{recipe.title}}">
-                    <h4 class="content">{{recipe.title}}</h4>
-                    <p class="info">por {{recipe.chef_id}}</p>               
+                    <div class="card-info">
+                        <h4 class="content">{{recipe.title}}</h4>
+                        <p class="info">por {{chef.name}}</p>
+                        <a href="/recipes/{{recipe.id}}">Visualizar</a>
+                    </div>
                 </div>
             {% endfor %}
 

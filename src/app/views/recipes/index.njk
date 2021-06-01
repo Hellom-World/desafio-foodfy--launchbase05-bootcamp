@@ -14,13 +14,13 @@
 
     <section class="content">
         <h1>Mais Acessadas</h1>
-        <div class="cards-all">
+        <div class="cards-index">
                 
             {% for recipe in recipes %}
                 <div class="card" id='{{recipe.id}}'>
                     <img src="{{recipe.image}}" alt="{{recipe.title}}">
                     <h4 class="content">{{recipe.title}}</h4>
-                    <p class="info">por {{recipe.chef_id}}</p>               
+                    <p class="info">por {{recipe.chef_name}}</p>               
                 </div>
             {% endfor %}
 

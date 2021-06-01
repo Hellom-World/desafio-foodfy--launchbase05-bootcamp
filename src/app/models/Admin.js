@@ -88,6 +88,7 @@ module.exports = {
             callback(results.rows[0])
         })
     },
+    
     findchef(id, callback) {
         db.query(`SELECT chefs.*, count(recipes) AS total_recipes
         FROM chefs
@@ -168,6 +169,13 @@ module.exports = {
             if(err) throw `Database Error! ${err}`
 
             return callback(), console.log(id)
+        })
+    },
+    chefSelectOptions(callback) {
+        db.query(`SELECT name, id FROM chefs`, function(err, results) {
+            if (err) throw 'Database Error!'
+
+            callback (results.rows)
         })
     }
     

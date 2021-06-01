@@ -9,7 +9,7 @@ module.exports = {
             return res.render("recipes/index.njk", {recipes})
     
         })
-    },   
+    },
     create(req, res){
         return res.render('admin/create.njk')        
     },    
@@ -83,9 +83,17 @@ module.exports = {
         })
     },              
     recipes(req, res){
-        Recipes.all(function(recipes) {
-        
-        return res.render('recipes/recipes.njk', {recipes})        
-        })
+        const { filter 
+        } = req.query
+
+        if ( filter ) {
+            Recipes.findBy(filter, function(recipes){
+                return res.render("recipes/recipes.njk", { recipes })
+            })
+        } else {
+            Recipes.all(function(recipes){
+                return res.render("recipes/recipes.njk", { recipes })
+            })
+        }
     },
 }  
