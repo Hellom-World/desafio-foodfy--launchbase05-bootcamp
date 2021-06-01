@@ -300,15 +300,15 @@ article h2{
     color: blue;
 }
 .section-button-edit{
-    margin-top: -37px;
+    /* margin-top: -37px; */
     display: flex;
     justify-content: space-between;
 }
 #form-delete{
-    max-width: 638px;
-    display: flex;
-    margin: auto;
-    justify-content: flex-end;
+    min-width: 65vw;
+    text-align: right;
+    position: absolute;
+    max-width: 72vw;
 }
 .delete-button,
 .salve-button{
@@ -321,7 +321,7 @@ article h2{
     cursor: pointer;
 }
 .delete-button{
-    margin-top: 50px;
+    /* margin-top: 50px; */
     width: 92px;
     background: firebrick;
 }

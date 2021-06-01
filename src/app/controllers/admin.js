@@ -58,10 +58,13 @@ module.exports = {
         Admin.findchef(req.params.id, function (chef){
             if (!chef) return res.send("Chef no found!")
 
-            chef.created_at = date(chef.created_at).format
+            /* chef.created_at = date(chef.created_at).format */
+            
+            Admin.findChefRecipes(req.params.id, function(recipes){
 
-            return res.render("admin/showchef.njk", { chef })
+                return res.render('admin/showchef.njk', {  chef, recipes }),console.log(recipes)
         
+            })
         })
     },  
     chefs(req, res){
