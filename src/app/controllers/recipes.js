@@ -38,9 +38,12 @@ module.exports = {
             if (!chef) return res.send("Chef no found!")
 
             chef.created_at = date(chef.created_at).format
+            
+            Recipes.findChefRecipes(req.params.index, function(recipes){
 
-            return res.render("recipes/showchef.njk", { chef })
+                return res.render('recipes/showchef.njk', {  chef, recipes })
         
+            })
         })
     },                
     edit(req, res){
