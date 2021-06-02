@@ -541,3 +541,26 @@ textarea{
     background: forestgreen;
     margin:0;
 }
+
+
+/* paginação */
+
+.content .pagination{
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+
+}
+
+.pagination a,
+.pagination span {
+        color: forestgreen;
+        text-decoration: none;
+        margin-right: 16px;
+}
+
+.pagination a:hover {
+    filter: brightness(0.3);
+    border-bottom: 1px solid firebrick
+}
