@@ -1102,7 +1102,6 @@ __________________________ Filtros da Tabela ___________________________________
                 return res.render("instructors/index", { instructors })
             })
         }
-
     },
 
 -No arquivo Instructors.js, abaixo da função "find()"
@@ -1296,14 +1295,14 @@ _____________________________________PAGINAÇÃO________________________________
     // [1, ..., 13, 14, 15, 16, 17, ..., 20]
 
     let totalPages = 20,
-        SelectedPage = 15,
+        selectedPage = 15,
         pages = []
 
     for(let currentPage = 1; currentPage <= totalPages; currentPage++){
 
-        const firstAndLastPage = currentPage == 1 || currentPage == total
+        const firstAndLastPage = currentPage == 1 || currentPage == totalPages
         const pagesAfterSelectedPage = currentPage <= selectedPage + 2
-        const pagesBeforeSelectedPage = currentPage >= selecetdPage - 2
+        const pagesBeforeSelectedPage = currentPage >= selectedPage - 2
 
 
         if(firstAndLastPage == 1 || pagesBeforeSelectedPage && pagesAfterSelectedPage) {
@@ -1311,7 +1310,7 @@ _____________________________________PAGINAÇÃO________________________________
         }
     }
 
-    console.log(params)
+    console.log(pages)
 
 
 
@@ -1329,7 +1328,7 @@ _____________________________________PAGINAÇÃO________________________________
     // [1, ..., 13, 14, 15, 16, 17, ..., 20]
 
     let totalPages = 20,
-        SelectedPage = 15,
+        selectedPage = 15,
         pages = [],
         oldPage
 
@@ -1337,7 +1336,7 @@ _____________________________________PAGINAÇÃO________________________________
 
         const firstAndLastPage = currentPage == 1 || currentPage == totalPages
         const pagesAfterSelectedPage = currentPage <= selectedPage + 2
-        const pagesBeforeSelectedPage = currentPage >= selecetdPage - 2
+        const pagesBeforeSelectedPage = currentPage >= selectedPage - 2
 
 
         if(firstAndLastPage == 1 || pagesBeforeSelectedPage && pagesAfterSelectedPage) {
@@ -1355,7 +1354,7 @@ _____________________________________PAGINAÇÃO________________________________
         }
     }
 
-    console.log(params)
+    console.log(pages)
 
 
 
@@ -1397,8 +1396,6 @@ _____________________________________PAGINAÇÃO________________________________
     }
 
 
-
-
 -No arquivo "instructor.js" delete a parte comentada e troque esse conteudo:
 
 
@@ -1416,11 +1413,10 @@ _____________________________________PAGINAÇÃO________________________________
             callback(instructors){
 
                 const pagination = {
-                    filter,
-                    total,
+                    total: Math.ceil(recipes[0].total / limit),
                     page
                 }
-                return res.render("instructors/index", { instructors })
+                return res.render("instructors/index", { instructors, pagination, filter })
             }
         }
 
@@ -1452,7 +1448,7 @@ paginate(params) {
             filterQuery = "",
             totalQuery = `(
                 SELECT count(*) FROM instructors
-            ) AS total`
+             AS total`
 
 
         
@@ -1568,7 +1564,7 @@ paginate(params) {
 
     .table-container {
         display: grid;
-        grid-template: 64px 1vr 16px / 1fr;
+        grid-template: 64px 1fr 16px / 1fr;
     }
 
     .table-container .header {

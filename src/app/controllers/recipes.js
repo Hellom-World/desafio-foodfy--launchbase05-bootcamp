@@ -30,7 +30,7 @@ module.exports = {
 
             recipe.created_at = date(recipe.created_at).format
         
-        return res.render('recipes/show.njk', {recipe}), console.log(recipe)      
+        return res.render('recipes/show.njk', {recipe})  
         })
     },
     showchef(req, res){
@@ -83,17 +83,47 @@ module.exports = {
         })
     },              
     recipes(req, res){
-        const { filter 
-        } = req.query
+        let {filter, page, limit } = req.query
 
-        if ( filter ) {
-            Recipes.findBy(filter, function(recipes){
-                return res.render("recipes/recipes.njk", { recipes })
-            })
-        } else {
-            Recipes.all(function(recipes){
-                return res.render("recipes/recipes.njk", { recipes })
-            })
+        page = page || 1
+        limit = limit || 3
+        let offset = limit * (page - 1)
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(recipes){
+
+                const pagination = {
+                    
+                    total: Math.ceil(recipes[0].total / limit),
+                    page
+                }
+                return res.render("recipes/recipes.njk", { recipes, pagination, filter })
+            }
         }
+
+        Recipes.paginate(params)
+
+        /* let {filter, page, limit } = req.query
+
+        page = page || 1
+        limit = limit || 3
+        let offset =  limit * (page - 1)
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(recipes){
+                return res.render("recipes/recipes.njk", { recipes, filter })
+            }
+        }
+
+        Recipes.paginate(params) */
+
     },
 }  

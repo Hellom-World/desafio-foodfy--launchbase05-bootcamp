@@ -36,7 +36,7 @@ for(let card of cards){
 }
             
 /* Mostra - Esconde -> ingredientes */
-const escondeingre = document.querySelector('.esconde-ingredientes')
+/* const escondeingre = document.querySelector('.esconde-ingredientes')
 const divIngredientes = document.querySelector('.lista-ingredientes')
 
 escondeingre.addEventListener('click', function(){
@@ -48,10 +48,11 @@ escondeingre.addEventListener('click', function(){
         divIngredientes.classList.add('mostrar')
         escondeingre.innerHTML= "ESCONDER"
     }
-})
+}) */
 
 /* Mostra - Esconde -> Modo de preparo */
-const escondeMP = document.querySelector('.esconder-preparo')
+
+/* const escondeMP = document.querySelector('.esconder-preparo')
 const divMP = document.querySelector('.lista-preparation')
 
 escondeMP.addEventListener('click', function(){
@@ -63,10 +64,11 @@ escondeMP.addEventListener('click', function(){
         divMP.classList.add('mostrar')
         escondeMP.innerHTML="ESCONDER"
     }
-})
+}) */
 
 /* Mostra - Esconde -> informações adicionais */
-const escondeInfo = document.querySelector('.esconder-info')
+
+/* const escondeInfo = document.querySelector('.esconder-info')
 const textInfo = document.querySelector('.text-info')
 
 escondeInfo.addEventListener('click', function(){
@@ -78,4 +80,44 @@ escondeInfo.addEventListener('click', function(){
         textInfo.classList.add('mostrar')
         escondeInfo.innerHTML="ESCONDER"
     }
-})
+}) */
+
+    // paginação
+    // totalPages = 20
+    // SelectedPage = 15
+    // [1, ..., 13, 14, 15, 16, 17, ..., 20]
+
+    function paginate (selectedPage, totalPages) {
+        let pages = [],
+        oldPage
+        for(let currentPage = 1; currentPage <= totalPages; currentPage++){
+    
+            const firstAndLastPage = currentPage == 1 || currentPage == totalPages
+            const pagesAfterSelectedPage = currentPage <= selectedPage + 2
+            const pagesBeforeSelectedPage = currentPage >= selectedPage - 2
+    
+    
+            if(firstAndLastPage == 1 || pagesBeforeSelectedPage && pagesAfterSelectedPage) {
+                if (oldPage && currentPage - oldPage > 2){
+                    pages.push("...")
+                }
+    
+                if (oldPage && currentPage - oldPage == 2) {
+                    pages.push(oldPage + 1)
+                }
+    
+                pages.push(currentPage)
+                    
+                oldPage = currentPage
+            }
+            
+        }
+        return pages 
+    }
+    const pagination = document.querySelector(".pagination")
+    const page = +pagination.dataset.page;
+    const total = +pagination.dataset.total;
+
+    const pages = paginate(page, total)
+    console.log(pages)
+      
