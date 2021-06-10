@@ -95,6 +95,9 @@ section div p{
     cursor: pointer;
 }
 .card img{
+    width: 100%;
+    object-fit: none;
+
     margin: 20px 0;
     border-radius: 15px;
     height: 140px;
@@ -195,6 +198,8 @@ article h2{
     margin: 20px 0px;   
 }
 .foto-rec img{
+    object-fit: cover;
+    height: 340px;
     width: 100%;
     border-radius: 15px;
 }
@@ -381,7 +386,11 @@ header div .active{
 }
 /* Edit Adm */
 
-input{
+#ingredients input,
+#modoPreparo input,
+.ingredients input,
+.grid-fields input,
+.create-name input{
     width: 100%;
     font-size: 16px;
     border-radius: 4px;
@@ -393,6 +402,8 @@ input{
 h3{
     font-size: 16px;
     padding: 10px 0;
+    color: black;
+    text-transform: none;
 }
 button[type="button"]{
     font-size: 16px;
@@ -563,4 +574,79 @@ textarea{
 .pagination a:hover {
     filter: brightness(0.3);
     border-bottom: 1px solid firebrick
+}
+
+
+/* Upaload de imagens */
+
+
+.item .flex-photos {
+    display: flex;
+}
+
+.item #photos-upload {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+
+}
+
+
+.item #photos-upload span {
+    position: absolute;
+    border-radius: 3.5px;
+    box-shadow: 0 2px 2px -6px #333;
+    background-color: white;
+    border: 1px solid #999;
+    color: white;
+    width: 148px;
+    height: 148px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.item #photos-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+
+    z-index: 1;
+    cursor: pointer;
+}
+
+.item #photos-upload i{
+    
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		background: rgba(255,255,255,0.8);
+
+		color: #444444;
+
+		width: 100%;
+		height: 100%;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		font-size: 300%;
+		cursor: pointer;
+		
+		transition: opacity 200ms;
+		opacity: 0.5;
+	
+}
+.item #photos-upload:hover i{
+    opacity: 1;
 }

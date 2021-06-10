@@ -18,7 +18,11 @@
                 
             {% for recipe in recipes %}
                 <div class="card-adm" id='{{recipe.id}}'>
+                    {% if recipe.image %}
                     <img src="{{recipe.image}}" alt="{{recipe.title}}">
+                    {% else %}
+                    <img src="http://placehold.it/500x500?text=RECEITA SEM FOTO"/>
+                    {% endif %}
                     <div class="card-info">
                         <h4 class="content">{{recipe.title}}</h4>
                         <p class="info">por {{recipe.chef_name}}</p>

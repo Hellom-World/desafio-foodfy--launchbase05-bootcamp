@@ -1,26 +1,32 @@
 {% extends "layout.njk" %}
 
 {% block content %}
-
+    <section class="section-button">
+        <p>Receita: {{recipe.title}}</p>
+        {# <a class="button" href="{{recipe.id}}/edit.njk">Editar receita</a> #}
+    </section>
     <section>
         <div class="foto-rec">
-            <img src="{{item.image}}" alt="">
+            {% if recipe.image %}
+            <img src="{{recipe.image}}" alt="{{recipe.title}}">
+            {% else %}
+            <img src="http://placehold.it/500x500?text=RECEITA SEM FOTO"/>
+            {% endif %}
         </div>
 
         <div class="title-rec">
-            <h1 class="content">{{item.title}}</h1>
-            <p class="info">por {{item.chef_name}}</p>    
+            <h1 class="content">{{recipe.title}}</h1>
+            <p class="info">Por {{recipe.chef_name}}</p>    
         </div>
 
         <div class="ingredientes">
             
             <div class="title-esconde">
                 <h4 class="subtitle-rec">Ingredientes</h4>
-                <p class="esconde-ingredientes">MOSTRAR</p>
             </div>
 
-            <div class="lista-ingredientes">
-                {% for linha in item.ingredients %}
+            <div class="lista-ingredientes  mostrar">
+                {% for linha in recipe.ingredients %}
                     <li class="lista-rec">{{linha}}</li>
                 {% endfor %}
             </div>
@@ -30,10 +36,9 @@
 
             <div class="title-esconde">
                 <h4 class="subtitle-rec">Modo de Preparo</h4>
-                <p class="esconder-preparo">MOSTRAR</p>
             </div>
-            <div class="lista-preparation">        
-                {% for linha in item.preparation %}
+            <div class="lista-preparation mostrar">        
+                {% for linha in recipe.preparation %}
                     <li class="lista-rec">{{linha}}</li>
                 {% endfor %}
             </div>
@@ -43,10 +48,9 @@
             
             <div class="title-esconde">
                 <h4 class="subtitle-rec">Informações adicionais</h4>
-                <p class="esconder-info">MOSTRAR</p>
             </div>
-            <div class="text-info">
-                <p class="lista-rec">{{item.information}}</p>
+            <div class="text-info mostrar">
+                <p class="lista-rec">{{recipe.information}}</p>
             </div>
             
             

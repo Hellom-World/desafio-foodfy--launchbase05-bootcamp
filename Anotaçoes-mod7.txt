@@ -1,0 +1,1714 @@
+
+
+__________________________________________________Gerenciador de imagens no front end_________________________________________________________
+
+
+
+
+
+
+-----------Estruturando o gerenciador----------------
+
+-Abra o arquivo fields.njk
+
+	-Vai no comentario de fotos e escreva no lugar:
+
+		<div class="item">
+			<div>Fotos</div>
+			<div>
+				<div id="photos-upload">
+					<input 
+					id="photos-input"
+					type="file" 
+					name="photos" 
+					multiple
+					accept="image/*"
+					>	
+					<p>Selecione até 6 fotos</p>
+				</div>
+				
+				<div id="photos-preview">
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+-----------Estilizando o gerenciador----------------
+
+-Abra o arquivo styles.css
+
+	- no final do arquivo, escreva:
+
+		/* PHOTOS UPLOAD */
+
+		.form .item #photos-upload {
+			position: relative;
+
+			display: block;
+			overflow: hidden;
+
+			width: 200px;
+		}
+
+		.form .item #photos-upload p {
+			padding: 8px 16px;
+			border-radius: 4px;
+			box-shadow: 0 2px 2px -6px #333;
+			background-color: var(--secondary-color);
+			color: white;
+
+			width: 100%;
+			text-align: center;
+
+			text-transform: uppercase;
+			font-size: 14px;
+		}
+
+		.form .item #photos-input {
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			display: block;
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+
+			cursor: pointer;
+		}
+
+
+
+	
+
+-----------Iniciando estrutura de dados do upload de imagens----------------
+-PAREI AQUI
+
+-Abra o arquivo scripts.js
+
+	-Abaixo do objeto "const Mask", escreva:
+
+		const PhotosUpload = {
+			uploadLimit: 6,
+			handleFileInput(event) {
+				const { files: fileList } = event.target
+				const { uploadLimit } = PhotosUpload
+
+				if (fileList.length > uploadLimit) {
+					alert(`Envie no máximo ${uploadLimit} fotos`)
+					event.preventDefault()
+					return			
+				}
+			}
+		}
+
+-No arquivo fields.njk, abaixo da linha "accept="image/*"", escreva:
+
+	onchange="PhotosUpload.handleFileInput(event)"
+
+
+
+
+-----------Conhecento arrow function----------------
+
+
+-Abra o arquivo scripts.js
+
+	-Refaça o objeto PhotoUpload, para:
+
+		const PhotosUpload = {
+			uploadLimit: 6,
+			handleFileInput(event) {
+				const { files: fileList } = event.target
+				const { uploadLimit } = PhotosUpload
+
+				if (fileList.length > uploadLimit) {
+					alert(`Envie no máximo ${uploadLimit} fotos`)
+					event.preventDefault()
+					return			
+				}
+
+				Array.from(fileList).forEach(file => {
+
+				})
+			}
+		}
+
+
+
+
+
+-----------Lendo imagens com javascript no front-end----------------
+
+-Dentro do arquivo scrips.js
+
+	-Refaça o array do objeto PhotoUpload, Para:
+
+		Array.from(fileList).forEach(file => {
+			const reader = new FileReader()
+
+			reader.onload = () => {
+				const image = new Image()
+				image.src = String(reader.result)
+
+				const div = document.createElement('div')
+				div.classList.add('photo')
+
+				div.onclick = () => alert('remover foto')
+
+				div.appendChild(image)
+
+				document.querySelector('#photos-preview').appendChild(div)
+			}
+
+			reader.readAsDataURL(file)
+		})
+
+
+
+
+
+
+-----------Criando estilo para preview de imagens----------------
+
+-Abra o arquivo styles.css, no final escreva:
+
+
+	form .item #photos-preview {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-gap: 8px;
+		width: 100%;
+		margin: 8px 0;
+	}
+
+	form .item #photos-preview img{
+		width: 100%;
+		height: 150px;
+
+		object-fit: cover;
+	}
+
+
+-Verificar
+
+
+
+
+
+-----------Refatorando gerenciador de UPLOAD----------------
+
+-Dentro do arquivo scrips.js
+
+	-Dentro do objeto PhotoUpload, 
+
+		-Acima da linha "uploadLimit: 6,", escreva:
+
+			preview: document.querySelector("#photos-preview"),
+
+	-Dentro da função "reader.onload()"
+
+		-Mude a linha "document.querySelector("#photos-preview").appendChild(div)", Para:
+
+			PhotoUpload.preview.appendChild(div)
+
+		-Recorte as linhas:
+
+			const div = document.createElement('div')
+			div.classList.add('photo')
+
+			div.onclick = () => alert('remover foto')
+
+			div.appendChild(image)
+
+			
+
+	-Dentro do objeto PhotoUpload,
+
+		-Abaixo da função "handleFileInput()", crie uma nova função:
+
+			getContainer(image){
+
+				const div = document.createElement('div')
+				div.classList.add('photo')
+
+				div.onclick = () => alert('remover foto')
+
+				div.appendChild(image)
+
+				return div
+			}
+
+	-Dentro da função "reader.onload()"
+
+		-Acima da linha "PhotosUpload.preview.appendChild(div)", escreva:
+
+			const div = PhotoUpload.getContainer(image)
+
+	-Dentro da função "handleFileInput(event)"
+
+		-Recorte essas linhas:
+
+			const { uploadLimit } = PhotosUpload
+
+			if (fileList.length > uploadLimit) {
+				alert(`Envie no máximo ${uploadLimit} fotos`)
+				event.preventDefault()
+				return			
+			}
+
+		-rescreva essa linha no lugar:
+
+			if (PhotosUpload.hasLimit(event)) return
+	-Dentro do objeto PhotoUpload,
+
+		-Acima da função "getContainer(image)", crie uma nova função:
+
+			hasLimit(event) {
+				const { uploadLimit } = PhotosUpload
+
+				if (fileList.length > uploadLimit) {
+					alert(`Envie no máximo ${uploadLimit} fotos`)
+					event.preventDefault()
+					return true	
+				}	
+
+				return false
+			}
+
+
+
+
+
+
+
+-----------Removendo imagens do gerenciador----------------
+
+
+-Dentro do arquivo scrips.js
+
+	-Dentro do objeto PhotoUpload, 
+
+		-Abaixo da função "getContainer()", escreva a função:
+
+			getRemoveButton(){
+				const button = document.createElement('i')
+				button.classList.add('material-icons')
+				button.innerHTML = "close"
+				return button
+			}
+
+
+		-Na função "getContainer()"
+
+			-Abaixo da linha "div.appendChild(image)", escreva:
+
+				div.appendChild(PhotosUpload.getRemoveButton())
+		
+		-Na função "hasLimit()",
+
+			-Abaixo da "const { uploadLimit }, escreva
+
+				const { files: fileList } = event.target
+
+-Abra aquivo styles.css, no fim do arquivo, escreva:
+
+	#photos-preview .photo {
+		position: relative;
+	}
+
+	#photos-preview .photo i {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		background: rgba(255,255,255,0.8);
+
+		color: red;
+
+		width: 100%;
+		height: 100%;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		font-size: 500%;
+		cursor: pointer;
+		
+		transition: opacity 200ms;
+		opacity: 0;
+	}
+
+	#photos-preview .photo:hover i {
+		opacity: 1;
+	}
+
+
+
+-Dentro do arquivo scrips.js
+
+	-Dentro o do objeto "PhotosUpload"
+		
+		-Abaixo da função "getRemoveButton", escreva a função:
+
+			removePhoto(event) {
+				const photoDiv = event.target.parentNode
+				const photosArray = Array.from(PhotosUpload.preview.children)
+				const index = photosArray.indexOf(photoDiv)
+
+				photoDiv.remove()
+			}
+
+		-Dentro da função "getContainer()", mude a linha
+
+			div.onclick = () => alert('remover foto')
+
+				para
+
+			div.onclick = PhotosUpload.removePhoto
+
+
+
+
+
+
+
+
+-----------Atualizando Lista de Arquivos----------------
+
+-Abra o arquivo scripts.js
+
+	-Dentro do objeto "PhotosUpload",
+
+		-Abaixo da linha "uploadLimit: 6,", escreva:
+
+			files: [],
+
+	-Dentro da função "handleFileInput()",
+
+		-Acima da linha "const reader = new FileReader()", escreva
+
+		PhotosUpload.files.push(file)
+
+	-Acima da função "getContainer()", escreva:
+
+		getAllFiles() {
+			const dataTransfer = new DataTransfer()
+
+			PhotosUpload.files.forEach(file => dataTransfer.items.add(file))
+
+			console.log(dataTransfer)
+		}
+
+	-Dentro da função "handleFileInput()",
+
+		-Na ultima linha e fora do Array.from, escreva:
+
+			PhotosUpload.getAllFiles()
+
+
+
+	-Na função, getAllFiles, substitua a linha:
+
+		const dataTransfer = new DataTransfer()
+					Por
+		const dataTransfer = new ClipboardEvent("").clipboardData || new DataTransfer()
+
+			E
+
+		console.log(dataTransfer)
+
+					Por
+
+		return dataTransfer.files
+
+
+
+	-Dentro da função "handleFileInput()",
+
+		-Na ultima linha e fora do Array.from, substitua:
+
+			PhotoUpload.getAllFiles()
+
+				Por
+			
+			event.target.files = PhotosUpload.getAllFiles()
+
+	-Dentro da função "removePhoto()",
+
+		-Acima da linha "photoDiv.remove()", escreva:
+
+			PhotosUpload.files.splice(index, 1)
+	
+	-Dentro do objeto "PhotosUpload",
+
+		Acima da linha "preview: document.querySelector("#photos-preview"),", escreva:
+
+			input,
+
+	-Dentro da função "handleFileInput()",
+
+		-Abaixo da linha "const {files: fileList } = event.target", escreva:
+
+			PhotosUpload.input = event.target
+
+	-Dentro da função "handleFileInput()",
+
+		-Na ultima linha e fora do Array.from, substitua:
+
+			event.target.files = PhotosUpload.getAllFiles()
+
+				Por
+			
+			PhotoUpload.input.files = PhotosUpload.getAllFiles()
+
+	-Dentro da função "hasLimit()",
+
+		-substitua a linha "const { uploadLimit } = PhotoUpload" Para:
+
+			const { uploadLimit } = PhotoUpload
+
+			 Por
+
+			const { uploadLimit, input: fileList } = PhotoUpload
+
+
+	-Dentro da função "removePhoto", substitua a linha:
+
+		PhotoUpload
+
+			Por
+		
+		PhotoUpload.input.files = PhotosUpload.getAllFiles()
+
+	-Dentro do objeto "PhotosUpload",
+
+		-Subistitua alinha  "input,", Por
+
+			input: "",
+
+
+
+
+
+
+
+-----------Regra de limite maximo de envio----------------
+
+
+-Abra o arquivo script.js
+
+
+	-Dentro da função "hasLimit()", 
+
+		-Substitua a linha:
+
+			const { uploadLimit, input: fileList } = PhotoUpload
+
+				Por
+			
+			const { uploadLimit, input: fileList, preview } = PhotoUpload
+
+		-Acima da linha "return false", escreva:
+
+			const photosDiv = []
+			preview.childNodes.forEach(item =>{
+				if (item.classList && item.classList.value == "photo")
+					photosDiv.push(item)
+			})
+
+			const totalPhotos = fileList.length + photosDiv.length
+			if (totalPhotos > uploadLimit) {
+				alert("Você atingiu o limite máximo de fotos")
+				event.preventDefault()
+				return true
+			}
+
+	-Dentro da função "hasLimit()", 
+
+		-Substitua a linha:
+
+			const { uploadLimit, input: fileList, preview } = PhotoUpload
+
+				Por
+			
+			const { uploadLimit, input, preview } = PhotoUpload
+			const { files: fileList } = input
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_______________________________________________________________________Salvando, atualizando e excluindo imagens____________________________________
+
+
+
+--------------Configurando Upload com multer------------------
+
+
+-Para de rodar o programa, e de o comando no terminal:
+
+	npm install multer
+
+-Nos arquivos "create.njk" e "edit.njk"
+
+	-Acrescente na tag <form> a linha:
+
+		enctype="multipart/form-data"
+
+-Crie uma pasta chamada "images" dentro da pasta public
+
+-Na Pasta app, crie a pasta "middlewares"
+
+	-Dentro da pasta "middlewares", crie arquivo "multer.js"
+
+		-Dentro do arquivo "multer.js", escreva:
+
+			const multer = require('multer');
+
+			const storage = multer.diskStorage({
+				destination: (req, file, cb) => {
+					cb(null, './public/images')
+				},
+				filename: (req, file, cb) => {
+					cb(null, `${Date.now().toString()}-${file.originalname}`)
+				}
+			})
+
+			const fileFilter = (req, file, cb) => {
+				const isAccepted = ['image/png', 'image/jpg', 'image/jpeg']
+				.find(acceptedFormat => acceptedFormat == file.mimetype)
+
+				if(isAccepted) {
+					return cb(null, true);
+				}
+				return cb(null, false)
+			}
+
+			module.exports = multer({
+				storage,
+				fileFilter
+			})
+
+	-Abra o arquivo "routes.js"
+
+		-Abaixo da linha "const routes", escreva:
+
+			const multer = require('./app/middlewares/multer')
+
+		-Reescreva as rotas .post e .put Para:
+
+		routes.post('/products', multer.array("photos", 6), ProductController.post)
+		routes.put('/products', multer.array("photos", 6), ProductController.put)
+
+
+
+
+
+
+----------------Iniciando Cadastro com imagens-------------------------
+
+
+-Abra o arquivo "ProductController.js",
+
+	-Dentro da função "post()", 
+
+		-Acima da linha "let results", escreva:
+
+			if(req.files.length == 0)
+				return res.send('please, send at least one image')
+
+-Dentro da pasta models, crie o arquivo "File.js"
+
+	-Dentro do arquivo "File.js", escreva:
+
+		const db = require('../../config/db')
+
+		module.exports = {
+			create(filename, path, product_id) {
+				const query = `
+					INSERT INTO files (
+						name,
+						path,
+						product_id
+					) VALUES ($1, $2, $3)
+					RETURNING id
+				`
+				const values = [
+					filename,
+					path || 1,
+					product_id
+				]
+				
+				return db.query(query, values)
+			},
+		}
+
+
+-Abra o arquivo "ProductController.js",
+
+	-Dentro da função "post()", 
+
+		-Abaixo da linha "const productId", escreva:
+
+			req.files.forEach(file => {
+				await File.create({
+					...file,
+					product_id: productId
+				})
+			})
+
+	-Abaixo da linha "const Product", escreva:
+
+		const File = require('../models/File')
+
+
+
+
+
+
+
+---------------Array de promessas com promisse.all()------------------
+
+
+
+-Abra o arquivo "ProductController.js",
+
+	-Dentro da função "post()", 
+
+		-Subistitua:
+
+			req.files.forEach(file => {
+				await File.create({
+					...file,
+					product_id: productId
+				})
+			})
+
+				Por
+
+			const filesPromise = req.files.map(file => ile.create({...file, product_id: productId }))
+			await Promise.all(filesPromise)
+
+
+				e
+
+			return res.redirect('/products/${productId}')
+
+				Por
+			
+			return res.redirect('/products/${productId}/edit')
+
+- faça npm start para cadastrar um novo produto
+
+- Verifica se foi salvo algo na tabela files do banco de dados
+
+
+
+
+
+
+
+
+------------------Estruturando imagens para enviar ao front end-------------------------
+
+
+-Abra o arquivo "ProductController.js",
+
+	-Dentro da função edit,
+
+		-Abaixo da linha "const categories", escreva:
+
+		//get imagens
+		results = await Product.files(product.id)
+		let files = results.rows
+		files = files.map(file => ({
+			...file,
+			src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+		})) 
+
+		-Substitua o return:
+
+			return res.render ("products/edit.njk", { product, categories})
+
+				Por
+
+			return res.render ("products/edit.njk", { product, categories, files})
+
+
+-Abra o arquivo "Product.js"
+
+	-Abaixo da função "delete()", escreva a função:
+
+		files(id) {
+			return db.query(`
+				SELECT * FROM files WHERE product_id = $1
+			`, [id])
+		}
+
+
+
+
+
+
+
+--------------Apresentando imagens no gerenciador de uploads-------------------
+
+
+-Abra o arquivo fields.njk e substitua a div#photos-preview Por
+
+	<div id="photos-preview">
+
+		{% if files %}
+			{% for image in files %}
+				<div class="photo" id="{{image.id}}">
+					<img src=""{{image.src}} alt="{{image.name}}">
+					<i class="material-icons">close</i>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+
+
+
+-Testar (não vai conseguir remover as fotos que vieram
+mas vai conseguir remover novas fotos que forem colocadas)
+
+
+
+
+
+
+
+
+
+--------------Lógica de exclusão de imagens vindas do backend-------------------
+
+
+
+-Abra o arquivo fields.njk e substitua a div#photos-preview Por
+
+	<div id="photos-preview">
+
+		{% if files %}
+			{% for image in files %}
+				<div class="photo" id="{{image.id}}">
+					<img src=""{{image.src}} alt="{{image.name}}">
+					<i class="material-icons"
+						onclick="PhotosUpload.removeOldPhoto(event)"
+					>close</i>
+				</div>
+			{% endfor %}
+			<input type="hidden" name="removed_files">
+		{% endif %}
+	</div>
+
+-Abra o arquivo scrips.js
+
+	-Abaixo da função "removePhoto(event)", escreva a função:
+
+		removeOldPhoto(event) {
+			const photoDiv = event.target.parentNode
+
+			if (photoDiv.id) {
+				const removedFiles = document.querySelector('input[name="removed_files"')
+				if (removedFiles) {
+					removedFiles.value += `${photoDiv.id},`
+				}
+			}
+
+			photoDiv.remove()
+		}
+
+-Testar (Agora ja tem como retirar as fotos
+mas ainda não da pra atualizar)
+
+-Abra o arquivo "ProductController", 
+
+	-Dentro da função "put()"
+
+		-Substitua a linha:
+
+			if (req.body[key] == ""){
+				
+				Por
+			
+			if (req.body[key] == "" && key != "removed_files"){
+
+
+		-Acima da linha "req.body.price", escreva
+
+			if (req.body.removed_files) {
+				// 1,2,3,
+				const removedFiles = req.body.removed_files.split(",") //[1,2,3,]
+				const lastIndex = removedFiles.length - 1
+				removedFiles.splice(lastIndex, 1) //[1,2,3]
+
+				const removedFilesPromise = removedFiles.map(id => File.delete(id))
+
+				await Promise.all(removedFilesPromise)
+			}
+
+-Abra o arquivo "File.js"
+
+
+	-Abaixo da linha "const db", escreva:
+
+		const fs = require('fs')
+
+	-Abaixo da função create, crie a função:
+
+		async delete(id) {
+
+			const result = await db.query(`SELECT * FROM files WHERE id = $1`, [id])
+			const file = result.rows[0]
+			
+			fs.unlinkSync(file.path)
+
+			return db.query(`
+				DELETE FROM files WHERE id = $1
+			`, [id])
+		}
+
+
+
+
+
+
+
+
+
+
+--------------------Tratando erros com try/cath---------------------------------
+
+-Abra o arquivo "File.js"
+
+	-reescreva a função "delete()" para:
+
+		async delete(id) {
+
+			try {
+				const result = await db.query(`SELECT * FROM files WHERE id = $1`, [id])
+				const file = result.rows[0]
+				
+				fs.unlinkSync(file.path)
+
+				
+				return db.query(`
+					DELETE FROM files WHERE id = $1
+				`, [id])
+			}catch(err) {
+				console.error(err)
+			}
+
+		}
+
+	-No navegador - pagina edit,
+		-Tirar fotos adicionadas e atualizar... verificar se sumiu no banco de dados
+		(ainda não atualiza no edit)
+
+
+
+
+
+
+------------Atualizando imagens no banco---------------------
+
+
+-Abra o arquivo "ProductController.js"
+
+	-Dentro da função "put()"
+
+		-Acima da linha "if(req.body.removed_files)", escreva
+
+			if (req.files.length != 0) {
+				const newFilesPromise = req.files.map(file =>
+				File.create({...file, product_id: req.body.id}))
+
+				await Promise.all(newFilesPromise)
+			}
+
+-Testar editar, colocar novas fotos e atualizar
+
+
+
+
+
+
+
+
+------------------Debugando com Vscode-------------------------------
+
+DESCONSIDERAAAAAAAAA ESSA PARTEEEEEEEE DESCONSIDERAAAAAAAAA ESSA PARTEEEEEEEE
+-Abra o arquivo package.json e reescreva o script, Para:
+
+	"scripts": { 
+	"debug": "nodemon --inspect=0.0.0.0:9229 src/server.js",
+    "start": "npm-run-all -p nodemon browsersync ",
+    "nodemon": "nodemon src/server.js",
+    "browsersync": "browser-sync start --proxy http://localhost:5000 --files 'public, src/app/views'"
+  },
+
+
+
+-Abra o DeBug clique em config
+
+	-Com o arquivo launch.json aberto, escreva:
+
+		{
+			// Use IntelliSense to learn about possible attributes.
+			// Hover to view descriptions of existing attributes.
+			// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+			"version": "0.2.0",
+			"configurations": [
+				{
+					"type": "node",
+					"request": "attach",
+					"name": "attach to Process",
+					"address": "localhost",
+					"port": 9229 
+				}
+			]
+		}
+	-Ele explica como usar o debug (assista ao video caso precise)
+
+
+
+
+
+
+
+-No arquivo File.js
+
+	-substitua a linha "fs.unlinkSync(file.path)", por:
+
+		fs.unlink(file.path, (err)=> {
+			if (err) twrow err
+			return db.query(`
+				DELETE FROM files WHERE id = $1
+			`, [id])
+		})
+
+	-delete a linha abaixo:
+
+			return db.query(`
+				DELETE FROM files WHERE id = $1
+			`, [id])
+DESCONSIDERAAAAAAAAA ESSA PARTEEEEEEEE DESCONSIDERAAAAAAAAA ESSA PARTEEEEEEEE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+__________________________PAGINA DE COMPRAS_____________________________________________
+
+
+
+-----------HTML DA PAGINA DE COMPRAS-----------------
+
+-No arquivo "routes.js"
+
+	-Abaixo da rota "get.create", escreva:
+
+		routes.get('/products/:id', ProductController.show) 
+
+-Abra o arquivo "ProductController.js"
+
+	-Abaixo da função "post()", escreva:
+
+		show(req, res) {
+			return res.render("products/show")
+		}
+
+-Na pasta "products" crie e arquivo "show.njk"
+
+	-Dentro do arquivo "show.njk", escreva:
+
+		{% extends "layout.njk "%}
+		{% block content %}
+			<section class="product-single container">
+				<div class="gallery">
+					<img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO"/>
+				</div>
+				<div class="info">
+					<h1>Computador</h1>
+
+					<div class="published">
+						Publicado em 18/12 às 21h
+					</div>
+				</div>
+
+				<div class="description">
+					sadsdjsanjdsadsa
+				</div>
+
+				<div class="price-buy">
+					<div class="price">
+						R$ 99,00
+					</div>
+					<div class="buy">
+						<button class="button">Comprar</button>
+					</div>
+				</div>
+			</section>
+		{% endblock content %}
+	
+	-renderize a pagina /product/id
+
+
+
+
+
+
+------------Iniciando CSS da página de Compras-------------------
+
+-Abra o arquivo "Styles.css", no fim da pagina escreva:
+
+	/* PRODUCT VIEW */
+
+	.product-single {
+		background-color: white;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 24px;
+
+		padding: 32px 24px;
+		margin:32px auto;
+
+		box-shadow: 2px 2px 2px -4px rgba(63,63,63,.9);
+
+		border: 1px solid #efefef;
+		border-radius: 4px;
+	}
+
+	.product-sigle .gallery {
+		width: 100%;
+	}
+	.product-sigle .gallery img {
+		width: 100%;
+	}
+
+
+
+
+
+--------------Aplicando CSS grid em linha------------------
+
+-Ainda no arquivo "styles.css", no fim do conteudo, escreva:
+
+	/* product single info */
+
+	.product-single .info {
+		display:grid;
+		grid-template-rows: auto 40px 2fr 1fr;
+	}
+
+
+
+
+
+
+
+--------------Estilos de titulo e data de publicação------------------
+
+-Ainda no arquivo "styles.css", no fim do conteudo, escreva:
+
+	.product-single .info h1 {
+		font-size: 32px;
+		line-height: 32px;
+		color: #333;
+		text-transform: uppercase;
+	}
+
+	.product-single .info .published {
+		color:#888;
+		font-size:12px;
+		line-height: 22px;
+		letter-spacing: 0.4px;
+	}
+
+
+
+
+
+
+
+
+--------------Ajustando preço e botão de compra------------------
+
+-Ainda no arquivo "styles.css", no fim do conteudo, escreva:
+
+	/* price-buy */
+	.product-single .price-buy{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		padding-top: 8px;
+		border-top: 1px solid #eee ;
+	}
+
+	.product-single .price-buy .price{
+		font-size: 24px;
+		color: #333;
+		font-weight: bold;
+
+		display: flex;
+		align-items: center;
+	}
+
+
+-No arquivo show.njk da pasta products,
+
+	-substitua a div price por:
+
+		<div class="price">
+			R$ 99,00
+			<span class="old">R$ 89,00</span>
+		</div>
+
+-No arquivo "styles.css", no fim do conteudo, escreva:
+
+	.product-single .price-buy .price .old{
+		text-decoration: line-throught;
+		color: #999;
+		font-size: 14px;
+		font-weight: normal;
+		margin-left: 8px;	
+	}
+
+	.product-single .price-buy .buy button {
+		background-color: var(--secundary-color);
+
+		font-size: 14px;
+		letter-spacing: 0.4px;
+	}
+
+
+
+
+
+
+
+
+--------------Posicionando Footer------------------
+
+
+-No arquivo "styles.css", na tag"body{}", acrescente:
+
+	display: flex;
+	flex-direction: column;
+
+	-Abaixo da tag "body{}", escreva:
+
+		footer{
+			margin-top: auto
+		}
+
+
+
+
+
+
+
+
+--------------Dados para apresentação de produtos------------------
+
+
+-Abra o arquivo "ProductController.js"
+
+	-substitua a função "show()" Por:
+
+		async show(req, res){
+
+			let results = await Product.find(req.params.id)
+			const product = results.rows[0]
+
+			if(!product) return res.send("Product Not Found")
+
+
+			const { day, hour, minutes, month} = date(product.updated_at)
+			product.published = {
+				day: `${day}/${month}`,
+				hour: `${hour}h${minutes}`,
+			}
+			product.oldPrice = formatPrice(product.old_price)
+			return res.render ("products/show", { product })
+		}
+
+	-mude a "const { formatPrice }", para:
+
+		const { formatPrice, date } = require('../../lib/utils')
+
+-Abra o arquivo ultils.js,
+
+	-substitua a função "date()", por:
+
+		date(timestamp){
+			const date = new Date(timestamp)
+
+			const year = date.getFullYear()
+			const month = `0${date.getMonth() + 1}`.slice(-2)
+			const day = `0${date.getDate()}`.slice(-2)
+			const hour = date.getHours()
+			const minutes = date.getMinutes()
+
+			//return yyyy-mm-dd
+			console.log(`${year}-${month}-${day}`)
+			
+			return {
+				day,
+				month,
+				year,
+				hour,
+				minutes,
+				iso: `${year}-${month}-${day}`,
+				birthDay:`${day}/${month}`,
+				format: `${day}/${month}/${year}`
+			}
+    	},
+
+
+-Abra o arquivo "show.njk" da pasta products
+
+	-mude a div.info, Para:
+
+		<div class="info">
+			<h1>{{product.name}}</h1>
+			
+			<div class="published">
+				Publicado em {{product.day}} às {{product.published.hour}}
+			</div>
+
+			<div class="description">
+				{{product.description}}
+			</div>	
+
+			<div class="price-buy">
+				<div class="price">
+					{{product.price}}
+					
+					{% if product.price !==product.oldPrice %}
+						<span class="old">{{product.oldPrice}}</span>
+					{%endif%}
+				</div>
+
+				<div class="buy">
+					{% if product.status == 0 %}
+						<p class="unavailable"> Indisponível </p>
+					{% elseif product.quantity == 0 %}
+						<p class="unavailable"> Fora de Estoque </p>
+					{% else %}
+						<button class="button">Comprar</button>
+					{%endif%}
+				</div>
+			</div>
+		</div>
+
+
+-Abra o arquivo "ProductController.js"
+
+	-Na função "put()", mude a linha:
+
+		return res.redirect(`/products/${req.body.id}/edit`)
+
+			para:
+
+		return res.redirect(`/products/${req.body.id}`)
+
+	
+
+
+
+
+
+----------------Procedures e Triggers no SQL--------------------------
+
+-Logica de função no SQL:
+
+	CREATE FUNCTION funcName(arg text, arg2 int)
+	RETURNS text AS $$
+	BEGIN
+		RETURN 'meu texto' || arg
+	END;
+	$$
+
+	-legenda: "||" é contatenção
+
+-No postbird, na tabela products
+
+	-Rode a query:
+
+		CREATE FUNCTION trigger_set_timestamp()
+		RETURNS TRIGGER AS $$
+		BEGIN
+			NEW.updated_at = NOW();
+			RETURN NEW;
+		END;
+		$$	LANGUAGE plpgsql; 
+
+	-Rode a query:
+
+		CREATE FUNCTION trigger_set_timestamp()
+		RETURNS TRIGGER AS $$
+		BEGIN
+			NEW.updated_at = NOW();
+			RETURN NEW;
+		END;
+		$$	LANGUAGE plpgsql;
+		
+
+		CREATE TRIGGER set_timestamp
+		BEFORE UPDATE ON products
+		FOR EACH ROW
+		EXECUTE PROCEDURE trigger_set_timestamp();
+
+-Atualize algum produto
+
+	-Verifique se a data da publicação foi atualizada
+
+
+
+
+
+
+
+
+-------------------Estruturando galeria de imagens do pruduto---------------------------------
+
+-Abra o arquivo "ProductController.js"
+
+	-Na função "show()",
+
+		-Acima da linha "return res.render", escreva:
+
+			results = await Product.files(product.id)
+			const files = results.rows.map(file => ({
+				...file,
+				src:`${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+			}))
+
+		-Mude a linha "return res.render" para:
+
+			return res.render("products/show", { product, files })
+
+-Abra o arquivo "show.njk" na pasta products
+
+	-substitua a div.gallery por:
+
+		<div class="gallery">
+			<div class="highlight">
+				{% if not files[0] %}
+				<img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO"/>
+				{% else %}
+					<img src="{{files[0].src}}" alt="{{files[0].name}}">
+				{%endif%}
+			</div>
+			<div class="gallery-preview">
+				{%for image in files %}
+					<img 
+					src="{{image.src}}"
+					alt="{{image.name}}"
+					{% if loop.index0 == 0%}
+					class="active"
+					{%endif%}
+					>
+				{% endfor%}
+			</div>
+		</div>		
+
+-Abra o arquivo "styles.css",
+
+	-Acima da tag ".product-single .gallery", escreva:
+
+		/* product single gallery */
+
+	-Substitua da tag".product-single .gallery img", por:
+
+		.product-single .highlight > img {
+			width: 100%;
+			height: 280px;
+
+			object-fit: none;
+			object-position: 50% 50%;
+			border: 1px solid #efefef
+
+			cursor: zoom-in;
+		}
+
+		.product-single .gallery-preview{
+			display:grid;
+			grid-template-columns: repeat(3, 1fr);
+			grid-gap: 2px;
+		}
+		.product-single .gallery-preview img {
+			height:100px;
+			width: 100%;
+
+			object-fit: cover;
+
+			opacity: 0.6;
+
+			cursor: pointer;
+
+			transition: 200ms;
+		}
+
+		.product-single .gallery-preview img:hover,
+		.product-single .gallery-preview img.active{
+			opacity: 1;
+		}
+
+
+
+
+
+
+
+----------------Funcionalidades da galeria de imagens------------------------
+
+-Abra o arquivo "show.njk"
+
+	-Substitua a div.gallery-preview, por:
+
+		<div class="gallery-preview">
+			{%for image in files %}
+				<img 
+				src="{{image.src}}"
+				alt="{{image.name}}"
+				{% if loop.index0 == 0%}
+				class="active"
+				{%endif%}
+				onclick="ImageGallery.setImage(event)"
+				>
+			{% endfor%}
+		</div>		
+
+-Abra o arquivo "scrips.js",
+
+	-Abaixo da "const PhotosUpload", escreva
+
+		const ImageGallery = {
+			highlight: document.querySelector('.gallery .highlight' > img),
+			previews: document.querySelectorAll('.gallery-preview img'),
+			setImage(e) {
+				const { target } = e
+				
+				ImageGallery.previews.forEach(preview => preview.classList.remove('active'))
+				target.classList.add('active')
+
+				ImageGallery.highlight.src = target.src
+			}
+		} 
+
+
+
+
+
+
+
+
+----------------MONTANDO LIGHTBOX---------------------
+
+-Abra o arquivo "Show.njk" da pasta products
+
+	-substitua a div.highlight por:
+
+		<div class="highlight">
+			{% if not files[0] %}
+			<img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO"/>
+			{% else %}
+				<img src="{{files[0].src}}" alt="{{files[0].name}}">
+			{%endif%}
+
+			<div class="lightbox-target">
+				<img src="{{files[0].src}}" alt="{{files[0].name}}">
+				<a href="#" class="lightbox-close">
+					<i class="material-icons">close</i>
+				</a>
+			</div>
+		</div>
+
+-Abra o arquivo "styles.css" 
+
+	-Acima do comentario /* product single info */, escreva:
+
+		/* lightbox product gallery*/
+
+		.product-single .highlight .lightbox-target {
+			position: fixed;
+			width:100%;
+			height:100%;
+			background: rgba(0,0,0, .7); 
+
+			overflow: hidden;
+			z-index: 100;
+
+			top: 0;
+			left: 0;
+		}
+
+		.product-single .highlight .lightbox-target img{
+			margin: auto;
+
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+
+			background-color: white;
+			box-shadow: 0px 0px 8px rgba(0,0,0,.3);
+
+			width:90%;
+			height:90%;
+
+			object-fit: contain;
+		}
+
+		.product-single .highlight a.lightbox-close {
+			width:50px;
+			height:50px;
+
+			background: white;
+
+			position: absolute;
+			top: -80px;
+			right: 0;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			transition: 400ms
+		}
+
+-Abra o navegador em products/id
+
+-No arquivo styles.css,
+
+	-Na tag ".product-single .highlight .lightbox-target{}"
+
+		-mude:
+
+			top: 0;
+
+				para
+			
+			top:-100%;
+
+		-E acrescente:
+
+			opacity: 0;
+
+			transition: opacity 400ms;		
+
+
+
+
+
+
+---------------------javascript do lightbox----------------------------
+
+-No arquivo "script.js",
+
+	-Abaixo do "const ImageGallery", escreva:
+
+		const Lightbox = {
+			target: document.querySelector('.lightbox-target'),
+			image: document.querySelector('.lightbox-taget img'),
+			closeButton: document.querySelector('.lightbox-target a.lightbox-close'),
+			open() {
+				Lightbox.target.style.opacity = 1
+				Lightbox.target.style.top = 0
+				Lightbox.target.style.bottom = 0
+				Lightbox.closeButton.style.top = 0
+			},
+			close() {
+				Lightbox.target.style.opacity = 0
+				Lightbox.target.style.top = "-100%"
+				Lightbox.target.style.bottom = "initial"
+				Lightbox.closeButton.style.top = "-80px"
+			}
+		}
+
+-No arquivo "show.njk" da pasta products,
+
+	-Mude a tag "a.light-close" para:
+
+		<a
+			href="#"
+			class="lightbox-close"
+			onclick="Lightbox.close()"
+			>
+			<i class="material-icons">close</i>
+		</a>
+	
+	-Mude a segunda tag"img" da "div.highlight", para:
+
+		<img
+			src="{{files[0].src}}"
+			alt="{{files[0].name}}"
+			onclick="Lightbox.open()"
+		>
+
+-No arquivo "scripts.js" na "const ImageGallery",
+
+	-Abaixo da linha "ImageGallery.highlight.src", escreva:
+
+		Lightbox.image.src = target.src
+
+
+
+
+
+
+
+
+
+
+
+
+

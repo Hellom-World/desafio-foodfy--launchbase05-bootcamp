@@ -6,7 +6,11 @@
     </section>
     <section>
         <div class="bigcircle">
-            <span style="background-image: url({{chef.avatar_url}})"></span>
+            {% if chef.avatar_url %}
+             <span style="background-image: url({{chef.avatar_url}})"></span>
+            {% else %}
+            <span style="background-image: url(http://placehold.it/500x500?text=ImageNotFound)"></span>    
+            {% endif %}
         </div>
 
         <div class="title-rec">
@@ -21,12 +25,17 @@
         </div>        
     </section>
     <section class="content">
+        {% if recipes.length > 0 %}
         <h1>Receitas</h1>
         <div class="cards-all">
                 
             {% for recipe in recipes %}
                 <div class="card-adm" id='{{recipe.id}}'>
-                    <img src="{{recipe.image}}" alt="{{recipe.title}}">
+                     {% if recipe.image %}
+                    <img src="{{recipe.image}}" >
+                    {% else %}
+                    <img src="http://placehold.it/500x500?text=RECEITA SEM FOTO"/>
+                    {% endif %}
                     <div class="card-info">
                         <h4 class="content">{{recipe.title}}</h4>
                         <p class="info">por {{chef.name}}</p>
@@ -36,6 +45,7 @@
             {% endfor %}
 
         </div>
+        {% endif %}
     </section>
 
 {% endblock %}

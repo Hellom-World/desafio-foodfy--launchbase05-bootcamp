@@ -1,4 +1,4 @@
-{% extends "layout.njk" %}
+{% extends "layoutAdm.njk" %}
 
 
 {% block content%}
@@ -9,10 +9,15 @@
             {% for chef in chefs %}
                 <div class="card-chef" id="{{chef.id}}" >
                     <div class="circle">
+                    {% if chef.avatar_url %}
                     <span style="background-image: url({{chef.avatar_url}})"></span>
+                    {% else %}
+                    <span style="background-image: url(http://placehold.it/500x500?text=ImageNotFound)"></span>    
+                    {% endif %}
                     </div>
                     <div class="content-info">
                         <h4 class="content">{{chef.name}}</h4>
+                        
                         <p class="info">
                             {% if chef.total_recipes > 1 %}
                                 {{chef.total_recipes}} receitas

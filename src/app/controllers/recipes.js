@@ -6,13 +6,13 @@ module.exports = {
     index(req, res){
         Recipes.all(function(recipes) {
             
-            return res.render("admin/index.njk", {recipes})
+            return res.render("admin/recipes/index.njk", {recipes})
     
         })
     },
     create(req, res){
         Recipes.chefSelectOptions(function(options){
-            return res.render('admin/create.njk', {chefOptions: options})
+            return res.render('admin/recipes/create.njk', {chefOptions: options})
         })
     },      
     post(req, res){
@@ -34,7 +34,7 @@ module.exports = {
 
             recipe.created_at = date(recipe.created_at).format
         
-        return res.render('admin/show.njk', {recipe})  
+        return res.render('admin/recipes/show.njk', {recipe})  
         })
     },                
     edit(req, res){
@@ -42,7 +42,7 @@ module.exports = {
             if (!recipe) return res.send("recipe no found!")
 
             Recipes.chefSelectOptions(function(options){
-                return res.render(`admin/edit.njk`, {recipe, chefOptions: options})
+                return res.render(`admin/recipes/edit.njk`, {recipe, chefOptions: options})
             })
         })
        

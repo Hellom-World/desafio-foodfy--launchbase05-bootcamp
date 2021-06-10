@@ -1,9 +1,27 @@
-    <section>
+<section>
         
-            <div class="foto-rec">
-                <h3>Imagem da Receita</h3>
-                <input name="image" type="url" value="{{recipe.image}}"placeholder="https://">    
+    <div class="item">
+        <h3>Fotos</h3>
+        <div class="flex-photos">
+            <div id="photos-upload">
+                <input 
+                id="photos-input"
+                type="file" 
+                name="photos"
+                multiple
+                accept="image/*"
+                onchange="PhotosUpload.handleFileInput(event)"
+                >
+                <span></span>
+                <i class="material-icons">add</i>
             </div>
+            
+            <div id="photos-preview">
+            </div>
+
+        </div>
+    </div>
+
 
             <div id="ingredients">
                 <h3>Ingredientes</h3>

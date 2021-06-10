@@ -7,7 +7,7 @@ module.exports = {
     index(req, res){
         Admin.allRecipes(function(recipes) {
             
-            return res.render("recipes/index.njk", {recipes})
+            return res.render("sitepages/index.njk", {recipes})
     
         })
         
@@ -18,7 +18,7 @@ module.exports = {
 
             recipe.created_at = date(recipe.created_at).format
         
-        return res.render('recipes/show.njk', {recipe})  
+        return res.render('sitepages/showrecipe.njk', {recipe})  
         })
     }, 
     showchef(req, res){
@@ -29,7 +29,7 @@ module.exports = {
             
             Admin.findChefRecipes(req.params.id, function(recipes){
 
-                return res.render('recipes/showchef.njk', {  chef, recipes })
+                return res.render('sitepages/showchef.njk', {  chef, recipes })
         
             })
         })
@@ -53,19 +53,19 @@ module.exports = {
                     total: Math.ceil(recipes[0].total / limit),
                     page
                 }
-                return res.render("recipes/recipes.njk", { recipes, pagination, filter })
+                return res.render("sitepages/recipes.njk", { recipes, pagination, filter })
             }
         }
 
         Admin.paginate(params)
     },
     about(req, res){
-        return res.render('recipes/sobre.njk')        
+        return res.render('sitepages/sobre.njk')        
     },
     chefs(req, res){
         Admin.allChefs(function(chefs) {
         
-        return res.render('recipes/chefs.njk', {chefs})
+        return res.render('sitepages/chefs.njk', {chefs})
         })
     },   
     
