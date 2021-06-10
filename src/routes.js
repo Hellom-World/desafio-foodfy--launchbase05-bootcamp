@@ -2,33 +2,32 @@ const express = require ('express')
 const routes = express.Router()
 const recipes = require('./app/controllers/recipes')
 const admin = require('./app/controllers/admin')
+const chefs = require('./app/controllers/chefs')
 
 
-routes.get("/", recipes.index)
-routes.get("/receitas", recipes.recipes)
-routes.get("/sobre", recipes.about) 
-routes.get("/chefs", recipes.chefs) 
-routes.get("/recipes/:index", recipes.show)
-routes.get("/recipes/chefs/:index", recipes.showchef)
+routes.get("/", admin.index)
+routes.get("/recipes", admin.recipesPaginate) 
+routes.get("/recipes/:id", admin.showRecipes)
+routes.get("/chefs/:id", admin.showchef)
+routes.get("/sobre", admin.about) 
+routes.get("/chefs", admin.chefs)
 
+routes.get("/admin", recipes.index); // Mostrar a lista de receitas
+routes.get("/admin/recipes", recipes.index); // Mostrar a lista de receitas
+routes.get("/admin/recipes/create", recipes.create); // Mostrar formulário de nova receita
+routes.get("/admin/recipes/:id", recipes.show); // Exibir detalhes de uma receita
+routes.get("/admin/recipes/:id/edit", recipes.edit); // Mostrar formulário de edição de receita
+routes.post("/admin/recipes", recipes.post); // Cadastrar nova receita
+routes.put("/admin/recipes", recipes.put); // Editar uma receita
+routes.delete("/admin/recipes", recipes.delete); // Deletar uma receita */
 
-routes.get("/admin", admin.index); // Mostrar a lista de receitas
-
-routes.get("/admin/recipes", admin.index); // Mostrar a lista de receitas
-routes.get("/admin/recipes/create", admin.create); // Mostrar formulário de nova receita
-routes.get("/admin/recipes/:id", admin.show); // Exibir detalhes de uma receita
-routes.get("/admin/recipes/:id/edit", admin.edit); // Mostrar formulário de edição de receita
-routes.post("/admin/recipes", admin.post); // Cadastrar nova receita
-routes.put("/admin/recipes", admin.put); // Editar uma receita
-routes.delete("/admin/recipes", admin.delete); // Deletar uma receita */
-
-routes.get("/admin/chefs", admin.chefs) //Mostrar lista de Chefes ---New--
-routes.get("/admin/chefs/create", admin.createchef); // Mostrar formulário de novo chef
-routes.get("/admin/chefs/:id", admin.showchef); // Exibir detalhes de um chef
-routes.get("/admin/chefs/:id/edit", admin.editchef); // Mostrar formulário de edição de chef
-routes.post("/admin/chefs", admin.postchef); // Cadastrar novo chef
-routes.put("/admin/chefs", admin.putchef); // Editar uma receita
-routes.delete("/admin/chefs", admin.deletechef); // Deletar uma receita */
+routes.get("/admin/chefs", chefs.index) //Mostrar lista de Chefes ---New--
+routes.get("/admin/chefs/create", chefs.create); // Mostrar formulário de novo chef
+routes.get("/admin/chefs/:id", chefs.show); // Exibir detalhes de um chef
+routes.get("/admin/chefs/:id/edit", chefs.edit); // Mostrar formulário de edição de chef
+routes.post("/admin/chefs", chefs.post); // Cadastrar novo chef
+routes.put("/admin/chefs", chefs.put); // Editar um chef
+routes.delete("/admin/chefs", chefs.delete); // Deletar um chef */
 
 
 

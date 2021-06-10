@@ -15,7 +15,7 @@ for(let cardChef of cardChefs){
     cardChef.addEventListener('click', function() {
         const index = cardChef.getAttribute('id')
 
-       window.location.href= `/recipes/chefs/${index}`
+       window.location.href= `/chefs/${index}`
     }) 
 
 }

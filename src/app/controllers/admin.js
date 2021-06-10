@@ -7,55 +7,20 @@ module.exports = {
     index(req, res){
         Admin.allRecipes(function(recipes) {
             
-            return res.render("admin/index.njk", {recipes})
+            return res.render("recipes/index.njk", {recipes})
     
         })
         
-    },   
-    create(req, res){
-        Admin.chefSelectOptions(function(options){
-            return res.render('admin/create.njk', {chefOptions: options})
-        })
     },
-    createchef(req, res){
-        return res.render('admin/createchef.njk')        
-    },   
-    post(req, res){
-        const keys = Object.keys(req.body)
-
-        for(key of keys) {
-            if (req.body[key] == "") {
-                return res.send('please, fill all fields')
-            }
-        }
-        
-            Admin.create(req.body, function(recipes) {
-                return res.redirect(`/admin/recipes/${recipes.id}`)
-            })
-    },
-    postchef(req, res){
-        const keys = Object.keys(req.body)
-
-        for(key of keys) {
-            if (req.body[key] == "") {
-                return res.send('please, fill all fields')
-            }
-        }
-
-        Admin.createchef(req.body, function(chefs) {
-            return res.redirect(`/admin/chefs/${chefs.id}`)
-        })
-    },   
-    show(req, res){
-        Admin.find(req.params.id, function (recipe){
-            if (!recipe) return res.send("Instructor no found!")
+    showRecipes(req, res){
+        Admin.findRecipes(req.params.id, function (recipe){
+            if (!recipe) return res.send("recipe not found!")
 
             recipe.created_at = date(recipe.created_at).format
-
-            return res.render("admin/show.njk", { recipe })
         
+        return res.render('recipes/show.njk', {recipe})  
         })
-    },
+    }, 
     showchef(req, res){
         Admin.findchef(req.params.id, function (chef){
             if (!chef) return res.send("Chef no found!")
@@ -64,71 +29,54 @@ module.exports = {
             
             Admin.findChefRecipes(req.params.id, function(recipes){
 
-                return res.render('admin/showchef.njk', {  chef, recipes }),console.log(recipes)
+                return res.render('recipes/showchef.njk', {  chef, recipes })
         
             })
         })
-    },  
+    },
+    recipesPaginate(req, res){
+        let {filter, page, limit } = req.query
+
+        page = page || 1
+        limit = limit || 3
+        let offset = limit * (page - 1)
+
+        const params = {
+            filter,
+            page,
+            limit,
+            offset,
+            callback(recipes){
+
+                const pagination = {
+                    
+                    total: Math.ceil(recipes[0].total / limit),
+                    page
+                }
+                return res.render("recipes/recipes.njk", { recipes, pagination, filter })
+            }
+        }
+
+        Admin.paginate(params)
+    },
+    about(req, res){
+        return res.render('recipes/sobre.njk')        
+    },
     chefs(req, res){
-        Admin.all(function(chefs) {
+        Admin.allChefs(function(chefs) {
         
-        return res.render('admin/chefs.njk', {chefs})
-        })
-    },              
-    edit(req, res){
-        Admin.find(req.params.id, function (recipe){
-            if (!recipe) return res.send("recipe no found!")
-
-            Admin.chefSelectOptions(function(options){
-                return res.render('admin/edit.njk', {recipe, chefOptions: options})
-            })
-        })
-       
-    },
-    editchef(req, res){
-        Admin.findchef(req.params.id, function (chef){
-            if (!chef) return res.send("Chef no found!")
-
-            return res.render(`admin/editchef.njk`, { chef })
-        })
-       
-    },   
-    put(req, res){
-        const keys = Object.keys(req.body)
-
-        for(key of keys) {
-            if (req.body[key] == "") {
-                return res.send("Please, fill all fields!")
-            }
-        }
-        
-            Admin.update(req.body, function() {
-                return res.redirect(`/admin/recipes/${req.body.id}`)
-            })
-        
-    },
-    putchef(req, res){
-        const keys = Object.keys(req.body)
-
-        for(key of keys) {
-            if (req.body[key] == "") {
-                return res.send("Please, fill all fields!")
-            }
-        }
-        Admin.updatechef(req.body, function() {
-            return res.redirect(`/admin/chefs/${req.body.id}`)
+        return res.render('recipes/chefs.njk', {chefs})
         })
     },   
-    delete(req, res){
-        
-        Admin.delete(req.body.id, function(){
-            return res.redirect(`/admin/recipes`)
-        })    
-    },
-    deletechef(req, res){
-        
-        Admin.deletechef(req.body.id, function(){
-            return res.redirect(`/admin/chefs`)
-        })    
-    }   
+    
+      
+
+     
+
+              
+
+    
+    
+    
+     
 }  
