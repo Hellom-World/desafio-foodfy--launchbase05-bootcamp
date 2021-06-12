@@ -566,9 +566,9 @@ textarea{
 
 .pagination a,
 .pagination span {
-        color: forestgreen;
-        text-decoration: none;
-        margin-right: 16px;
+    color: forestgreen;
+    text-decoration: none;
+    margin-right: 16px;
 }
 
 .pagination a:hover {
@@ -580,8 +580,9 @@ textarea{
 /* Upaload de imagens */
 
 
-.item .flex-photos {
-    display: flex;
+.item .grid-photos {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
 }
 
 .item #photos-upload {
@@ -612,6 +613,7 @@ textarea{
     position: absolute;
     top: 0;
     left: 0;
+    
 
     display: block;
     overflow: hidden;
@@ -624,29 +626,78 @@ textarea{
 }
 
 .item #photos-upload i{
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background: rgba(255,255,255,0.8);
+
+    color: #444444;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 300%;
+    cursor: pointer;
     
-		position: absolute;
-		top: 0;
-		left: 0;
-
-		background: rgba(255,255,255,0.8);
-
-		color: #444444;
-
-		width: 100%;
-		height: 100%;
-
-		display: flex;
-		align-items: center;
-		justify-content: center;
-
-		font-size: 300%;
-		cursor: pointer;
-		
-		transition: opacity 200ms;
-		opacity: 0.5;
+    transition: opacity 200ms;
+    opacity: 0.5;
 	
 }
 .item #photos-upload:hover i{
+    opacity: 1;
+}
+
+.item #photos-preview {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 8px;
+    width: 100%;
+    
+    align-items: center;
+}
+
+.item #photos-preview img{
+    width: 100%;
+    height: 148px;
+
+    object-fit: cover;
+    border: 1px solid #999;
+    border-radius: 3.5px;
+}
+
+#photos-preview .photo {
+    position: relative;
+}
+
+#photos-preview .photo i {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background: rgba(255,255,255,0.8);
+
+    color: red;
+
+    width: 102%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 400%;
+    cursor: pointer;
+    
+    transition: opacity 200ms;
+    opacity: 0;
+}
+
+#photos-preview .photo:hover i {
     opacity: 1;
 }

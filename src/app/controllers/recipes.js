@@ -1,6 +1,7 @@
 const { age, date } = require('../../lib/utils')
 const db = require('../../config/db')
 const Recipes = require ('../models/Recipes')
+const File = require('../models/File')
 
 module.exports = {
     index(req, res){
@@ -15,19 +16,27 @@ module.exports = {
             return res.render('admin/recipes/create.njk', {chefOptions: options})
         })
     },      
-    post(req, res){
-        const keys = Object.keys(req.body)
+async post(req, res){
+    const keys = Object.keys(req.body)
 
-        for(key of keys) {
-            if (req.body[key] == "") {
-                return res.send('please, fill all fields')
-            }
+    for(key of keys) {
+        if (req.body[key] == "") {
+            return res.send('please, fill all fields')
         }
+    }
+    if(req.files.length == 0)
+        return res.send('please, send at least one image')
+    
+    let results = await Recipes.create(req.body)
+    const recipeId = results.rows[0].id
+
+    const filesPromise = req.files.map(file => File.create({...file }))
+			await Promise.all(filesPromise)
         
-            Recipes.create(req.body, function(recipes) {
-                return res.redirect(`/admin/recipes/${recipes.id}`)
-            })
-    },
+    Recipes.create(req.body, function(recipes) {
+        return res.redirect(`/admin/recipes/${recipes.id}/edit`)
+    })
+},
     show(req, res){
         Recipes.find(req.params.id, function (recipe){
             if (!recipe) return res.send("recipe not found!")

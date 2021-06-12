@@ -88,7 +88,6 @@ __________________________________________________Gerenciador de imagens no fron
 	
 
 -----------Iniciando estrutura de dados do upload de imagens----------------
--PAREI AQUI
 
 -Abra o arquivo scripts.js
 
