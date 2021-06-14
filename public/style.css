@@ -390,7 +390,8 @@ header div .active{
 #modoPreparo input,
 .ingredients input,
 .grid-fields input,
-.create-name input{
+.create-name input,
+input[type="text"]{
     width: 100%;
     font-size: 16px;
     border-radius: 4px;
@@ -699,5 +700,96 @@ textarea{
 }
 
 #photos-preview .photo:hover i {
+    opacity: 1;
+}
+
+/* PhotosUpload Chefs */
+
+
+form section div #photos-input {
+    position: absolute;
+    opacity: 0;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1;
+}
+
+
+form section div #photos-preview-chefs {
+    
+    border: 1px solid #444444;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    position: relative;
+    margin: 8px 0;
+}
+
+
+form section div #photos-preview-chefs i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+form section div .sombra{
+    margin-top: 8px;
+    height: 152px;
+    width: 151px;
+    font-size: 600%;
+    position: absolute;
+    z-index: 0;
+    border-radius: 50%;
+    opacity: 0.4;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form section div .material-icons:hover {
+    background-color:rgba(65, 57, 57, 0.185);
+}
+
+form section div #photos-preview-chefs img{
+    width: 100%;
+    height: 150px;
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+#photos-preview-chefs .photo {
+    position: relative;
+}
+
+#photos-preview-chefs .photo i {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background: rgba(255,255,255,0.8);
+
+    color: red;
+
+    width: 100%;
+    height: 97.7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 500%;
+    cursor: pointer;
+    
+    transition: opacity 200ms;
+    opacity: 0;
+    z-index: 2;
+    border-radius: 50%;
+}
+
+#photos-preview-chefs .photo:hover i {
     opacity: 1;
 }

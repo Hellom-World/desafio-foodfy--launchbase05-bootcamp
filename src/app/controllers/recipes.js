@@ -28,7 +28,7 @@ async post(req, res){
         return res.send('please, send at least one image')
     
     let results = await Recipes.create(req.body)
-    const recipeId = results.rows[0].id
+    /* const recipeId = results.rows[0].id */
 
     const filesPromise = req.files.map(file => File.create({...file }))
 			await Promise.all(filesPromise)

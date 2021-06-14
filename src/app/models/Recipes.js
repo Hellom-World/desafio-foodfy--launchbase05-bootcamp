@@ -15,6 +15,7 @@ module.exports = {
 
     },
     create(data, callback){
+        
         const query = `
         INSERT INTO recipes (
             chef_id,
@@ -33,7 +34,7 @@ module.exports = {
             data.ingredients,
             data.preparation,
             data.information,
-            date(Date.now()).iso
+            date(Date.now()).iso,
         ]
 
         return db.query(query, values)

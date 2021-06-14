@@ -19,7 +19,6 @@ module.exports = {
         const query = `
         INSERT INTO chefs (
             name,
-            avatar_url,
             created_at
         ) VALUES ($1, $2, $3)
         RETURNING id
@@ -27,7 +26,6 @@ module.exports = {
 
         const values = [
             data.name,
-            data.avatar_url,
             date(Date.now()).iso
         ]
 

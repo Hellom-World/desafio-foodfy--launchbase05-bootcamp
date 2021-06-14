@@ -1,11 +1,11 @@
 const db = require('../../config/db')
 
 module.exports = {
-    create(filename, path, product_id) {
+    create({filename, path}) {
         const query = `
             INSERT INTO files (
                 name,
-                path,
+                path
             ) VALUES ($1, $2)
             RETURNING id
         `

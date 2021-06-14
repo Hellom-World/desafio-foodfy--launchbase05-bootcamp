@@ -1,11 +1,17 @@
 
 <section>
     <div>
-        <h3>Nome</h3>
-        <input type="text" name="name" value="{{chef.name}}" />               
+        <h3>Avatar</h3>
+        <input id="photos-input" type="file" name="photos" multiple="" accept="image/*"
+        onchange="PhotosUploadChefs.handleFileChefInput(event)">     
+        <i class="material-icons sombra">person_add</i>
+        <div id="photos-preview-chefs">
+            
+        </div>         
     </div>
     <div>
-        <h3>Avatar</h3>
-        <input type="text" name="avatar_url" value="{{chef.avatar_url}}" placeholder="http://"/>                
+        <h3>Nome</h3>
+        <input type="text" name="name" value="{{chef.name}}" /> 
+                 
     </div>
 </section>

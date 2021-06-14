@@ -27,8 +27,8 @@ routes.get("/admin/chefs", chefs.index) //Mostrar lista de Chefes ---New--
 routes.get("/admin/chefs/create", chefs.create); // Mostrar formulário de novo chef
 routes.get("/admin/chefs/:id", chefs.show); // Exibir detalhes de um chef
 routes.get("/admin/chefs/:id/edit", chefs.edit); // Mostrar formulário de edição de chef
-routes.post("/admin/chefs", chefs.post); // Cadastrar novo chef
-routes.put("/admin/chefs", chefs.put); // Editar um chef
+routes.post("/admin/chefs", multer.array("photos", 1), chefs.post); // Cadastrar novo chef
+routes.put("/admin/chefs", multer.array("photos", 1), chefs.put); // Editar um chef
 routes.delete("/admin/chefs", chefs.delete); // Deletar um chef */
 
 

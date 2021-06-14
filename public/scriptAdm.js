@@ -37,11 +37,12 @@ function addIngredient() {
     // Deixa o valor do input vazio
     newField.children[0].value = "";
     ingredients.appendChild(newField);
-  }
-  
-  document
+
+    document
     .querySelector(".add-ingredient")
     .addEventListener("click", addIngredient);
+};
+  
 
 
 /* Logica de adicionar modo de preparo */
@@ -58,11 +59,13 @@ function addPreparo() {
     // Deixa o valor do input vazio
     newField.children[0].value = "";
     modoPreparo.appendChild(newField);
-  }
-  
-  document
+
+    document
     .querySelector(".add-modPrep")
     .addEventListener("click", addPreparo);
+  }
+  
+
 
 
 
@@ -161,4 +164,81 @@ function addPreparo() {
         PhotosUpload.input.files = PhotosUpload.getAllFiles()
         photoDiv.remove()
     }
-  }
+}
+
+const PhotosUploadChefs = {
+    previewChef: document.querySelector("#photos-preview-chefs"),
+    input: "",
+    files: [],
+    handleFileChefInput(event) {
+        
+        const { files: fileList } = event.target
+
+        if (fileList.length != 1){
+            alert('Selecione apenas 1 foto')
+            event.preventDefault()
+            return
+        }
+
+        Array.from(fileList).forEach(file => {
+
+            PhotosUploadChefs.files.push(file)
+			const reader = new FileReader()
+
+			reader.onload = () => {
+				const image = new Image()
+				image.src = String(reader.result)
+                
+
+                
+                const div = PhotosUploadChefs.getContainer(image)
+
+                div.appendChild(PhotosUploadChefs.getRemoveButton())
+                
+                var node = document.querySelectorAll(".photo");
+                if (node.length > 0) {
+                    
+                    alert('Selecione apenas 1 foto')
+                    event.preventDefault()
+                }
+				document.querySelector('#photos-preview-chefs').appendChild(div)
+            }
+            
+
+			reader.readAsDataURL(file)
+		})
+    },
+    getAllFiles() {
+        const dataTransfer = new DataTransfer()
+
+        PhotosUpload.files.forEach(file => dataTransfer.items.add(file))
+
+        console.log(dataTransfer)
+    },
+    getContainer(image){
+
+        const div = document.createElement('div')
+        div.classList.add('photo')
+
+        div.onclick = PhotosUploadChefs.removePhoto
+
+        div.appendChild(image)
+
+        return div
+    },
+    getRemoveButton(){
+        const button = document.createElement('i')
+        button.classList.add('material-icons')
+        button.innerHTML = "close"
+        return button
+    },
+    removePhoto(event) {
+        const photoDiv = event.target.parentNode
+        const photosArray = Array.from(PhotosUploadChefs.previewChef.children)
+        const index = photosArray.indexOf(photoDiv)
+
+        photoDiv.remove()
+    }
+
+
+}
