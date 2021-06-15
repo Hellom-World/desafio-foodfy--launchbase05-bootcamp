@@ -2,6 +2,7 @@ const { age, date } = require('../../lib/utils')
 const db = require('../../config/db')
 const Recipes = require ('../models/Recipes')
 const File = require('../models/File')
+const RecipeFiles = require('../models/RecipeFiles')
 
 module.exports = {
     index(req, res){
@@ -27,15 +28,25 @@ async post(req, res){
     if(req.files.length == 0)
         return res.send('please, send at least one image')
     
-    let results = await Recipes.create(req.body)
     /* const recipeId = results.rows[0].id */
+    
+    const filesPromise = req.files.map(file => File.create({...file}))
+	await Promise.all(filesPromise)
+    console.log(filesPromise)
+/* 
+    let resultsFile = await File.create(...req.files)
+    const file_id = resultsFile.rows[0].id */
+    
+    let resultsRecipes = await Recipes.create(req.body)
+    const recipe_id = resultsRecipes.rows[0].id
 
-    const filesPromise = req.files.map(file => File.create({...file }))
-			await Promise.all(filesPromise)
-        
-    Recipes.create(req.body, function(recipes) {
-        return res.redirect(`/admin/recipes/${recipes.id}/edit`)
-    })
+    await RecipeFiles.create(recipe_id, file_id)
+    
+
+    
+    
+        return res.redirect(`/admin/recipes/${recipes_id}/edit`)
+    
 },
     show(req, res){
         Recipes.find(req.params.id, function (recipe){

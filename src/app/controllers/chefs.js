@@ -1,6 +1,7 @@
 const { age, date } = require('../../lib/utils')
 const db = require('../../config/db')
 const Chefs = require('../models/Chefs')
+const File = require('../models/File')
 
 
 module.exports = {
@@ -13,7 +14,7 @@ module.exports = {
     create(req, res){
         return res.render('admin/chefs/create.njk')        
     }, 
-    post(req, res){
+   async post(req, res){
         const keys = Object.keys(req.body)
 
         for(key of keys) {
@@ -21,10 +22,14 @@ module.exports = {
                 return res.send('please, fill all fields')
             }
         }
+        let resultsFile = await File.create(...req.files)
+        const file_id = resultsFile.rows[0].id
 
-        Chefs.create(req.body, function(chefs) {
-            return res.redirect(`/admin/chefs/${chefs.id}`)
-        })
+        let resultsChef = await Chefs.create(req.body.name, file_id)
+        chef = resultsChef.rows[0]  
+       
+            return res.redirect(`/admin/chefs/${chef.id}`)
+       
     }, 
     put(req, res){
         const keys = Object.keys(req.body)

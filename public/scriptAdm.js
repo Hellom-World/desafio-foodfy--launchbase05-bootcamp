@@ -206,12 +206,13 @@ const PhotosUploadChefs = {
             
 
 			reader.readAsDataURL(file)
-		})
+        })
+        PhotosUploadChefs.getAllFiles()
     },
     getAllFiles() {
-        const dataTransfer = new DataTransfer()
+        const dataTransfer = new ClipboardEvent("").clipboardData || new DataTransfer()
 
-        PhotosUpload.files.forEach(file => dataTransfer.items.add(file))
+        PhotosUploadChefs.files.forEach(file => dataTransfer.items.add(file))
 
         console.log(dataTransfer)
     },
