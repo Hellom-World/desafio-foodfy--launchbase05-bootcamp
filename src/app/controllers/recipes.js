@@ -30,22 +30,13 @@ async post(req, res){
     
     /* const recipeId = results.rows[0].id */
     
-    const filesPromise = req.files.map(file => File.create({...file}))
-	await Promise.all(filesPromise)
-    console.log(filesPromise)
-/* 
-    let resultsFile = await File.create(...req.files)
-    const file_id = resultsFile.rows[0].id */
-    
     let resultsRecipes = await Recipes.create(req.body)
     const recipe_id = resultsRecipes.rows[0].id
 
-    await RecipeFiles.create(recipe_id, file_id)
+    const filesPromise = req.files.map(file => File.create({...file, recipe_id}))
+	await Promise.all(filesPromise)
     
-
-    
-    
-        return res.redirect(`/admin/recipes/${recipes_id}/edit`)
+        return res.redirect(`/admin/recipes/${recipe_id}/edit`)
     
 },
     show(req, res){

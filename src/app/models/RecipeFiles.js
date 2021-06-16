@@ -1,19 +1,30 @@
 const db = require('../../config/db')
 
-module.exports = {
-    create(recipe_id, file_id) {
-        const query = `
-            INSERT INTO recipe_files (
-                recipe_id,
-                file_id
-            ) VALUES ($1, $2)
-            RETURNING id
-        `
-        const values = [
-            recipe_id,
-            file_id,
-        ]
-        
-        return db.query(query, values)
+module.exports ={
+    findFileForId(id) {
+        try {
+          return db.query(`SELECT * FROM files WHERE id = $1`, [id])
+        } catch (error) {
+          console.log(error)
+        }
     },
+    findFileForIdRecipe(id) {
+      try {
+        return db.query(`SELECT recipe_files.file_id
+        FROM recipe_files
+        WHERE recipe_files.recipe_id = $1`, [id])
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    allFiles(){
+      try{
+        return db.query(`
+          SELECT *
+          FROM files
+        `)
+      } catch (error) {
+        console.log(error)
+      }
+    }
 }

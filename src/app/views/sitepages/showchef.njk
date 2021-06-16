@@ -7,7 +7,7 @@
     <section>
         <div class="bigcircle">
             {% if chef.avatar_url %}
-             <span style="background-image: url({{chef.avatar_url}})"></span>
+             <img src="{{filechef.src}}">   
             {% else %}
             <span style="background-image: url(http://placehold.it/500x500?text=ImageNotFound)"></span>    
             {% endif %}
@@ -31,8 +31,8 @@
                 
             {% for recipe in recipes %}
                 <div class="card-adm" id='{{recipe.id}}'>
-                     {% if recipe.image %}
-                    <img src="{{recipe.image}}" >
+                    {% if filesRecipe.src %}
+                    <img src="{{filesRecipe.src}}" >
                     {% else %}
                     <img src="http://placehold.it/500x500?text=RECEITA SEM FOTO"/>
                     {% endif %}

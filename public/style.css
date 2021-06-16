@@ -471,7 +471,8 @@ textarea{
     margin-bottom: 0;
 }
 
-.circle span {
+.circle span,
+.circle img {
         position: absolute; 
         width: 64px;
         height: 64px;
@@ -483,7 +484,8 @@ textarea{
     
 }
 
-.bigcircle span {
+.bigcircle span,
+.bigcircle img {
     position: absolute; 
     width: 200px;
     height: 200px;

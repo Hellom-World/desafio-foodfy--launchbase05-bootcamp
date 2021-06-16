@@ -6,7 +6,13 @@
         onchange="PhotosUploadChefs.handleFileChefInput(event)">     
         <i class="material-icons sombra">person_add</i>
         <div id="photos-preview-chefs">
-            
+            {% if filechef%}
+                <div class="photo">
+                   <img src="{{filechef.src}}">
+                   <i class="material-icons">close</i> 
+                </div>
+                
+            {%endif%}
         </div>         
     </div>
     <div>

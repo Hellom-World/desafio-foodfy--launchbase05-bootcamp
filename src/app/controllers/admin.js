@@ -2,6 +2,8 @@
 const { age, date } = require('../../lib/utils')
 const db = require('../../config/db')
 const Admin = require('../models/Admin')
+const Chefs = require('../models/Chefs')
+const RecipeFiles = require('../models/RecipeFiles')
 
 module.exports = {
     index(req, res){
@@ -21,19 +23,56 @@ module.exports = {
         return res.render('sitepages/showrecipe.njk', {recipe})  
         })
     }, 
-    showchef(req, res){
-        Admin.findchef(req.params.id, function (chef){
-            if (!chef) return res.send("Chef no found!")
+    async showchef(req, res){
 
-            chef.created_at = date(chef.created_at).format
-            
-            Admin.findChefRecipes(req.params.id, function(recipes){
+        let results = await Chefs.find(req.params.id)
+        const chef = results.rows[0]
+        if (!chef) return res.send("Chef no found!")
 
-                return res.render('sitepages/showchef.njk', {  chef, recipes })
         
-            })
-        })
-    },
+        results = await Chefs.findChefRecipes(req.params.id)
+        const recipes = results.rows
+        
+        
+
+        //get imagens
+        results = await RecipeFiles.findFileForId(chef.file_id)
+        let filechef = ""
+        if (results.rows.length  != 0 ){
+            filechef = results.rows[0]
+            
+            
+            
+            filechef.src = `${req.protocol}://${req.headers.host}${filechef.path.replace("public", "")}` 
+            
+        }
+            
+        if(recipes.length == 0) {
+            return res.render("admin/chefs/show.njk", { chef, filechef, recipes })
+        }
+      
+       
+        
+        if(recipes) {
+            
+        
+        let RecipeFileId = recipes[0].id
+      
+    
+        results = await RecipeFiles.findFileForIdRecipe(RecipeFileId)
+        let fileRecipeId = results.rows[0].file_id
+
+        
+        results = await RecipeFiles.findFileForId(fileRecipeId)
+        let filesRecipe = results.rows[0]
+        filesRecipe.src = `${req.protocol}://${req.headers.host}${filesRecipe.path.replace("public", "")}` 
+        
+    
+                
+        
+        return res.render("admin/chefs/show.njk", { chef, recipes, filechef, filesRecipe})
+        }
+    },  
     recipesPaginate(req, res){
         let {filter, page, limit } = req.query
 
@@ -62,11 +101,19 @@ module.exports = {
     about(req, res){
         return res.render('sitepages/sobre.njk')        
     },
-    chefs(req, res){
-        Admin.allChefs(function(chefs) {
+   async chefs(req, res){
         
-        return res.render('sitepages/chefs.njk', {chefs})
-        })
+
+        let result = await Admin.allChefs() 
+        const chefs = result.rows
+
+        result = await RecipeFiles.allFiles()
+			const files = result.rows.map(file => ({
+				...file,
+				src:`${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+			}))
+
+        return res.render('sitepages/chefs.njk', {chefs, files})
     },   
     
       
