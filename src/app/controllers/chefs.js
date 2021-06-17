@@ -14,9 +14,21 @@ module.exports = {
 			const files = result.rows.map(file => ({
 				...file,
 				src:`${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-			}))
+            }))
+            
+            for (file in files){
+                for(chef in chefs){
+                    if(chefs[chef].file_id == files[file].id){
+                        chefs[chef] = {
+                            ...chefs[chef],
+                            path: files[file].path,
+                            src: files[file].src
+                        }
+                    }
+                }
+            }
 
-        return res.render('admin/chefs/chefs.njk', {chefs, files})
+        return res.render('admin/chefs/chefs.njk', {chefs, files}), console.log(chefs)
     },
     create(req, res){
         return res.render('admin/chefs/create.njk')        
@@ -96,7 +108,7 @@ module.exports = {
         filesRecipe.src = `${req.protocol}://${req.headers.host}${filesRecipe.path.replace("public", "")}` 
         
     
-                
+        
         
         return res.render("admin/chefs/show.njk", { chef, recipes, filechef, filesRecipe})
         }

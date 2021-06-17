@@ -477,7 +477,7 @@ textarea{
         width: 64px;
         height: 64px;
         background-position: center;
-        background-size: cover;
+        object-fit: cover;
         border-radius: 50%;
         /* box-shadow: 3px 1px 6px -4px black;
         border: 2px solid white; */
@@ -490,7 +490,7 @@ textarea{
     width: 200px;
     height: 200px;
     background-position: center;
-    background-size: cover;
+    object-fit: cover;
     border-radius: 50%;
     /* box-shadow: 3px 1px 6px -4px black;
     border: 2px solid white; */

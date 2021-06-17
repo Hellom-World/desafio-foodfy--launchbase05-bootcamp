@@ -48,7 +48,7 @@ module.exports = {
         }
             
         if(recipes.length == 0) {
-            return res.render("admin/chefs/show.njk", { chef, filechef, recipes })
+            return res.render("sitepages/showchef.njk", { chef, filechef, recipes })
         }
       
        
@@ -70,7 +70,7 @@ module.exports = {
     
                 
         
-        return res.render("admin/chefs/show.njk", { chef, recipes, filechef, filesRecipe})
+        return res.render("sitepages/showchef.njk", { chef, recipes, filechef, filesRecipe})
         }
     },  
     recipesPaginate(req, res){

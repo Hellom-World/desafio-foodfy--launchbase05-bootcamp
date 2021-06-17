@@ -173,6 +173,7 @@ const PhotosUploadChefs = {
     handleFileChefInput(event) {
         
         const { files: fileList } = event.target
+        PhotosUpload.input = event.target
 
         if (fileList.length != 1){
             alert('Selecione apenas 1 foto')
@@ -232,12 +233,15 @@ const PhotosUploadChefs = {
         button.classList.add('material-icons')
         button.innerHTML = "close"
         return button
+        
     },
     removePhoto(event) {
+        
         const photoDiv = event.target.parentNode
         const photosArray = Array.from(PhotosUploadChefs.previewChef.children)
         const index = photosArray.indexOf(photoDiv)
 
+        PhotosUpload.files.splice(index, 1)
         photoDiv.remove()
     }
 
