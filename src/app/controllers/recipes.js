@@ -5,12 +5,29 @@ const File = require('../models/File')
 const RecipeFiles = require('../models/RecipeFiles')
 
 module.exports = {
-    index(req, res){
-        Recipes.all(function(recipes) {
+    async index(req, res){
+        results = await Recipes.all(req.params.id)
+      const recipes = results.rows
+      
+      
+      let RecipeFileId = recipes[0].id
+
+
+      results = await RecipeFiles.findFileForIdRecipe(RecipeFileId)
+      let fileRecipeIds = results.rows
+     
+        let {filesRecipes} = ""
+        for (fileRecipeId in fileRecipeIds ){
+            results = await RecipeFiles.findFileForId(fileRecipeIds[fileRecipeId].file_id)
+            filesRecipes = results.rows[0]
+            filesRecipes.src = `${req.protocol}://${req.headers.host}${filesRecipes.path.replace("public", "")}`
             
-            return res.render("admin/recipes/index.njk", {recipes})
-    
-        })
+        }
+      
+      
+      
+
+      return res.render("admin/recipes/index.njk", {recipes, filesRecipes}), console.log(filesRecipes)
     },
     create(req, res){
         Recipes.chefSelectOptions(function(options){
