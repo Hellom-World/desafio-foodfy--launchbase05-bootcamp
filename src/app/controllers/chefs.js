@@ -28,7 +28,7 @@ module.exports = {
                 }
             }
 
-        return res.render('admin/chefs/chefs.njk', {chefs, files}), console.log(chefs)
+        return res.render('admin/chefs/chefs.njk', {chefs, files})
     },
     create(req, res){
         return res.render('admin/chefs/create.njk')        
