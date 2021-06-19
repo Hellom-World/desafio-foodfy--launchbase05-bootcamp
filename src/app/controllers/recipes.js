@@ -6,28 +6,39 @@ const RecipeFiles = require('../models/RecipeFiles')
 
 module.exports = {
     async index(req, res){
-        results = await Recipes.all(req.params.id)
+        let results = await Recipes.all(req.params.id)
       const recipes = results.rows
       
-      
+    
       let RecipeFileId = recipes[0].id
 
+        result = await RecipeFiles.allFiles()
+			const files = result.rows.map(file => ({
+				...file,
+				src:`${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+            }))
 
-      results = await RecipeFiles.findFileForIdRecipe(RecipeFileId)
-      let fileRecipeIds = results.rows
-     
-        let {filesRecipes} = ""
-        for (fileRecipeId in fileRecipeIds ){
-            results = await RecipeFiles.findFileForId(fileRecipeIds[fileRecipeId].file_id)
-            filesRecipes = results.rows[0]
-            filesRecipes.src = `${req.protocol}://${req.headers.host}${filesRecipes.path.replace("public", "")}`
+            for (recipe in recipes){
+                for(file in files){
+                    console.log(files[file].id)
+                    console.log(recipes[recipe])
+                    if(recipes[recipe].file_id == files[file].id){
+                        recipes[recipe] = {
+                            ...recipes[recipe],
+                            path: files[file].path,
+                            src: files[file].src
+                        }
+                        console.log(recipes)
+                    }
+                }
+            }
             
-        }
+        
       
       
       
 
-      return res.render("admin/recipes/index.njk", {recipes, filesRecipes}), console.log(filesRecipes)
+      return res.render("admin/recipes/index.njk", {recipes})
     },
     create(req, res){
         Recipes.chefSelectOptions(function(options){
