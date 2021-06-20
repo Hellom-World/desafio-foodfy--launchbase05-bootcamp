@@ -6,34 +6,30 @@ const RecipeFiles = require('../models/RecipeFiles')
 
 module.exports = {
     async index(req, res){
-        let results = await Recipes.all(req.params.id)
+        let results = await RecipeFiles.allRecipesWithFileIdAndNameChef()
       const recipes = results.rows
-      
-    
-      let RecipeFileId = recipes[0].id
 
         result = await RecipeFiles.allFiles()
 			const files = result.rows.map(file => ({
 				...file,
 				src:`${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
             }))
+        result = await RecipeFiles.findFileForId()
 
             for (recipe in recipes){
                 for(file in files){
-                    console.log(files[file].id)
-                    console.log(recipes[recipe])
                     if(recipes[recipe].file_id == files[file].id){
                         recipes[recipe] = {
                             ...recipes[recipe],
                             path: files[file].path,
                             src: files[file].src
                         }
-                        console.log(recipes)
+                        
                     }
                 }
             }
             
-        
+            console.log(recipes)
       
       
       

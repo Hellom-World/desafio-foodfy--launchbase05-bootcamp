@@ -26,5 +26,17 @@ module.exports ={
       } catch (error) {
         console.log(error)
       }
+    },
+    allRecipesWithFileIdAndNameChef(){
+      try{
+        return db.query(`
+        SELECT recipes.*, recipe_files.file_id as file_id, chefs.name as chef_name
+        FROM recipes
+        LEFT JOIN recipe_files ON (recipes.id = recipe_files.recipe_id)
+        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+        `)
+      } catch (error) {
+        console.log(error)
+      }
     }
 }

@@ -82,7 +82,7 @@ const PhotosUploadChefs = {
     handleFileChefInput(event) {
         
         const { files: fileList } = event.target
-        PhotosUpload.input = event.target
+        PhotosUploadChefs.input = event.target
 
         if (fileList.length != 1){
             alert('Selecione apenas 1 foto')
@@ -150,7 +150,7 @@ const PhotosUploadChefs = {
         const photosArray = Array.from(PhotosUploadChefs.previewChef.children)
         const index = photosArray.indexOf(photoDiv)
 
-        PhotosUpload.files.splice(index, 1)
+        PhotosUploadChefs.files.splice(index, 1)
         photoDiv.remove()
     }
 
@@ -158,5 +158,6 @@ const PhotosUploadChefs = {
 }
 
 function removediv(event){
-
+    const divPhoto = event.target.parentNode
+    divPhoto.remove()
 }

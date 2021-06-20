@@ -297,6 +297,7 @@ article h2{
     height: 80px;
 }
 .card-adm img{
+    object-fit: cover;
     width: 172px;
     height: 80px;
     border-radius: 8.57px;

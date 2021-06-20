@@ -51,7 +51,7 @@ module.exports = {
             return res.redirect(`/admin/chefs/${chef.id}`)
        
     }, 
-    put(req, res){
+    async put(req, res){
         const keys = Object.keys(req.body)
 
         for(key of keys) {
@@ -59,8 +59,12 @@ module.exports = {
                 return res.send("Please, fill all fields!")
             }
         }
+
+        let resultsFile = await File.create(...req.files)
+        const file_id = resultsFile.rows[0].id
+
         Chefs.update(req.body, function() {
-            return res.redirect(`/admin/chefs/${req.body.id}`)
+            return res.redirect(`/admin/chefs/${chef.id}`)
         })
     },   
     async show(req, res){
