@@ -6,12 +6,34 @@ const Chefs = require('../models/Chefs')
 const RecipeFiles = require('../models/RecipeFiles')
 
 module.exports = {
-    index(req, res){
-        Admin.allRecipes(function(recipes) {
-            
+    async index(req, res){
+
+        let results = await RecipeFiles.allRecipesWithFileIdAndNameChef()
+      const recipes = results.rows
+
+        result = await RecipeFiles.allFiles()
+			const files = result.rows.map(file => ({
+				...file,
+				src:`${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+            }))
+        result = await RecipeFiles.findFileForId()
+
+            for (recipe in recipes){
+                for(file in files){
+                    if(recipes[recipe].file_id == files[file].id){
+                        recipes[recipe] = {
+                            ...recipes[recipe],
+                            path: files[file].path,
+                            src: files[file].src
+                        }
+                        
+                    }
+                }
+            }
+                        
             return res.render("sitepages/index.njk", {recipes})
     
-        })
+        
         
     },
     showRecipes(req, res){
