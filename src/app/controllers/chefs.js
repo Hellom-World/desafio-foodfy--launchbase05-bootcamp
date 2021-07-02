@@ -63,8 +63,10 @@ module.exports = {
         let resultsFile = await File.create(...req.files)
         const file_id = resultsFile.rows[0].id
 
+
+        console.log(req.body)
         Chefs.update(req.body, function() {
-            return res.redirect(`/admin/chefs/${chef.id}`)
+            return res.redirect(`/admin/chefs/${req.body.id}`)
         })
     },   
     async show(req, res){
@@ -114,7 +116,7 @@ module.exports = {
     
         
         
-        return res.render("admin/chefs/show.njk", { chef, recipes, filechef, filesRecipe})
+        return res.render("admin/chefs/show.njk", { chef, recipes, filechef, filesRecipe}),console.log(filesRecipe)
         }
     }, 
     async edit(req, res){

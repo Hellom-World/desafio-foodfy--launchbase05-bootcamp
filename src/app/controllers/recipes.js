@@ -6,19 +6,45 @@ const RecipeFiles = require('../models/RecipeFiles')
 
 module.exports = {
     async index(req, res){
-        let results = await RecipeFiles.allRecipesWithFileIdAndNameChef()
-      const recipes = results.rows
+        /* let results = await RecipeFiles.allRecipesWithFileIdAndNameChef() */
 
-        result = await RecipeFiles.allFiles()
-			const files = result.rows.map(file => ({
+        let results = await RecipeFiles.allRecipes()
+        let recipes = results.rows
+        
+         results = await RecipeFiles.allRecipeFiles()
+        let FilesRecipes = results.rows
+        
+        results = await RecipeFiles.allFiles()
+        let allfiles = results.rows 
+        let files = ""
+        for (allfile in allfiles){
+            
+            for (FileRecipe in FilesRecipes){
+                if(allfiles[allfile].id == FilesRecipes[FileRecipe].file_id  ){
+
+                    files =[...files,{
+                        ...allfiles[allfile]
+                    }]
+                    
+                }
+            }
+        }
+        
+        
+
+        
+			files = files.map(file => ({
 				...file,
 				src:`${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
             }))
-        result = await RecipeFiles.findFileForId()
 
+        result = await RecipeFiles.findFileForId()
+     
             for (recipe in recipes){
-                for(file in files){
-                    if(recipes[recipe].file_id == files[file].id){
+                for (file in files) {
+
+                    if(recipes[recipe].id == files[file].recipe_id){
+                        
                         recipes[recipe] = {
                             ...recipes[recipe],
                             path: files[file].path,
@@ -27,9 +53,11 @@ module.exports = {
                         
                     }
                 }
+                
             }
             
-            console.log(recipes)
+            
+           
       
       
       

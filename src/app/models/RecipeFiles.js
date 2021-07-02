@@ -20,9 +20,31 @@ module.exports ={
     allFiles(){
       try{
         return db.query(`
-          SELECT *
-          FROM files
+        SELECT files.*, recipe_files.recipe_id as recipe_id
+        FROM files
+        LEFT JOIN recipe_files ON (files.id = recipe_files.file_id)
         `)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    allRecipeFiles(){
+      try{
+        return db.query(`
+        SELECT  *
+        FROM recipe_files
+        `)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    allRecipes(){
+      try{
+        return db.query(`
+        SELECT recipes.*, chefs.name as chef_name
+        FROM recipes
+        
+        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)`)
       } catch (error) {
         console.log(error)
       }

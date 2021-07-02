@@ -35,14 +35,14 @@ module.exports = {
         const query = `
         UPDATE chefs SET
             name=($1),
-            avatar_url=($2),
-            created_at=($3)
+            created_at=($2),
+            file_id=($3)
         WHERE id =($4)
         `
         const values = [
             data.name,
-            data.avatar_url,
             date(Date.now()).iso,
+            data.file_id,
             data.id
         ]
 
