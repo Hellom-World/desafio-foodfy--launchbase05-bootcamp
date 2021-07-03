@@ -35,14 +35,13 @@ module.exports = {
 
         return db.query(query, values)
     },
-    find(id, callback) {
-        db.query(`SELECT recipes.*, chefs.name AS chef_name
-        FROM recipes
-        LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
-        WHERE recipes.id = $1`, [id], function(err, results){  
-            if(err) throw `database Error! ${err}`
-            callback(results.rows[0])
-        })
+    find(id) {
+        try{
+            return db.query(`SELECT recipes.*, chefs.name AS chef_name
+            FROM recipes
+            LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
+            WHERE recipes.id = $1`, [id])
+        } catch (error) { console.error(error)}
     },
     findBy(filter, callback) {
         db.query(`
@@ -92,12 +91,11 @@ module.exports = {
         })
     },
     
-    chefSelectOptions(callback) {
-        db.query(`SELECT name, id FROM chefs`, function(err, results) {
-            if (err) throw 'Database Error!'
-
-            callback (results.rows)
-        })
+    chefSelectOptions() {
+        try{
+            return db.query(`SELECT name, id FROM chefs`)
+        } catch(error) { console.error(error)}
+        
     }
     
 

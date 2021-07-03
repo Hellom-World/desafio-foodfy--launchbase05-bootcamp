@@ -32,11 +32,13 @@ module.exports = {
         
         
 
-        
+        if(files){
+
 			files = files.map(file => ({
 				...file,
 				src:`${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
             }))
+        }
 
         result = await RecipeFiles.findFileForId()
      

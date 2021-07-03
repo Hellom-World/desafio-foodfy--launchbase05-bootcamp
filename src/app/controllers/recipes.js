@@ -32,11 +32,13 @@ module.exports = {
         
         
 
-        
+        if(files) {
+
 			files = files.map(file => ({
 				...file,
 				src:`${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
             }))
+        }
 
         result = await RecipeFiles.findFileForId()
      
@@ -80,7 +82,7 @@ async post(req, res){
     if(req.files.length == 0)
         return res.send('please, send at least one image')
     
-    /* const recipeId = results.rows[0].id */
+    
     
     let resultsRecipes = await Recipes.create(req.body)
     const recipe_id = resultsRecipes.rows[0].id
@@ -91,23 +93,60 @@ async post(req, res){
         return res.redirect(`/admin/recipes/${recipe_id}/edit`)
     
 },
-    show(req, res){
-        Recipes.find(req.params.id, function (recipe){
-            if (!recipe) return res.send("recipe not found!")
-
-            recipe.created_at = date(recipe.created_at).format
+    async show(req, res){
+        let results = await Recipes.find(req.params.id)
+        let recipe = results.rows[0]
+        if (!recipe){
+            return res.send("recipe not found!")
+        } 
+        recipe.created_at = date(recipe.created_at).format
+                
         
         return res.render('admin/recipes/show.njk', {recipe})  
-        })
+        
     },                
-    edit(req, res){
-        Recipes.find(req.params.id, function (recipe){
-            if (!recipe) return res.send("recipe no found!")
+    async edit(req, res){
+        let results = await Recipes.find(req.params.id)
+        const recipe = results.rows[0]
+        if (!recipe){
+            return res.send("recipe no found!")
+        } 
 
-            Recipes.chefSelectOptions(function(options){
-                return res.render(`admin/recipes/edit.njk`, {recipe, chefOptions: options})
-            })
-        })
+        
+        results = await Recipes.chefSelectOptions()
+        const options = results.rows
+                
+         
+        results = await RecipeFiles.allFiles()
+        const filesWithRecipeId = results.rows
+        let filesRecipe = ""
+        for(file in filesWithRecipeId){
+            if (filesWithRecipeId[file].recipe_id == req.params.id){
+                filesRecipe =[
+                    ...filesRecipe,
+                    
+
+                        filesWithRecipeId[file]
+                    
+                ]
+                    
+                    
+
+            }
+        } 
+
+        console.log(filesRecipe)
+
+        //get imagens
+		filesRecipe = filesRecipe.map(file => ({
+			...file,
+			src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+		})) 
+        
+
+        return res.render(`admin/recipes/edit.njk`, {recipe, chefOptions: options, filesRecipe})
+            
+        
        
     }, 
     put(req, res){

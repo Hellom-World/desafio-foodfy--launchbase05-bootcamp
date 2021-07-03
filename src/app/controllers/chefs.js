@@ -35,12 +35,15 @@ module.exports = {
     }, 
    async post(req, res){
         const keys = Object.keys(req.body)
-
+        
         for(key of keys) {
-            if (req.body[key] == "") {
+            if (req.body[key] == "" || req.files == "") {
                 return res.send('please, fill all fields')
             }
         }
+        
+
+        
         let resultsFile = await File.create(...req.files)
         const file_id = resultsFile.rows[0].id
 
@@ -55,19 +58,18 @@ module.exports = {
         const keys = Object.keys(req.body)
 
         for(key of keys) {
-            if (req.body[key] == "") {
-                return res.send("Please, fill all fields!")
+            if (req.body[key] == "" || req.files == "") {
+                return res.send('please, fill all fields')
             }
         }
 
         let resultsFile = await File.create(...req.files)
         const file_id = resultsFile.rows[0].id
 
+        resultsChef = await Chefs.update(req.body, file_id) 
 
-        console.log(req.body)
-        Chefs.update(req.body, function() {
-            return res.redirect(`/admin/chefs/${req.body.id}`)
-        })
+        return res.redirect(`/admin/chefs/${req.body.id}`)
+        
     },   
     async show(req, res){
 
@@ -116,7 +118,7 @@ module.exports = {
     
         
         
-        return res.render("admin/chefs/show.njk", { chef, recipes, filechef, filesRecipe}),console.log(filesRecipe)
+        return res.render("admin/chefs/show.njk", { chef, recipes, filechef, filesRecipe})
         }
     }, 
     async edit(req, res){

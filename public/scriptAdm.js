@@ -24,6 +24,7 @@ for(let cardChef of cardChefs){
 }
 
 /* Logica de adicionar ingredientes */
+document.querySelector(".add-ingredient").addEventListener('click', addIngredient)
 
 function addIngredient() {
     const ingredients = document.querySelector("#ingredients");
@@ -37,16 +38,18 @@ function addIngredient() {
     // Deixa o valor do input vazio
     newField.children[0].value = "";
     ingredients.appendChild(newField);
-
-    document
-    .querySelector(".add-ingredient")
-    .addEventListener("click", addIngredient);
+    
+    
+    
 };
+
   
 
 
 /* Logica de adicionar modo de preparo */
-
+document
+    .querySelector(".add-modPrep")
+    .addEventListener("click", addPreparo);
 function addPreparo() {
     const modoPreparo = document.querySelector("#modoPreparo");
     const fieldContainer = document.querySelectorAll(".modPrep-content");
@@ -60,9 +63,7 @@ function addPreparo() {
     newField.children[0].value = "";
     modoPreparo.appendChild(newField);
 
-    document
-    .querySelector(".add-modPrep")
-    .addEventListener("click", addPreparo);
+    
   }
   
 
@@ -83,7 +84,7 @@ const PhotosUploadChefs = {
         
         const { files: fileList } = event.target
         PhotosUploadChefs.input = event.target
-
+        console.log(fileList)
         if (fileList.length != 1){
             alert('Selecione apenas 1 foto')
             event.preventDefault()
@@ -110,6 +111,7 @@ const PhotosUploadChefs = {
                     
                     alert('Selecione apenas 1 foto')
                     event.preventDefault()
+                    return
                 }
 				document.querySelector('#photos-preview-chefs').appendChild(div)
             }
@@ -157,7 +159,93 @@ const PhotosUploadChefs = {
 
 }
 
+
+const PhotosUpload = {
+    preview: document.querySelector("#photos-preview"),
+    input: "",
+    files: [],
+    handleFileInput(event) {
+        
+        const { files: fileList } = event.target
+        PhotosUpload.input = event.target
+        if (fileList.length > 5){
+            alert('Selecione apenas 5 foto')
+            event.preventDefault()
+            return
+        }
+        
+
+        Array.from(fileList).forEach(file => {
+
+            PhotosUploadChefs.files.push(file)
+			const reader = new FileReader()
+
+			reader.onload = () => {
+				const image = new Image()
+				image.src = String(reader.result)
+                
+
+                
+                const div = PhotosUpload.getContainer(image)
+
+                div.appendChild(PhotosUpload.getRemoveButton())
+                
+                var node = document.querySelectorAll(".photo");
+                if (node.length > 4) {
+                    
+                    alert('Selecione apenas 5 foto')
+                    event.preventDefault()
+                    return
+                }
+				document.querySelector('#photos-preview').appendChild(div)
+            }
+            
+
+			reader.readAsDataURL(file)
+        })
+        PhotosUpload.getAllFiles()
+    },
+    getAllFiles() {
+        const dataTransfer = new ClipboardEvent("").clipboardData || new DataTransfer()
+
+        PhotosUpload.files.forEach(file => dataTransfer.items.add(file))
+
+        console.log(dataTransfer)
+    },
+    getContainer(image){
+
+        const div = document.createElement('div')
+        div.classList.add('photo')
+
+        div.onclick = PhotosUpload.removePhoto
+
+        div.appendChild(image)
+
+        return div
+    },
+    getRemoveButton(){
+        const button = document.createElement('i')
+        button.classList.add('material-icons')
+        button.innerHTML = "close"
+        return button
+        
+    },
+    removePhoto(event) {
+        
+        const photoDiv = event.target.parentNode
+        const photosArray = Array.from(PhotosUpload.preview.children)
+        const index = photosArray.indexOf(photoDiv)
+
+        PhotosUpload.files.splice(index, 1)
+        photoDiv.remove()
+    }
+
+
+}
+
 function removediv(event){
     const divPhoto = event.target.parentNode
     divPhoto.remove()
 }
+
+

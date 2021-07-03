@@ -31,7 +31,7 @@ module.exports = {
 
         return db.query(query, values)
     },
-    update(data, callback) {
+    update(data, file_id ) {
         const query = `
         UPDATE chefs SET
             name=($1),
@@ -42,15 +42,11 @@ module.exports = {
         const values = [
             data.name,
             date(Date.now()).iso,
-            data.file_id,
+            file_id,
             data.id
         ]
+        return db.query(query, values)
 
-        db.query(query, values, function(err, results){
-            if(err) throw `database Error! ${err}`
-
-            callback()
-        })
     },
     find(id) {
      try{
